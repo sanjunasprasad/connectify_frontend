@@ -1,0 +1,139 @@
+.ChatBox-container {
+    background: rgb(50, 50, 50);
+    border-radius: 1rem;
+    display: grid;
+    grid-template-rows: 14vh 60vh 9vh;
+}
+
+.chat-header {
+    padding: 1rem 1rem 0rem 1rem; 
+    /* create a gap all around for chatbox*/
+    display: flex;
+    flex-direction: column;
+    position: relative;
+     overflow: hidden;
+}
+
+.chat-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.5rem; 
+    overflow: scroll;
+    background-color: rgb(60, 64, 67);
+}
+.chat-body::-webkit-scrollbar {
+    display: none;
+}
+
+.message {
+  background: linear-gradient(98.63deg, #f9a225 0%, #f95f35 100%);
+  color: white;
+  padding: 0.7rem;
+  border-radius: 1rem 1rem 1rem 0;
+  max-width: 28rem;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.message>span:nth-child(2){
+    font-size: 0.7rem;
+    color: white;
+    align-self: end;
+}
+
+.own {
+  align-self: flex-end;
+  border-radius: 1rem 1rem 0 1rem;
+  background: linear-gradient(98.63deg, #24e4f0 0%, #358ff9 100%);
+}
+
+
+.chat-sender {
+    position: relative; 
+    margin-top: 7rem; 
+    background: white;
+    display: flex;
+    justify-content: space-between;
+    height: 4.0rem;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.8rem;
+    border-radius: 1rem;
+}
+
+.chat-sender>input{
+    height: 70%;
+    background-color: rgb(236, 236, 236);
+    border-radius: 0.5rem;
+    border: none;
+    outline: none;
+    flex  :1 ;
+    font-size: 14px;
+    padding: 0px 15px 0px 15px;
+}
+.chat-sender>div:nth-of-type(1)
+{
+    background: rgb(233, 233, 233);
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    cursor: pointer
+}
+.chat-sender>div{
+    height: 70%;
+    padding: 0px 15px 0px 15px;
+}
+
+.send-button{
+    background-color:  rgb(50, 50, 50);
+    color: white;
+    border-radius: 5px;
+    width: 80px;
+}
+
+
+.chatbox-empty-message {
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    font-size: 20px;
+  }
+
+  .videocall{
+    margin-top: -3rem;
+    margin-left: 49rem;
+    height:45px;
+  }
+
+
+  
+/* Add this CSS to your ChatBox.css file */
+.input-with-image-preview {
+    position: relative;
+  }
+  
+  .selected-image-preview {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 645px; /* Adjust the right position as needed */
+    max-width: 62px; /* Adjust the maximum width of the image preview */
+    max-height: 50px; /* Adjust the maximum height of the image preview */
+  }
+  
+
+  .close-icon {
+    position: absolute;
+    top: -17px; /* Adjust the top position of the close icon */
+    right: 635px; /* Adjust the right position of the close icon */
+    width: 15px; /* Adjust the width of the close icon */
+    height: 15px; /* Adjust the height of the close icon */
+    cursor: pointer; /* Add cursor pointer to indicate it's clickable */
+    z-index: 1; /* Ensure the close icon is above the image preview */
+  }
+  

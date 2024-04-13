@@ -1,0 +1,47 @@
+.mainchatrightbar{
+    background-color: black;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 22% 1px auto;
+    gap: 1rem;
+    color: white;
+    
+}
+
+
+.vertical-line {
+  width: 1px;
+  background-color: white; 
+}
+
+.Left-side-chat {
+    display: flex;
+    flex-direction: column;
+    background-color:black;
+  }
+  
+  .Chat-container {
+    display: flex;
+    flex-direction: column;
+
+    background: black; /*left side ulla brown */
+    overflow: scroll;
+  }
+  
+  .Chat-list {
+    display: flex;
+    flex-direction: column;
+    background-color: black;  /* right ulla melvin background green */
+    gap: 3rem;
+    margin-left:51px;
+    margin-top:4rem;
+  }
+  
+  .Right-side-chat {
+    display: flex;
+    flex-direction: column;
+    background-color:  black; /* right side full aqua*/
+  }
+
+
+

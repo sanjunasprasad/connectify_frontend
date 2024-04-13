@@ -1,0 +1,65 @@
+.Explorerightbar{
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1;
+    background-color: black;
+    padding-left: 40px;
+    color:white;
+    padding-top: 20px;
+    padding-left: 250px;
+}
+
+.containerclass{
+    position: relative;
+    width: 27%;
+    margin-left: 10px;
+    cursor: pointer;
+}
+.modalclassNameforASavedPost{
+    width: 60%;
+    height: 95vh;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    padding: 20px;
+    border: none;
+    background-color: #1f1e1e;
+    margin-top: 25px;
+    border: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.imagefor{
+    width: 100%;
+}
+
+.imageforimage{
+    width: 100%;
+    height: 29vh;
+    object-fit: cover;
+}
+
+.text{
+    display: flex;
+    font-size: 1rem;
+    position: absolute;
+    top: 0px;
+    font-weight: 600;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    width: 100%;
+    align-items: center;
+    height: 29vh;
+    justify-content: center;
+    visibility: hidden;
+}
+.logoforexplorepost{
+    width: 20px;
+    height: 20px;
+}
+
+
+.container:hover .text{
+    visibility: visible;
+}

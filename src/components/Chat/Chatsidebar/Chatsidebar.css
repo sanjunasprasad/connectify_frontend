@@ -1,0 +1,21 @@
+.chatmainsidebar{
+    background-color: black;
+    height: 100vh;
+    overflow: hidden;
+    position:fixed;
+    width: 5%; /*original 24% */
+    display: flex;
+    
+}
+
+.logos{  
+    margin-left: 0px; /* margin left for icons on sidebar */
+}
+
+
+.profileicon{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: contain;
+}

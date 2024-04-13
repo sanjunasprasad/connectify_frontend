@@ -1,0 +1,12 @@
+.homesubcontainer{
+    display: flex;
+}
+
+.homesidebar{
+    flex: 0.3;
+    background-color: black; /* bg color for sidebar top narrow */
+    
+}
+.homerightbar{
+    flex: 1;
+}
