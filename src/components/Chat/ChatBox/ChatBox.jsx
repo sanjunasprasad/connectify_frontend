@@ -212,7 +212,7 @@ const ChatBox = ({ currentUser, setSendMessage, receivedMessage }) => {
                   <span>{message.text}</span>{" "}
                   {message.image && (
                     <img
-                      src={`http://localhost:8000/${message.image}`}
+                      src={`https://connectifyy.site/${message.image}`}
                       style={{ maxHeight: '150px' }} alt="Message Image" />
                   )}
                   <span>{getRelativeTime(message.createdAt)}</span>

@@ -197,7 +197,8 @@ export default function Post({ postlist }) {
               {isVideo && (
                 <ReactPlayer
                   controls={true}
-                  url={`http://localhost:8000/${postlist?.file}`}
+                  url={`https://connectifyy.site/${postlist?.file}`}
+                  // url={`http://localhost:8000/${postlist?.file}`}
                   height="85vh"
                   width="100%"
                   style={{ objectFit: "cover" }}
@@ -268,7 +269,7 @@ export default function Post({ postlist }) {
         {isVideo && (
           <ReactPlayer
             controls={true}
-             url={`http://localhost:8000/${postlist?.file}`}
+             url={`https://connectifyy.site/${postlist?.file}`}
             height="auto"
             width="100%"
             style={{ objectFit: "contain" }} />

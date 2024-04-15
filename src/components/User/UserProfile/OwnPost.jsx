@@ -187,7 +187,7 @@ function OwnPost({ post }) {
         {isVideo && (
           <ReactPlayer
           controls={true}
-            url={`http://localhost:8000/${post.file}`}
+            url={`https://connectifyy.site/${post.file}`}
             className="z-0 h-full w-full rounded-md object-cover"
             style={{ maxHeight: '250px', width: '333px' }}
             alt=""
@@ -218,7 +218,7 @@ function OwnPost({ post }) {
             {isVideo && (
               <ReactPlayer
                 controls={true}
-                url={`http://localhost:8000/${post.file}`}
+                url={`https://connectifyy.site/${post.file}`}
                 height="85vh"
                 width="100%"
                 style={{ objectFit: "cover" }}
