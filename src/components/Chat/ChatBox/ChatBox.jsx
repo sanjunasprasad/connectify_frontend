@@ -4,7 +4,6 @@ import { useNavigate ,Link} from "react-router-dom";
 import { axiosUserInstance } from "../../../services/axios/axios";
 import moment from 'moment';
 import InputEmoji from 'react-input-emoji'
-import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import videocall from "../../../Icons/videocall.png"
 import closeicon from "../../../Icons/close.png"
@@ -144,7 +143,7 @@ const ChatBox = ({ currentUser, setSendMessage, receivedMessage }) => {
 
 
 
-  //videocall
+  //videocall icon direct to zeegopage
   const handleVideocall = useCallback(() => {
     navigate(`/meeting/${currentUser}/${friendId}`);
   }, [navigate, currentUser, friendId])
@@ -153,15 +152,17 @@ const ChatBox = ({ currentUser, setSendMessage, receivedMessage }) => {
   const [videoCallLink, setVideoCallLink] = useState(null);
   useEffect(() => {
     const link = localStorage.getItem('videoCallLink');
-    console.log("i got link chatbox:", link)
+    console.log("i got link chatbox from localll:", link)
     if (link) {
-      setVideoCallLink(link);
-      
+      setVideoCallLink(link);     
     }
   }, []);
   const handleButtonClick = () => {
-    navigate(`/meeting/${currentUser}/${friendId}`);
-    // localStorage.removeItem('videoCallLink'); 
+    const storedLink = localStorage.getItem('videoCallLink');
+    if (storedLink) {
+      window.location.href = storedLink;
+      localStorage.removeItem('videoCallLink');
+    }
 };
 
 

@@ -8,13 +8,15 @@ import { v4 } from 'uuid'
 
 const ZegoVcall = () => {
     const { userId, id } = useParams();
+    console.log("user id",userId)
+    console.log("friend id",id)
     const navigate = useNavigate();
     const VURL = 'http://localhost:3000'
     const videoCallLink = `${VURL}/meeting/${userId}/${id}`;
 
     useEffect(() => {
       localStorage.setItem('videoCallLink', videoCallLink);
-      console.log("LINKKKKKKK",videoCallLink);
+      console.log("LINK saved in localstorage == directed link ",videoCallLink);
   }, []); 
 
 
@@ -31,12 +33,12 @@ const ZegoVcall = () => {
     const zc = ZegoUIKitPrebuilt.create(kitToken);
     zc.joinRoom({
       container: element,
-      sharedLinks: [
-        {
-        name: 'copy link',
-        url: `http://localhost:3000/meeting/${userId}/${id}`,
-       }
-       ],
+      // sharedLinks: [
+      //   {
+      //   name: 'copy link',
+      //   url: `http://localhost:3000/meeting/${userId}/${id}`,
+      //  }
+      //  ],
       scenario: {
         mode: ZegoUIKitPrebuilt.OneONoneCall,
       },
