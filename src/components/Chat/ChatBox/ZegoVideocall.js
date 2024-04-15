@@ -11,7 +11,7 @@ const ZegoVcall = () => {
     console.log("user id",userId)
     console.log("friend id",id)
     const navigate = useNavigate();
-    const VURL = 'http://localhost:3000'
+    const VURL = 'https://connectify-cyan.vercel.app'
     const videoCallLink = `${VURL}/meeting/${userId}/${id}`;
 
     useEffect(() => {
