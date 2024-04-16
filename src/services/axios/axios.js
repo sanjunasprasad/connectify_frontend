@@ -9,7 +9,7 @@ function createAxiosInstance(token ,role ) { //fn creates & configures Axios ins
         (config) => {
             console.log("role in axios",role)
             console.log("token in axios",token)
-            config.headers.Authorization = `Bearer ${token}`; // configures an interceptor to add an Authorization header with token value prefixed by Bearer 
+            config.headers.Authorization = `Bearer ${localStorage.getItem(token)}`; // configures an interceptor to add an Authorization header with token value prefixed by Bearer 
             config.headers.role = role;// adds a custom header named 'role' with the specified role 
             return config;
         },
@@ -43,10 +43,10 @@ function createFormDataAxiosInstance(token, role) {
 }
 
 
-const userToken = localStorage.getItem('token');
-const adminToken = localStorage.getItem('adminToken');
-const axiosUserInstance = createAxiosInstance(userToken , 'user');
-const axiosAdminInstance = createAxiosInstance(adminToken , 'admin');
+// const userToken = localStorage.getItem('token');
+// const adminToken = localStorage.getItem('adminToken');
+const axiosUserInstance = createAxiosInstance("token" , 'user');
+const axiosAdminInstance = createAxiosInstance("adminToken" , 'admin');
 const axiosFormDataInstance = createFormDataAxiosInstance(userToken , 'user');
 const axiosInstance = createAxiosInstance(null , null)
 
