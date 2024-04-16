@@ -51,7 +51,10 @@ function UserSignup() {
       errors.password = "Please provide a password";
     }
       else if (!passwordRegex.test(data.password)) {
-        errors.password = "Password must contain at least one lowercase letter,uppercase letter,digit,special symbol";
+        errors.password = "Password must contain at least one lowercase letter,digit,special symbol";
+    }
+    else if(data.password.length < 6){
+      errors.password = "Password must have 6 characters";
     }
     return errors;
   };
@@ -95,7 +98,7 @@ function UserSignup() {
         className="bg-white bg-opacity-25 backdrop-blur-lg p-10 rounded-lg shadow-lg"
         style={{ width: "450px", height: "720px" }} // Increased height
       >
-        <h1 className="text-3xl font-semibold text-white mb-5">Connectify</h1>
+        {/* <h1 className="text-3xl font-semibold text-white mb-5">Connectify</h1> */}
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label
