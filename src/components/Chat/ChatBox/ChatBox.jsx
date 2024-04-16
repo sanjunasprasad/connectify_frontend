@@ -7,6 +7,7 @@ import InputEmoji from 'react-input-emoji'
 import "sweetalert2/dist/sweetalert2.min.css";
 import videocall from "../../../Icons/videocall.png"
 import closeicon from "../../../Icons/close.png"
+import altusericon from "../../../Icons/user.png"
 import "./ChatBox.css"
 
 const ChatBox = ({ currentUser, setSendMessage, receivedMessage }) => {
@@ -179,7 +180,7 @@ const ChatBox = ({ currentUser, setSendMessage, receivedMessage }) => {
                 <img
                   src={userData?.user?.image
                     ? userData.user.image
-                    : process.env.REACT_APP_PUBLIC_FOLDER + "defaultProfile.png"}
+                    : altusericon}
                   alt=""
                   className="followerImage"
                   style={{ width: "45px", height: "45px", marginTop: '2rem', marginLeft: '4rem' }}

@@ -2,6 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux';
 import { addChat } from "../../../services/redux/slices/chatSlice"
 import { axiosUserInstance } from "../../../services/axios/axios";
+import altusericon from "../../../Icons/user.png"
 import "./Conversation.css"
 
 
@@ -32,7 +33,7 @@ const Conversation = ({ data, currentUserId , online}) => {
         <div>
         {online && <div className="online-dot"></div>}
           <img
-            src={data?.image}
+            src={data?.image || altusericon}
             alt=""
             className="followerImage"
             style={{ width: "50px", height: "50px" }}
