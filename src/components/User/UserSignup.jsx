@@ -50,9 +50,9 @@ function UserSignup() {
     if (!data.password) {
       errors.password = "Please provide a password";
     }
-    //   else if (!passwordRegex.test(data.password)) {
-    //     errors.password = "Password must contain at least one lowercase letter, one uppercase letter, one digit, one special character";
-    // }
+      else if (!passwordRegex.test(data.password)) {
+        errors.password = "Password must contain at least one lowercase letter, one uppercase letter, one digit, one special character,6 characters needed";
+    }
     return errors;
   };
 
