@@ -6,6 +6,8 @@ import { axiosUserInstance }  from "../../services/axios/axios.js";
 function UserSignup() {
   const navigate = useNavigate();
   const nameRegex = /^[A-Za-z]+$/;
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -50,7 +52,9 @@ function UserSignup() {
     } else if (data.password.length < 6) {
       errors.password = "Password must have at least 6 characters";
     }
-
+    else if (!passwordRegex.test(data.password)) {
+      errors.password = "Password must contain at least one lowercase letter, one uppercase letter, one digit, one special character";
+  }
     return errors;
   };
 
