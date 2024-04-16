@@ -47,7 +47,7 @@ function createFormDataAxiosInstance(token, role) {
 // const adminToken = localStorage.getItem('adminToken');
 const axiosUserInstance = createAxiosInstance("token" , 'user');
 const axiosAdminInstance = createAxiosInstance("adminToken" , 'admin');
-const axiosFormDataInstance = createFormDataAxiosInstance(userToken , 'user');
+const axiosFormDataInstance = createFormDataAxiosInstance("token" , 'user');
 const axiosInstance = createAxiosInstance(null , null)
 
 
