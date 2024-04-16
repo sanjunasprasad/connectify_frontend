@@ -7,7 +7,7 @@ import { addPost } from "../../../services/redux/slices/postSlice";
 import Modal from "react-modal";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
-import "./Sidebar.css";
+import "./Sidebarr.css";
 import Homeicon from "../../../Icons/home.png";
 import SearchIcon from "../../../Icons/Search.png";
 import Exploreicon from "../../../Icons/Explore.png";
