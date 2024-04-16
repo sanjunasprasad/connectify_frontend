@@ -77,7 +77,6 @@ function OwnPost({ post }) {
   };
 
   const handleDeletePost = async (postId) => {
-    const token = localStorage.getItem("token");
     console.log("post to be deleted:", postId)
     Swal.fire({
       title: 'Are you sure to delete post?',
@@ -90,12 +89,7 @@ function OwnPost({ post }) {
     }).then((result) => {
       if (result.isConfirmed) {
         axiosUserInstance
-          .delete(`/post/deletePost/${postId}`, {
-            headers: {
-              'Authorization': `Bearer ${token}`,
-              'role': 'user'
-            }
-          })
+          .delete(`/post/deletePost/${postId}`)
           .then((response) => {
             console.log('Post deleted:', response.data);
             Swal.fire({
@@ -123,7 +117,6 @@ function OwnPost({ post }) {
 
   
   const handleEditPost = async (postId, caption, postimage) => {
-    const token = localStorage.getItem("token");
     const { value: updatedCaption } = await Swal.fire({
       imageUrl: postimage,
       imageWidth: 400,
@@ -142,12 +135,7 @@ function OwnPost({ post }) {
 
     if (updatedCaption ) {
       try {
-        const response = await axiosUserInstance.put(`/post/editPost/${postId}`, { caption: updatedCaption }, {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'role': 'user'
-          }
-        });
+        const response = await axiosUserInstance.put(`/post/editPost/${postId}`, { caption: updatedCaption });
         console.log("editedddddd response",response.data);
         // dispatch(setPosts(response.data));
         // setPosts({ ...post, caption: updatedCaption });
@@ -161,12 +149,8 @@ function OwnPost({ post }) {
 
   
 
-
-
-
   return (
     <>
-
       <div
         className="relative aspect-[16/9] w-auto rounded-md md:aspect-auto md:h-400"
         style={{ position: 'relative', overflow: 'hidden' }}
@@ -174,8 +158,6 @@ function OwnPost({ post }) {
         onMouseLeave={handleMouseLeave}
         onClick={handleShowmodal}
       >
-
-
         {isImage && (
           <img
             src={post.file}

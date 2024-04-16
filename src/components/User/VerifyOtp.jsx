@@ -42,7 +42,6 @@ function VerifyOTP() {
       if (response.status === 200) {
         navigate("/");
       } else {
-        // alert('Invalid OTP. Please enter the correct OTP.');
         Swal.fire({
           icon: "error",
           title: "Error",
@@ -77,7 +76,6 @@ function VerifyOTP() {
       setOtpInputs(['', '', '', '']);
     } catch (error) {
       console.error('Axios error (resend OTP):', error);
-      // alert('An error occurred while resending OTP. Please try again later');
       Swal.fire({
         icon: "error",
         title: "Error",

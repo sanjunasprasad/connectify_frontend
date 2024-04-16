@@ -43,7 +43,6 @@ export default function Post({ postlist }) {
     try {
       const newLiked = !liked;
       setLiked(newLiked);
-      const token = localStorage.getItem("token");
       const response = await axiosUserInstance.put(`/post/likepost/${postlist._id}`, {userId: loggeduser._id});
       console.log("like response is", response);
       if (response.status === 200) {
@@ -69,7 +68,6 @@ export default function Post({ postlist }) {
   };
   const handlecomment = async () => {
     try {
-      const token = localStorage.getItem("token");
       const response = await axiosUserInstance.post(`/post/commentpost/${postlist._id}`, {
         userId: loggeduser._id,
         comment: comment
@@ -98,14 +96,8 @@ export default function Post({ postlist }) {
   //   setIsSaved(isPostSaved);
   // }, [_id, savedPosts]);
   const savePost = async () => {
-    const token = localStorage.getItem("token");
     try {
-      await axiosUserInstance.post(`/post/savePost/${postlist._id}`, { userId: loggeduser._id }, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'role': 'user'
-        }
-      });
+      await axiosUserInstance.post(`/post/savePost/${postlist._id}`, { userId: loggeduser._id });
 
       Swal.fire("Post  saved successfully!");
       setIsSaved(true);
@@ -125,7 +117,6 @@ export default function Post({ postlist }) {
 
   useEffect(() => {
     const fetchLikedUsers = async () => {
-      const token = localStorage.getItem("token");
       try {
         const response = await axiosUserInstance.get(`/post/likedusers/${postlist._id}`);
         if (response.status === 200) {

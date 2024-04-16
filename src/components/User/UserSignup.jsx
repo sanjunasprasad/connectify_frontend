@@ -207,7 +207,6 @@ function UserSignup() {
         </form>
         <p className="text-white text-center mt-3">
           Already have an account?
-          {/* <a href="#">Sign In</a> */}
           <Link to="/">Sign In</Link>
         </p>
       </div>

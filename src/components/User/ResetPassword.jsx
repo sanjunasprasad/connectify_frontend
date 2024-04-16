@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import { axiosInstance } from "../../services/axios/axios.js";
+import { axiosUserInstance } from "../../services/axios/axios.js";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 
@@ -47,7 +47,7 @@ function ResetPassword() {
       return; 
     }
     try{
-      const response = await axiosInstance.post('/resetPassword', formdata);
+      const response = await axiosUserInstance.post('/resetPassword', formdata);
       console.log('Response for forgot password:', response.data);
       if (response.data.success) {
         Swal.fire({

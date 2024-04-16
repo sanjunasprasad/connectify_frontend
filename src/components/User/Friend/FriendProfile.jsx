@@ -30,12 +30,7 @@ const [follower,Setfollower]=useState([])
 const [following,SetFollowing] =useState([])
 const [isFollowing, setIsFollowing] = useState(false);
 useEffect(() => {
-  const token = localStorage.getItem("token");
-    axiosUserInstance.get(`/friend/userAccount/${userid}`,{
-      headers: {
-      'Authorization': `Bearer ${token}`,
-      'role': 'user'}
-  })
+    axiosUserInstance.get(`/friend/userAccount/${userid}`)
       .then(response => {
         // console.log("response from backend222222",response)
         SetName(response.data.user.firstName);
@@ -57,12 +52,7 @@ useEffect(() => {
   //FOLLOW + UNFOLLOW
   const handleFollow = async () => {
     try {
-      const token = localStorage.getItem("token");
-      const response = await axiosUserInstance.post(`/friend/follow/${userid}`,{ loggeduser: _id },{
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'role': 'user'}
-      });
+      const response = await axiosUserInstance.post(`/friend/follow/${userid}`,{ loggeduser: _id });
       // console.log("response for follow:",response)
       setIsFollowing(true);
     } catch (error) {
@@ -72,12 +62,7 @@ useEffect(() => {
 
   const handleUnfollow = async () => {
     try {
-      const token = localStorage.getItem("token");
-      const response = await axiosUserInstance.post(`/friend/unfollow/${userid}`,{loggeduser:_id},{
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'role': 'user'}
-      });
+      const response = await axiosUserInstance.post(`/friend/unfollow/${userid}`,{loggeduser:_id});
       // console.log("response for unfollow:",response)
       setIsFollowing(false);
     } catch (error) {
@@ -106,13 +91,7 @@ useEffect(() => {
       });
       console.log("reason",reason)
       if (reason) {
-        const token = localStorage.getItem("token");
-        const response = await axiosUserInstance.post(`/friend/reportProfile/${userid}`, { loggeduser: _id, reason }, {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'role': 'user'
-          }
-        });
+        const response = await axiosUserInstance.post(`/friend/reportProfile/${userid}`, { loggeduser: _id, reason });
         console.log("response for report:", response);
         if(response.status === 200){
           Swal.fire({

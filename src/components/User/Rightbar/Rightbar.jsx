@@ -18,15 +18,9 @@ function Rightbar() {
 
   //restricted post display
   useEffect(() => {
-    const token = localStorage.getItem("token");
     if (_id) {
       axiosUserInstance.get(`/post/loadPost/${_id.toString()}`, {
-        params: { following: JSON.stringify(following) },
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'role': 'user'
-      }
-      })
+        params: { following: JSON.stringify(following) }})
       .then(response => {
       // console.log("POST RESPONSE POSTTTTT##### ",response.data) //full populated data
         dispatch(setPosts(response.data));
@@ -42,13 +36,9 @@ function Rightbar() {
   //suggestion list
   const [responseData, setResponseData] = useState([]);
   useEffect (()=>{
-    const token = localStorage.getItem("token");
     if (_id) {
-      const response = axiosUserInstance.get(`/friend/suggestionlist/${_id}`,{
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'role': 'user'}
-       }).then(response => {
+      const response = axiosUserInstance.get(`/friend/suggestionlist/${_id}`)
+        .then(response => {
           setResponseData(response.data);
           console.log("POST RESPONSE##### ",response.data) 
           
@@ -64,12 +54,7 @@ function Rightbar() {
 const [followStatus, setFollowStatus] = useState({});
 const handleFollow = async (userid) => {
   try {
-    const token = localStorage.getItem("token");
-    const response = await axiosUserInstance.post(`/friend/follow/${userid}`,{ loggeduser: _id },{
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'role': 'user'}
-    });
+    const response = await axiosUserInstance.post(`/friend/follow/${userid}`,{ loggeduser: _id });
     // console.log("response for follow:",response)
     setFollowStatus(prevState => ({
       ...prevState,
@@ -82,12 +67,7 @@ const handleFollow = async (userid) => {
 
 const handleUnfollow = async (userid) => {
   try {
-    const token = localStorage.getItem("token");
-    const response = await axiosUserInstance.post(`/friend/unfollow/${userid}`,{loggeduser:_id},{
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'role': 'user'}
-    });
+    const response = await axiosUserInstance.post(`/friend/unfollow/${userid}`,{loggeduser:_id});
     // console.log("response for unfollow:",response)
     setFollowStatus(prevState => ({
       ...prevState,
