@@ -127,12 +127,7 @@ export default function Post({ postlist }) {
     const fetchLikedUsers = async () => {
       const token = localStorage.getItem("token");
       try {
-        const response = await axiosUserInstance.get(`/post/likedusers/${postlist._id}`,{
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'role': 'user'
-          }
-        });
+        const response = await axiosUserInstance.get(`/post/likedusers/${postlist._id}`);
         if (response.status === 200) {
           setLikedUsers(response.data.likedUsers);
         }
