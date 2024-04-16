@@ -5,6 +5,7 @@ import "./Rightbarr.css"
 import { axiosUserInstance }  from "../../../services/axios/axios";
 import { setPosts } from '../../../services/redux/slices/postSlice';
 import Post from '../Post/Post'
+import altusericon from "../../../Icons/user.png"
 
 function Rightbar() {
 
@@ -117,10 +118,10 @@ const handleUnfollow = async (userid) => {
             {/* profile switch */}
             {loggeduser && (
             <div style={{ display: "flex", alignItems: "center" , marginLeft:20 , marginTop:30 , cursor:"pointer"}}>
-             <img src={loggeduser.image} style={{ width: "40px", height: "40px", borderRadius: "50%", objectFit: "cover" }} alt="" />
+             <img src={loggeduser?.image || altusericon } style={{ width: "40px", height: "40px", borderRadius: "50%", objectFit: "cover" }} alt="" />
               <div style={{marginLeft:10}}>
-                <p style={{textAlign:'start'}}><Link to={`/username`} >{loggeduser.firstName}</Link></p>
-                <p style={{marginTop:-4 , textAlign:'start' , color:"#A8A8A8"}}>{loggeduser.email}</p>
+                <p style={{textAlign:'start'}}><Link to={`/username`} >{loggeduser?.firstName}</Link></p>
+                <p style={{marginTop:-4 , textAlign:'start' , color:"#A8A8A8"}}>{loggeduser?.email}</p>
               </div>
              
             </div>
@@ -133,9 +134,9 @@ const handleUnfollow = async (userid) => {
               {/* list */}
               {responseData.map(user => (
               <div key={user._id} style={{display:"flex" , alignItems:"center" , marginLeft:20 , marginTop:10}}>
-                  <img src={user.image}style={{ width: "40px", height: "40px", borderRadius: "50%", objectFit: "cover" }} alt="" />
+                  <img src={user?.image || altusericon}style={{ width: "40px", height: "40px", borderRadius: "50%", objectFit: "cover" }} alt="" />
                     <div>
-                      <p style={{ marginLeft: 10 , textAlign:"start"  }}>  <Link to={`/username/${user._id}`} >{user.firstName}</Link> </p>
+                      <p style={{ marginLeft: 10 , textAlign:"start"  }}>  <Link to={`/username/${user._id}`} >{user?.firstName}</Link> </p>
                       <p style={{marginTop:-5 , color:"#A8A8A8" , marginLeft:10}}>Sugggested for you</p>
                     </div>
 

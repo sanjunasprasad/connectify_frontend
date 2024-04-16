@@ -8,6 +8,7 @@ import Modal from "react-modal";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import "./Sidebarr.css";
+import altusericon from "../../../Icons/user.png"
 import Homeicon from "../../../Icons/home.png";
 import SearchIcon from "../../../Icons/Search.png";
 import Exploreicon from "../../../Icons/Explore.png";
@@ -438,13 +439,12 @@ function Sidebar() {
             }}
           >
             <img
-              src={loggedUser?.image}
+              src={loggedUser?.image || altusericon}
               alt=""
               className="profileicon"
             />
             {ShowSearch && (
               <ul style={{ marginLeft: "20px" }}>
-                {/* <li className="listtext"> {loggedUser.firstName}</li> */}
                 <li className="listtext"> Profile</li>
               </ul>
             )}

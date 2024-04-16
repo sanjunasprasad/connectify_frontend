@@ -12,6 +12,7 @@ import commentIcon from '../../../Icons/Comment.png';
 import Moreoptions from "../../../Icons/Moreoptions.png"
 import Saveicon from "../../../Icons/Save.png"
 import Likeicon from "../../../Icons/Notifications.png"
+import altusericon from "../../../Icons/user.png"
 
 
 
@@ -229,7 +230,7 @@ function OwnPost({ post }) {
             <div >
               <div style={{ display: "flex", alignItems: "center", paddingLeft: 10, justifyContent: "space-between" }}>
                 <div style={{ display: "flex", alignItems: "center", paddingLeft: 10 }}>
-                  <img src={post?.user?.image} style={{ width: "30px", height: "30px", borderRadius: "50%", objectFit: "cover" }} alt="" />
+                  <img src={post?.user?.image || altusericon} style={{ width: "30px", height: "30px", borderRadius: "50%", objectFit: "cover" }} alt="" />
                   <div style={{ paddingLeft: 10 }}>
                     <p style={{ marginBottom: 16 }}>{post?.user?.firstName}</p>
                   </div>
@@ -252,7 +253,7 @@ function OwnPost({ post }) {
                 {/* Render comments */}
                 {post.comments.map((comment, index) => (
                   <div key={index} style={{ display: 'flex', marginLeft: 30 }}>
-                    <img src={comment?.user?.image} style={{ width: 30, height: 30, borderRadius: "50%", objectFit: "cover", marginTop: 20 }} alt="" />
+                    <img src={comment?.user?.image || altusericon} style={{ width: 30, height: 30, borderRadius: "50%", objectFit: "cover", marginTop: 20 }} alt="" />
                     <div style={{ marginLeft: 20 }}>
                       <p style={{ marginTop: 19 }}>{comment?.user?.firstName}</p>
                       <p style={{ marginTop: -3 }}>{comment?.text}</p>

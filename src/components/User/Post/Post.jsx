@@ -9,6 +9,7 @@ import ReactPlayer from 'react-player'
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import "./Postt.css"
+import altusericon from "../../../Icons/user.png"
 import Moreoptions from "../../../Icons/Moreoptions.png"
 import greyicon from "../../../Icons/Notifications.png" //hollowwhite
 import redicon from "../../../Icons/Unlike.png" //redicon
@@ -155,7 +156,7 @@ export default function Post({ postlist }) {
           <div style={{ display: 'flex', alignItems: 'center' }}>
             {/* profilepic on post top*/}
             {postlist && postlist?.user && postlist?.user?.image && (
-              <img src={postlist?.user?.image} style={{ width: "30px", height: "30px", borderRadius: "50%", objectFit: "cover", }} alt="" />)}
+              <img src={postlist?.user?.image || altusericon} style={{ width: "30px", height: "30px", borderRadius: "50%", objectFit: "cover", }} alt="" />)}
             {/* username  on post top*/}
             <p style={{ marginLeft: 10 }}>
               {postlist && postlist.user && postlist.user._id && loggeduser && loggeduser._id === postlist.user._id ? (<Link to={`/username`} >{postlist?.user?.firstName}</Link>) : (<Link to={`/username/${postlist.user._id}`} >{postlist?.user?.firstName}</Link>)}
@@ -201,7 +202,7 @@ export default function Post({ postlist }) {
               <div >
                 <div style={{ display: "flex", alignItems: "center", paddingLeft: 10, justifyContent: "space-between" }}>
                   <div style={{ display: "flex", alignItems: "center", paddingLeft: 10 }}>
-                    <img src={postlist?.user?.image} style={{ width: "30px", height: "30px", borderRadius: "50%", objectFit: "cover" }} alt="" />
+                    <img src={postlist?.user?.image ||altusericon} style={{ width: "30px", height: "30px", borderRadius: "50%", objectFit: "cover" }} alt="" />
                     <div style={{ paddingLeft: 10 }}>
                       {/* post owner name on top comment section */}
                       <p style={{ marginBottom: 0 }}>{postlist?.user?.firstName}</p>
@@ -215,7 +216,7 @@ export default function Post({ postlist }) {
                 <div className='scrollable-div'>
 
                   <div style={{ display: 'flex', marginLeft: 30 }}>
-                    <img src={postlist?.user?.image} style={{ width: 30, height: 30, borderRadius: "50%", objectFit: "cover", marginTop: 20 }} alt="" />
+                    <img src={postlist?.user?.image || altusericon} style={{ width: 30, height: 30, borderRadius: "50%", objectFit: "cover", marginTop: 20 }} alt="" />
                     <div style={{ marginLeft: 20 }}>
                       <p style={{ marginTop: 19 }}>{postlist?.user?.firstName}</p>
                       <p style={{ marginTop: -3 }}>{postlist?.caption}</p>
@@ -313,7 +314,7 @@ export default function Post({ postlist }) {
           <hr></hr>
           {likedUsers.map((user, index) => (
             <div key={index} style={{ display: 'flex', marginLeft: 30 }}>
-              <img src={user?.image} style={{ width: 30, height: 30, borderRadius: '50%', objectFit: 'cover', marginTop: 35 }} alt="User" />
+              <img src={user?.image || altusericon} style={{ width: 30, height: 30, borderRadius: '50%', objectFit: 'cover', marginTop: 35 }} alt="User" />
               <div style={{ marginLeft: 20 }}>
                 <p style={{ marginTop: 30 }}>{user?.firstName}</p>
                 <p style={{ color: '#A8A8A8', marginTop: -4 }}>{user?.lastName}</p>

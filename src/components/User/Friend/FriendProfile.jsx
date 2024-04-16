@@ -8,6 +8,7 @@ import "sweetalert2/dist/sweetalert2.min.css";
 import FriendPost from "..//UserProfile/FriendPost";
 import Sidebar from "../Sidebar/Sidebar"
 import SettingIcon from "../../../Icons/Settingslogo.png"
+import altusericon from "../../../Icons/user.png"
 
 
 
@@ -154,7 +155,7 @@ useEffect(() => {
             <div className="subProfilerightbar">
               <div>
                 <img
-                  src={userImage}
+                  src={userImage || altusericon}
                   style={{
                     width: "150px",
                     height: "150px",

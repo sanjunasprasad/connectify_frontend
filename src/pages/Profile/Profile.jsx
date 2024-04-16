@@ -7,6 +7,7 @@ import "./Profilee.css";
 import OwnPost from "../../components/User/UserProfile/OwnPost"
 import Sidebar from "../../components/User/Sidebar/Sidebar";
 import SettingIcon from "../../Icons/Settingslogo.png";
+import altusericon from "../../Icons/user.png"
 import Swal from "sweetalert2"
 import 'sweetalert2/dist/sweetalert2.min.css'
 
@@ -234,7 +235,7 @@ export default function Profile() {
             <div className="subProfilerightbar">
               <div>
                 <img
-                  src={loggedUser?.image}
+                  src={loggedUser?.image || altusericon}
                   style={{
                     width: "150px",
                     height: "150px",
@@ -255,7 +256,7 @@ export default function Profile() {
                         <span className="close" onClick={handleCloseModal}>
                           &times;
                         </span>
-                        {/* <h2>Edit Profile</h2> */}
+                        <h2>Edit Profile</h2>
                         <form onSubmit={handleSubmit}>
                           {/* Form fields */}
                           <div className="inputfieldsclass">
