@@ -1,10 +1,8 @@
 .MainRigntBar{
     background-color: black; /*bg color for entire rightside*/
     height: 100vh;
-    overflow: auto;
-    
+    overflow: auto; 
 }
-
 p{
     color:white  /*color for text*/
 }

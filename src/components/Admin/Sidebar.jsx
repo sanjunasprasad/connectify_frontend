@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import { BarChart, Wallet, User, BellRing, Paperclip, Brush, Wrench } from 'lucide-react'
+import { BarChart, Wallet, User, BellRing} from 'lucide-react'
 
  function Sidebar() {
   return (
