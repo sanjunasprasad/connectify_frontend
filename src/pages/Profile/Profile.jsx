@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { setUser, clearUser } from "../../services/redux/slices/userSlice";
 import { axiosUserInstance } from "../../services/axios/axios";
-import "./Profile.css";
+import "./Profilee.css";
 import OwnPost from "../../components/User/UserProfile/OwnPost"
 import Sidebar from "../../components/User/Sidebar/Sidebar";
 import SettingIcon from "../../Icons/Settingslogo.png";

@@ -8,7 +8,7 @@ import Modal from "react-modal";
 import ReactPlayer from 'react-player'
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
-import "./Post.css"
+import "./Postt.css"
 import Moreoptions from "../../../Icons/Moreoptions.png"
 import greyicon from "../../../Icons/Notifications.png" //hollowwhite
 import redicon from "../../../Icons/Unlike.png" //redicon
