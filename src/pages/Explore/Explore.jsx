@@ -1,5 +1,5 @@
 import React from 'react'
-import "./explore.css"
+import "./Explore.css"
 import Explorepost from '../../components/User/ExplorePost/Explorepost'
 import Sidebar from '../../components/User/Sidebar/Sidebar'
 import { PostExplore } from '../../components/User/data'

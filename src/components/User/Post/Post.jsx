@@ -8,7 +8,7 @@ import Modal from "react-modal";
 import ReactPlayer from 'react-player'
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
-import "./post.css"
+import "./Post.css"
 import Moreoptions from "../../../Icons/Moreoptions.png"
 import greyicon from "../../../Icons/Notifications.png" //hollowwhite
 import redicon from "../../../Icons/Unlike.png" //redicon
@@ -43,12 +43,7 @@ export default function Post({ postlist }) {
       const newLiked = !liked;
       setLiked(newLiked);
       const token = localStorage.getItem("token");
-      const response = await axiosUserInstance.put(`/post/likepost/${postlist._id}`, {userId: loggeduser._id}, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'role': 'user'
-        }
-      });
+      const response = await axiosUserInstance.put(`/post/likepost/${postlist._id}`, {userId: loggeduser._id});
       console.log("like response is", response);
       if (response.status === 200) {
         setLikes(prevLikes => (newLiked ? prevLikes + 1 : prevLikes - 1));
@@ -77,11 +72,6 @@ export default function Post({ postlist }) {
       const response = await axiosUserInstance.post(`/post/commentpost/${postlist._id}`, {
         userId: loggeduser._id,
         comment: comment
-      }, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'role': 'user'
-        }
       });
       console.log('response for comment posting:', response.data);
       setComment('');

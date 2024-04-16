@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from 'react'
 import { useSelector,useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import "./rightbar.css"
+import "./Rightbar.css"
 import { axiosUserInstance }  from "../../../services/axios/axios";
 import { setPosts } from '../../../services/redux/slices/postSlice';
 import Post from '../Post/Post'
