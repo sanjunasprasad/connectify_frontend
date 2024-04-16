@@ -1,7 +1,7 @@
-import React,{ useState }  from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { axiosUserInstance }  from "../../services/axios/axios.js";
+import { axiosUserInstance } from "../../services/axios/axios.js";
 
 function UserSignup() {
   const navigate = useNavigate();
@@ -49,12 +49,10 @@ function UserSignup() {
 
     if (!data.password) {
       errors.password = "Please provide a password";
-    } else if (data.password.length < 6) {
-      errors.password = "Password must have at least 6 characters";
     }
-    else if (!passwordRegex.test(data.password)) {
-      errors.password = "Password must contain at least one lowercase letter, one uppercase letter, one digit, one special character";
-  }
+    //   else if (!passwordRegex.test(data.password)) {
+    //     errors.password = "Password must contain at least one lowercase letter, one uppercase letter, one digit, one special character";
+    // }
     return errors;
   };
 
