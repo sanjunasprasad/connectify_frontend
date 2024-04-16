@@ -115,7 +115,7 @@ function FriendPost({ post }) {
 
               <div className='scrollable-div'>
                 <div style={{ display: 'flex', marginLeft: 30 }}>
-                  <img src={post?.user?.image} style={{ width: 30, height: 30, borderRadius: "50%", objectFit: "cover", marginTop: 20 }} alt="" />
+                  <img src={post?.user?.image || altusericon} style={{ width: 30, height: 30, borderRadius: "50%", objectFit: "cover", marginTop: 20 }} alt="" />
                   <div style={{ marginLeft: 20 }}>
                     <p style={{ marginTop: 19 }}>{post?.user?.firstName}</p>
                     <p style={{ marginTop: -3 }}>{post?.caption}</p>

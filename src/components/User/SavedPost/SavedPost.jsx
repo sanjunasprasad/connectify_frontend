@@ -8,6 +8,7 @@ import Likeicon from "../../../Icons/Notifications.png"
 import unlike from "../../../Icons/Unlike.png"
 import Moreoptions from '../../../Icons/Moreoptions.png'
 import Saveicon from "../../../Icons/Save.png"
+import altusericon from "../../../Icons/user.png"
 
 
 
@@ -59,9 +60,9 @@ function SavedPost({item}) {
             <div >
               <div style={{ display: "flex", alignItems: "center", paddingLeft: 10, justifyContent: "space-between" }}>
                 <div style={{ display: "flex", alignItems: "center", paddingLeft: 10 }}>
-                  <img src={item?.userPhoto} style={{ width: "30px", height: "30px", borderRadius: "50%", objectFit: "cover" }} alt="" />
+                  <img src={item?.userPhoto } style={{ width: "30px", height: "30px", borderRadius: "50%", objectFit: "cover" }} alt="" />
                   <div style={{ paddingLeft: 10 }}>
-                    <p style={{ marginBottom: 16 }}>{item?.username}</p>
+                    <p style={{ marginBottom: 16 }}>{item?.username || altusericon}</p>
                   
                   </div>
                 
@@ -73,7 +74,7 @@ function SavedPost({item}) {
 
               <div className='scrollable-div'>
                 <div style={{ display: 'flex', marginLeft: 30 }}>
-                  <img src={item?.userPhoto} style={{ width: 30, height: 30, borderRadius: "50%", objectFit: "cover", marginTop: 20 }} alt="" />
+                  <img src={item?.userPhoto || altusericon} style={{ width: 30, height: 30, borderRadius: "50%", objectFit: "cover", marginTop: 20 }} alt="" />
                   <div style={{ marginLeft: 20 }}>
                     <p style={{ marginTop: 19 }}>{item?.username}</p>
                     <p style={{ marginTop: -3 }}>{item?.caption}</p>
@@ -84,11 +85,11 @@ function SavedPost({item}) {
                   {/* Render comments */}
               {item.comments.map((comment, index) => (
                 <div key={index} style={{ display: 'flex', marginLeft: 30 }}>
-                  <img src={comment.userPhoto} style={{ width: 30, height: 30, borderRadius: "50%", objectFit: "cover", marginTop: 20 }} alt="" />
+                  <img src={comment?.userPhoto || altusericon} style={{ width: 30, height: 30, borderRadius: "50%", objectFit: "cover", marginTop: 20 }} alt="" />
                   <div style={{ marginLeft: 20 }}>
-                    <p style={{ marginTop: 19 }}>{comment.username}</p>
-                    <p style={{ marginTop: -3 }}>{comment.text}</p>
-                    <p style={{ color: "#A8A8A8", marginTop: -10 }}>{getRelativeTime(comment.createdAt)}</p>
+                    <p style={{ marginTop: 19 }}>{comment?.username}</p>
+                    <p style={{ marginTop: -3 }}>{comment?.text}</p>
+                    <p style={{ color: "#A8A8A8", marginTop: -10 }}>{getRelativeTime(comment?.createdAt)}</p>
                   </div>
                 </div>
                  ))}
