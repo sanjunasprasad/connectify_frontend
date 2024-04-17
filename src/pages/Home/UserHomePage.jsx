@@ -26,7 +26,7 @@ function UserHomePage() {
           console.log(err.response);
         });
     }
-  },[]);
+  },[navigate]);
 
   return (
     <div>

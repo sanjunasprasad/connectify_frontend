@@ -40,7 +40,7 @@ export default function Profile() {
       .catch((error) => {
         console.error('Error fetching posts:', error);
       });
-  }, []);
+  }, [loggedUser._id]);
 
   const [showModal, setShowModal] = useState(false);
   const handleShowModal = () => {
