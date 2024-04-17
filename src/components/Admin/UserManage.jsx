@@ -6,9 +6,9 @@ import 'sweetalert2/dist/sweetalert2.min.css'
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 
+
+
 function UserManage() {
-
-
 
   const [userDate,setUserDate] = useState([]);
   const [users, setUsers] = useState([]);
@@ -39,10 +39,8 @@ function UserManage() {
 
   // to block/unblock
   const toggleUserStatus = async (id) => {
-    const token = localStorage.getItem("adminToken");
-    console.log("admin token",token)
-   const  usertoken=localStorage.getItem("token")
-    console.log("user token",usertoken)
+    // const token = localStorage.getItem("adminToken");
+    // console.log("admin token",token)
     const userToUpdate = users.find((user) => user._id === id);
     console.log("usertoupdate:", userToUpdate);
     const newStatus = !userToUpdate.is_blocked;
@@ -100,11 +98,7 @@ const deleteUser = async (id) => {
       });
 
       if (result.isConfirmed) {
-          const response = await axiosAdminInstance.delete(`/admin/adminDeleteUser/${id}`,{
-            headers: {
-              Authorization: `Bearer ${token}`,
-              role : 'admin'},
-          });
+          const response = await axiosAdminInstance.delete(`/admin/adminDeleteUser/${id}`);
           if (response.data.email) {
               setUsers(prevUsers => prevUsers.filter(user => user._id !== id));
               Swal.fire({

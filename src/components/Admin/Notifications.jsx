@@ -5,6 +5,9 @@ import { axiosAdminInstance } from "../../services/axios/axios";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 
+
+
+
 function Notifications() {
 
   const navigate = useNavigate();
@@ -17,12 +20,7 @@ function Notifications() {
       navigate("/admin");
     } else {
       axiosAdminInstance
-        .get("/admin/listReportuser", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            role: 'admin'
-          },
-        })
+        .get("/admin/listReportuser")
         .then((response) => {
           console.log("response all reported user", response.data)
           setUsers(response.data);
@@ -38,27 +36,34 @@ function Notifications() {
     }
   }, [navigate]);
 
+  
   const handleDeactivate = async (id) => {
     try {
-      console.log("id is",id)
-      const token = localStorage.getItem("adminToken");
-      const response = await axiosAdminInstance.patch(`/admin/deactivateUser/${id}`, { status: false },{
-        headers: {
-          Authorization: `Bearer ${token}`,
-          role: 'admin'
-        },
+      const confirmed = await swal({
+        title: "Are you sure?",
+        text: "Once deactivated, this action cannot be undone!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
       });
-      console.log("response all deactivate:",response)
-     
+      if (confirmed) {
+        console.log("id is", id);
+        const response = await axiosAdminInstance.patch(`/admin/deactivateUser/${id}`, { status: false });
+        console.log("response all deactivate:", response);
+        swal("User deactivated successfully!", {
+          icon: "success",
+        });
+      } else {
+        swal("Deactivation cancelled!", {
+          icon: "info",
+        });
+      }
     } catch (error) {
-      console.error("error is",error);
-     
+      console.error("error is", error);
+      swal("Error!", "An error occurred while deactivating user.", "error");
     }
   };
-
-
-
-
+  
 
   return (
     <div className="flex">
