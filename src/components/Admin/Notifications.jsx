@@ -40,6 +40,15 @@ function Notifications() {
   
   const handleDeactivate = async (id) => {
     try {
+      // Check if the user is already deactivated
+      if (usersForRemoval.find(user => user._id === id && user.status)) {
+        Swal.fire({
+          icon: "warning",
+          title: "User Already Deactivated",
+          
+        });
+        return;
+      }
       const confirmed = await Swal.fire({
         title: "Are you sure?",
         text: "Once deactivated, this action cannot be undone!",
@@ -48,32 +57,34 @@ function Notifications() {
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes, proceed!"
       });
-      if (confirmed) {
-        console.log("id is", id);
+      
+      if (confirmed.isConfirmed) {
         const response = await axiosAdminInstance.patch(`/admin/deactivateUser/${id}`, { status: false });
-        console.log("response all deactivate:", response);
-        Swal.fire({
-          text: "User deactivated successfully",
-          icon: "success"
-      });
-      } else {
-        Swal.fire({
-          icon: "error",
-          title: "Error",
-          text: "An error occurred while deactivating user.",
-         
-        });
+        
+        if (response.status === 200) {
+          // Update usersForRemoval state after deactivating the user
+          setUsersForRemoval((prevUsers) =>
+            prevUsers.map((user) =>
+              user._id === id ? { ...user, status: true } : user
+            )
+          );
+          
+          Swal.fire({
+            text: "User deactivated successfully",
+            icon: "success"
+          });
+        }
       }
     } catch (error) {
       console.error("error is", error);
       Swal.fire({
         icon: "error",
         title: "Error",
-        text: "An error occurred while deactivating user.",
-       
+        text: "An error occurred while deactivating user."
       });
     }
   };
+  
   
 
   return (
@@ -234,12 +245,12 @@ function Notifications() {
                             </div>
                           </td>
                           <td className="px-4 py-4 whitespace-nowrap">
-                            <button className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded" onClick={()=>handleDeactivate(user._id)}>
-                            {user?.status ? 'Deactivated' : 'Deactivate User'}
+                            <button className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded" onClick={() => handleDeactivate(user._id)}>
+                              {user.status ? 'Deactivated' : 'Deactivate User'}
                             </button>
                           </td>
                         </tr>
-                     
+                
                       ))}
                     </tbody>
                   </table>
