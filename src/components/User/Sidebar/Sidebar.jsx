@@ -118,8 +118,6 @@ function Sidebar() {
             showConfirmButton: false,
             timer: 1500
           });
-           
-          
         })
         .catch((error) => {
           console.error(error);

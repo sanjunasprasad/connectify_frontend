@@ -20,7 +20,7 @@ import Savedicon from "../../../Icons/saved.png"
 
 export default function Post({ postlist }) {
   // console.log("postlist props contains:", postlist)
-  // console.log(postlist.file)
+  console.log(postlist.file)
   const dispatch = useDispatch();
   const loggeduser = useSelector(state => state.user.user);
   // console.log("logeduser 22222",loggeduser)
