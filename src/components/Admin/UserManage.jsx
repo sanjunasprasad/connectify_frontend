@@ -19,11 +19,7 @@ function UserManage() {
       navigate("/admin");
     } else {
       axiosAdminInstance
-        .get("/admin/loadUsers",{
-          headers: {
-          Authorization: `Bearer ${token}`,
-          role : 'admin'
-        },})
+        .get("/admin/loadUsers")
         .then((response) => {
           setUsers(response.data);
           const updatedUsers = response.data.map(user => ({
