@@ -115,7 +115,7 @@ function OwnPost({ post }) {
     });
   };
 
-  
+  const [post,setPosts] = useState(post.caption)
   const handleEditPost = async (postId, caption, postimage) => {
     const { value: updatedCaption } = await Swal.fire({
       imageUrl: postimage,
@@ -138,7 +138,7 @@ function OwnPost({ post }) {
         const response = await axiosUserInstance.put(`/post/editPost/${postId}`, { caption: updatedCaption });
         console.log("editedddddd response",response.data);
         // dispatch(setPosts(response.data));
-        // setPosts({ ...post, caption: updatedCaption });
+        setPosts({ ...post, caption: updatedCaption });
         Swal.fire("Post  updated successfully!");
         handleCloseModal();
       } catch (error) {

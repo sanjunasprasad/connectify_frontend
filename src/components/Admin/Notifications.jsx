@@ -10,7 +10,6 @@ function Notifications() {
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
   const [usersForRemoval, setUsersForRemoval] = useState([]);
-  // const [deactivated, setDeactivated] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("adminToken");
@@ -50,7 +49,6 @@ function Notifications() {
         },
       });
       console.log("response all deactivate:",response)
-      // setDeactivated(true);
      
     } catch (error) {
       console.error("error is",error);

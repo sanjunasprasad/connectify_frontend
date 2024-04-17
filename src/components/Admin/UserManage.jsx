@@ -14,16 +14,12 @@ function UserManage() {
   const [users, setUsers] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
-    const token = localStorage.getItem("adminToken");
+  
     if (!token) {
       navigate("/admin");
     } else {
       axiosAdminInstance
-        .get("/admin/loadUsers",{
-          headers: {
-          Authorization: `Bearer ${token}`,
-          role : 'admin'
-        },})
+        .get("/admin/loadUsers")
         .then((response) => {
           setUsers(response.data);
           const updatedUsers = response.data.map(user => ({
@@ -45,8 +41,6 @@ function UserManage() {
   const toggleUserStatus = async (id) => {
     const token = localStorage.getItem("adminToken");
     console.log("admin token",token)
-   const  usertoken=localStorage.getItem("token")
-    console.log("user token",usertoken)
     const userToUpdate = users.find((user) => user._id === id);
     console.log("usertoupdate:", userToUpdate);
     const newStatus = !userToUpdate.is_blocked;
@@ -61,12 +55,7 @@ function UserManage() {
         });
 
         if (result.isConfirmed) {
-            const response = await  axiosAdminInstance.patch(`/admin/blockuser/${id}`, 
-            {is_blocked: newStatus,},
-            {headers: {
-                Authorization: `Bearer ${token}`,
-                role : 'admin'},
-            });
+            const response = await  axiosAdminInstance.patch(`/admin/blockuser/${id}`, {is_blocked: newStatus,});
             console.log("response of blocked user:",response)
 
             // Update the local state to reflect the change
@@ -96,7 +85,6 @@ function UserManage() {
 
   //to delete user
 const deleteUser = async (id) => {
-  const token = localStorage.getItem("adminToken");
   try {
       const result = await Swal.fire({
           title: "Are you sure?",
@@ -109,11 +97,7 @@ const deleteUser = async (id) => {
       });
 
       if (result.isConfirmed) {
-          const response = await axiosAdminInstance.delete(`/admin/adminDeleteUser/${id}`,{
-            headers: {
-              Authorization: `Bearer ${token}`,
-              role : 'admin'},
-          });
+          const response = await axiosAdminInstance.delete(`/admin/adminDeleteUser/${id}`);
           if (response.data.email) {
               setUsers(prevUsers => prevUsers.filter(user => user._id !== id));
               Swal.fire({
