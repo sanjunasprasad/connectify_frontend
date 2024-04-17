@@ -40,14 +40,13 @@ function Rightbar() {
       const response = axiosUserInstance.get(`/friend/suggestionlist/${_id}`)
         .then(response => {
           setResponseData(response.data);
-          console.log("POST RESPONSE##### ",response.data) 
+          // console.log("POST RESPONSE##### ",response.data) 
           
           })
           .catch(error => {
             console.error('Error fetching user:', error);
           });
     }
- 
   },[_id])
 
 //follow+unfollow

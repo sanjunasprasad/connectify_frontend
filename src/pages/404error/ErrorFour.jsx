@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom";
 
 function ErrorFour() {
 
-  const navigate = useNavigate();
-  const handleGoBack = useCallback(() => {
-    navigate("/feedhome");
-  }, [navigate]);
+  // const navigate = useNavigate();
+  // const handleGoBack = useCallback(() => {
+  //   navigate("/feedhome");
+  // }, [navigate]);
   
   return (
     <div className="py-10">
@@ -23,7 +23,7 @@ function ErrorFour() {
           <button
             type="button"
             className="inline-flex items-center rounded-md border border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-            onClick={handleGoBack}
+            // onClick={handleGoBack}
           >
             <ArrowLeft size={16} className="mr-2" />
             Go back
