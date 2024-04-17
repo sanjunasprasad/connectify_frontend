@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2"
 import 'sweetalert2/dist/sweetalert2.min.css'
 import { axiosAdminInstance } from "../../services/axios/axios";
 import Navbar from "./Navbar";
@@ -50,17 +51,26 @@ function Notifications() {
         console.log("id is", id);
         const response = await axiosAdminInstance.patch(`/admin/deactivateUser/${id}`, { status: false });
         console.log("response all deactivate:", response);
-        swal("User deactivated successfully!", {
-          icon: "success",
-        });
+        Swal.fire({
+          text: "User deactivated successfully",
+          icon: "success"
+      });
       } else {
-        swal("Deactivation cancelled!", {
-          icon: "info",
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "An error occurred while deactivating user.",
+         
         });
       }
     } catch (error) {
       console.error("error is", error);
-      swal("Error!", "An error occurred while deactivating user.", "error");
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "An error occurred while deactivating user.",
+       
+      });
     }
   };
   
