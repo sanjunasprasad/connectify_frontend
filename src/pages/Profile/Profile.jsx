@@ -31,13 +31,7 @@ export default function Profile() {
   const [postLength, setLength] = useState(0);
   useEffect(() => {
     axiosUserInstance
-      .get('/post/loadownPost', {
-        params: { userId: _id },
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          role: 'user'
-        }
-      })
+      .get('/post/loadownPost', {params: { userId: _id }})
       .then((response) => {
         // console.log("post length response", response.data)
         setShowPosts(response.data);

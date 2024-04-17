@@ -98,7 +98,6 @@ export default function Post({ postlist }) {
   const savePost = async () => {
     try {
       await axiosUserInstance.post(`/post/savePost/${postlist._id}`, { userId: loggeduser._id });
-
       Swal.fire("Post  saved successfully!");
       setIsSaved(true);
     } catch (error) {

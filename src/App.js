@@ -6,6 +6,7 @@ import Profile from "./pages/Profile/Profile";
 import Explore from "./pages/Explore/Explore";
 import Savedpost from './pages/Saved/Savedpost';
 import AdminPage from "./pages/AdminPage";
+import ErrorFour from './pages/404error/ErrorFour';
 import Chat from "./pages/Chat/Chat"
 import ZegoVcall from './components/Chat/ChatBox/ZegoVideocall';
 import UserLogin from "./components/User/UserLogin";
@@ -46,6 +47,8 @@ function App() {
               
             <Route element={<Chat />} path="/chat" /> 
             <Route element={<ZegoVcall/>} path="/meeting/:userId/:id" />
+
+            <Route element={<ErrorFour/>} path="*" />
        </Routes>
       
     </>

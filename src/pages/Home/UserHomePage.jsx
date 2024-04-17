@@ -10,22 +10,14 @@ import Rightbar from "../../components/User/Rightbar/Rightbar";
 function UserHomePage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const token1 = useSelector(state => state.user.token);
-    // console.log("Token from Redux store userhome:", token1);
+  const token = useSelector(state => state.user.token);
 
   useEffect(() => {
-    // const token = localStorage.getItem("token");
-    // console.log("token fom localstorage in userhome after login:",token)
-    if (!token1) {
+    if (!token) {
       navigate("/");
     } else {
        axiosUserInstance 
-        .get("/userProfile", {
-          headers: {
-            Authorization: `Bearer ${token1}`,
-            role : 'user'
-          },
-        })
+        .get("/userProfile")
         .then((response) => {
           // console.log("response from fetchprofile in homepage:",response)
           dispatch(setUser(response.data));

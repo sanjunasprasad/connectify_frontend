@@ -32,4 +32,4 @@ function ErrorFour() {
   )
 }
 
-export default ErrorFour
+export default ErrorFour;
