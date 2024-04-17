@@ -6,7 +6,7 @@ import { axiosUserInstance } from "../../services/axios/axios.js";
 function UserSignup() {
   const navigate = useNavigate();
   const nameRegex = /^[A-Za-z]+$/;
-  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
 
   const [formData, setFormData] = useState({

@@ -140,7 +140,7 @@ export default function Post({ postlist }) {
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: "space-between", marginBottom: 10 }}>
           <div style={{ display: 'flex', alignItems: 'center' }}>
             {/* profilepic on post top*/}
-            {postlist && postlist?.user && postlist?.user?.image && (
+            {postlist &&  (
               <img src={postlist?.user?.image || altusericon} style={{ width: "30px", height: "30px", borderRadius: "50%", objectFit: "cover", }} alt="" />)}
             {/* username  on post top*/}
             <p style={{ marginLeft: 10 }}>
@@ -211,7 +211,7 @@ export default function Post({ postlist }) {
 
                   {postlist.comments.map((comment, index) => (
                     <div key={index} style={{ display: 'flex', marginLeft: 30 }}>
-                      <img src={comment?.user?.image} style={{ width: 30, height: 30, borderRadius: '50%', objectFit: 'cover', marginTop: 35 }} alt="User" />
+                      <img src={comment?.user?.image || altusericon} style={{ width: 30, height: 30, borderRadius: '50%', objectFit: 'cover', marginTop: 35 }} alt="User" />
                       <div style={{ marginLeft: 20 }}>
                         <p style={{ marginTop: 30 }}>{comment?.user?.firstName}</p>
                         <p style={{ marginTop: 0 }}>{comment?.text}</p>

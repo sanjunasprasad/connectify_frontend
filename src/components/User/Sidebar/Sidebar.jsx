@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch ,useSelector} from 'react-redux';
-import { axiosUserInstance }  from "../../../services/axios/axios";
+// import { axiosUserInstance }  from "../../../services/axios/axios";
 import {axiosFormDataInstance} from "../../../services/axios/axios";
 import {clearUser} from "../../../services/redux/slices/userSlice"
 import { addPost } from "../../../services/redux/slices/postSlice";
@@ -221,7 +221,7 @@ function Sidebar() {
                 <div style={{ marginLeft: 20, width: "40%" }}>
                   <div style={{ display: "flex", alignItems: "center" }}>
                     <img
-                      src={loggedUser.image}
+                      src={loggedUser?.image || altusericon}
                       style={{
                         width: "30px",
                         height: "30px",
