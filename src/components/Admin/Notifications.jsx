@@ -40,12 +40,13 @@ function Notifications() {
   
   const handleDeactivate = async (id) => {
     try {
-      const confirmed = await swal({
+      const confirmed = await Swal.fire({
         title: "Are you sure?",
         text: "Once deactivated, this action cannot be undone!",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, proceed!"
       });
       if (confirmed) {
         console.log("id is", id);
