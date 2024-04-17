@@ -37,7 +37,10 @@ export default function Post({ postlist }) {
     const storedLiked = localStorage.getItem(`post_liked_${postlist._id}_${loggeduser._id}`);
     return storedLiked ? JSON.parse(storedLiked) : postlist?.likes.some(like => like.user === loggeduser._id);
   });
-  const [likes, setLikes] = useState(() => { return postlist?.likes.length || 0});
+  const [likes, setLikes] = useState(() => {
+    const storedLikes = localStorage.getItem(`post_liked_${postlist._id}_${loggeduser._id}`);
+    return storedLikes ? JSON.parse(storedLikes) : postlist?.likes.length || 0;
+  });
 
   const handleLike = async () => {
     try {
@@ -48,6 +51,7 @@ export default function Post({ postlist }) {
       if (response.status === 200) {
         setLikes(prevLikes => (newLiked ? prevLikes + 1 : prevLikes - 1));
         localStorage.setItem(`post_liked_${postlist._id}_${loggeduser._id}`, JSON.stringify(newLiked));
+        localStorage.setItem(`post_liked_${postlist._id}_${loggeduser._id}`, JSON.stringify(newLiked ? likes + 1 : likes - 1));
       }
     } catch (error) {
       console.error('Error occurred while liking the post:', error);

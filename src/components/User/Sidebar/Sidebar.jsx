@@ -233,7 +233,7 @@ function Sidebar() {
                     <p
                       style={{ marginLeft: 10, fontWeight: 600, fontSize: 16 }}
                     >
-                      {loggedUser.firstName}
+                      {loggedUser?.firstName}
                     </p>
                   </div>
                   <textarea
