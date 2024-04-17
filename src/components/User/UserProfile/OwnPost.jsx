@@ -1,6 +1,4 @@
 import React, {  useState } from 'react';
-import {  useDispatch } from 'react-redux';
-import { setPosts } from "../../../services/redux/slices/postSlice"
 import Modal from "react-modal";
 import moment from 'moment';
 import Swal from "sweetalert2"
@@ -19,7 +17,7 @@ import altusericon from "../../../Icons/user.png"
 
 function OwnPost({ post }) {
 
-  const dispatch = useDispatch();
+ 
   const isImage = post.file.endsWith(".jpg") || post.file.endsWith(".jpeg") || post.file.endsWith(".png") || post.file.endsWith(".gif");
   const isVideo = post.file.endsWith(".mp4") || post.file.endsWith(".mov") || post.file.endsWith(".avi") || post.file.endsWith(".mkv");
   // show icon love,comment on post top
@@ -115,7 +113,7 @@ function OwnPost({ post }) {
     });
   };
 
-  const [post,setPosts] = useState(post.caption)
+  // const [post,setPosts] = useState(post.caption)
   const handleEditPost = async (postId, caption, postimage) => {
     const { value: updatedCaption } = await Swal.fire({
       imageUrl: postimage,
@@ -137,8 +135,7 @@ function OwnPost({ post }) {
       try {
         const response = await axiosUserInstance.put(`/post/editPost/${postId}`, { caption: updatedCaption });
         console.log("editedddddd response",response.data);
-        // dispatch(setPosts(response.data));
-        setPosts({ ...post, caption: updatedCaption });
+        // setPosts({ ...post, caption: updatedCaption });
         Swal.fire("Post  updated successfully!");
         handleCloseModal();
       } catch (error) {
