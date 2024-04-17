@@ -50,7 +50,7 @@ function UserSignup() {
     if (!data.password) {
       errors.password = "Please provide a password";
     }
-      else if (!passwordRegex.test(password)) {
+      else if (!passwordRegex.test(data.password)) {
         errors.password = "password must be atleast 6 characters with atleast one uppercase, lowercase, digit and special character"
     }
     else if(data.password.length < 6){
