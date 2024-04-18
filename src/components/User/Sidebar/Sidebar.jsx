@@ -104,6 +104,7 @@ function Sidebar() {
       axiosUserInstance
         .post("/post/createPost", formData,
           {headers: {
+            "Content-Type": "multipart/form-data",
               Authorization: `Bearer ${token}`,
               role : 'user'}
             })

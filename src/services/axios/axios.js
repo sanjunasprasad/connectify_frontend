@@ -10,7 +10,6 @@ function createAxiosInstance(token ,role ) { //fn creates & configures Axios ins
         (config) => {
             console.log("role in axios",role)
             console.log("token in axios",token)
-            console.log("config",config)
             config.headers.Authorization = `Bearer ${localStorage.getItem(token)}`; // configures an interceptor to add an Authorization header with token value prefixed by Bearer 
             config.headers.role = role;// adds a custom header named 'role' with the specified role 
             return config;
