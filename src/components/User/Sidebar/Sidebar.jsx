@@ -11,16 +11,14 @@ import "sweetalert2/dist/sweetalert2.min.css";
 import "./Sidebarr.css";
 import altusericon from "../../../Icons/user.png"
 import Homeicon from "../../../Icons/home.png";
-import SearchIcon from "../../../Icons/Search.png";
 import Exploreicon from "../../../Icons/Explore.png";
 import Reels from "../../../Icons/Reels.png";
 import Messages from "../../../Icons/Messenger.png";
 import createicon from "../../../Icons/New post.png";
-import Instragramicon from "../../../Icons/Instagram.png";
 import More from "../../../Icons/Settings.png";
 import Iconsfromcreatemodal from "../../../Icons/Icon to represent media such as images or videos.png";
 import InstagramIcon from "../../../Icons/Instagramlogo.png"; //instagram logotext
-import { Profiledata } from "../data";
+
 
 function Sidebar() {
 
@@ -51,7 +49,7 @@ function Sidebar() {
     });
   };
 
-  
+ 
 
   //modal
   const [modalIsOpen, setmodalIsOpen] = useState(false);
@@ -253,11 +251,7 @@ function Sidebar() {
       <div>
         {/* logotext on sidebar */}
         <div style={{ display: "flex", marginTop: "45px", marginLeft: "20px" }}>
-          {ShowSearch === false ? (
             <img src={InstagramIcon} alt="" className="logos" />
-          ) : (
-            <img src={Instragramicon} alt="" className="logos" />
-          )}
         </div>
 
         {/* sidebar items */}
@@ -280,10 +274,6 @@ function Sidebar() {
             )}
           </div>
         </Link>
-
-
-        
-
 
         {/* exploreicon */}
         <div
@@ -359,11 +349,6 @@ function Sidebar() {
         </div>
 
 
-
-        
- 
-
-
         {/* create post icon */}
         <div
           style={{
@@ -427,7 +412,7 @@ function Sidebar() {
         </div>
       </div>
 
-        
+      
     </div>
   );
 }
