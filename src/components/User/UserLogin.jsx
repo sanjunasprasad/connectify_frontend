@@ -99,16 +99,16 @@ function UserLogin() {
 
 
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    // console.log("usertoken from extra useeffect",token)
-    if (!token) {
-      navigate("/");
-    }
-    else {
-      navigate("/feedhome")
-    }
-  }, [navigate]);
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token");
+  //   // console.log("usertoken from extra useeffect",token)
+  //   if (!token) {
+  //     navigate("/");
+  //   }
+  //   else {
+  //     navigate("/feedhome")
+  //   }
+  // }, [navigate]);
 
   return (
     <div>
