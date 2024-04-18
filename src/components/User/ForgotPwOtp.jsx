@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-import { axiosUserInstance }  from "../../services/axios/axios.js";
+import { axiosInstance }  from "../../services/axios/axios.js";
 import Swal from "sweetalert2"
 import 'sweetalert2/dist/sweetalert2.min.css'
 
@@ -36,7 +36,7 @@ function ForgotPwOtp() {
       const Otp = otpInputs.join('');
       console.log('user entered OTP:', Otp);
       try {
-        const response = await axiosUserInstance.post('/otpVerify', { Otp });
+        const response = await axiosInstance.post('/otpVerify', { Otp });
         console.log('Response from backend:', response);
         if (response.status === 200) {
           navigate("/resetpassword");
@@ -67,7 +67,7 @@ function ForgotPwOtp() {
       event.preventDefault(); 
       try {
         setTimer(60);
-        const response = await axiosUserInstance.get('/resendotp');
+        const response = await axiosInstance.get('/resendotp');
         console.log('Response from backend (resend OTP):', response);
         if (response.data && response.data.success) {
           setSuccessMessage(response.data.message);
