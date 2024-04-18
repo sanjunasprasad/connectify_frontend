@@ -105,8 +105,8 @@ function Sidebar() {
       axios
         .post("/post/createPost", formData,{ headers: {
           "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${token}`,
-          role : 'user'
+          "Authorization": `Bearer ${token}`,
+          "role" : 'user'
         },})
         .then((response) => {
           console.log("created succesffully", response.data);
