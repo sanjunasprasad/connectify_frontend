@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 // import { axiosUserInstance }  from "../../../services/axios/axios";
-import { axiosFormDataInstance } from "../../../services/axios/axios";
+// import { axiosFormDataInstance } from "../../../services/axios/axios";
 import { clearUser } from "../../../services/redux/slices/userSlice"
 import { addPost } from "../../../services/redux/slices/postSlice";
 import Modal from "react-modal";
@@ -19,6 +19,7 @@ import More from "../../../Icons/Settings.png";
 import Iconsfromcreatemodal from "../../../Icons/Icon to represent media such as images or videos.png";
 import InstagramIcon from "../../../Icons/Instagramlogo.png"; //instagram icon
 import Instagramicon from "../../../Icons/Instagram.png";//instagram 
+import axios from "axios";
 
 
 function Sidebar() {
@@ -87,7 +88,7 @@ function Sidebar() {
   const handleCreatePost = async () => {
     try {
       console.log("creation iam called")
-      // const token = localStorage.getItem("token")
+      const token = localStorage.getItem("token")
       const formData = new FormData();
       const caption = document.querySelector('textarea[name="caption"]').value;
       formData.append("caption", caption);
@@ -100,9 +101,13 @@ function Sidebar() {
         fileType: file.type,
         userData: loggedUser,
       });
-      console.log("my type:", typeof formData);
-      axiosFormDataInstance
-        .post("/post/createPost", formData)
+      console.log("my type:", typeof formData);      
+      axios
+        .post("/post/createPost", formData,{ headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+          role : 'user'
+        },})
         .then((response) => {
           console.log("created succesffully", response.data);
           dispatch(addPost(response.data));
