@@ -6,7 +6,7 @@ import { setToken } from "../../services/redux/slices/userSlice";
 import { axiosInstance } from "../../services/axios/axios";
 import Swal from "sweetalert2"
 import 'sweetalert2/dist/sweetalert2.min.css'
-import { GoogleLogin } from 'react-google-login';
+// import { GoogleLogin } from 'react-google-login';
 
 
 function UserLogin() {
@@ -96,26 +96,26 @@ function UserLogin() {
   };
 
 
-   //Handle successful Google Sign-In
-  const handleGoogleLoginSuccess = async (response) => {
-    try {
-      const { tokenId } = response;
-      const googleResponse = await axiosInstance.post("/googleLogin", { tokenId });
-      if (googleResponse.status === 200) {
-        localStorage.setItem("token", googleResponse.data);
-        dispatch(setToken(googleResponse.data));
-        navigate("/feedhome");
-      }
-    } catch (error) {
-      // Handle error
-      console.error("Error:", error);
-    }
-  };
+  //  //Handle successful Google Sign-In
+  // const handleGoogleLoginSuccess = async (response) => {
+  //   try {
+  //     const { tokenId } = response;
+  //     const googleResponse = await axiosInstance.post("/googleLogin", { tokenId });
+  //     if (googleResponse.status === 200) {
+  //       localStorage.setItem("token", googleResponse.data);
+  //       dispatch(setToken(googleResponse.data));
+  //       navigate("/feedhome");
+  //     }
+  //   } catch (error) {
+  //     // Handle error
+  //     console.error("Error:", error);
+  //   }
+  // };
 
-  // Handle failed Google Sign-In
-  const handleGoogleLoginFailure = (error) => {
-    console.error("Google Sign-In failed:", error);
-  };
+  // // Handle failed Google Sign-In
+  // const handleGoogleLoginFailure = (error) => {
+  //   console.error("Google Sign-In failed:", error);
+  // };
 
 
 
@@ -202,13 +202,13 @@ function UserLogin() {
             {emailExist && (
               <p className="error-message text-center text-red-500">{emailExist}</p>
             )}
-             <GoogleLogin
+             {/* <GoogleLogin
               clientId="YOUR_GOOGLE_CLIENT_ID"
               buttonText="Sign in with Google"
               onSuccess={handleGoogleLoginSuccess}
               onFailure={handleGoogleLoginFailure}
               cookiePolicy={'single_host_origin'}
-            />  
+            />   */}
             
           </form>
         </div>
