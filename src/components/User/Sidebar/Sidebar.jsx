@@ -266,12 +266,10 @@ function Sidebar() {
               marginLeft: "20px",
             }}
           >
-            <img src={Homeicon} alt="" className="logos" />
-            {ShowSearch && (
+            <img src={Homeicon} alt="" className="logos" />       
               <ul style={{ marginLeft: "20px" }}>
                 <li className="listtext"> Home </li>
               </ul>
-            )}
           </div>
         </Link>
 
@@ -286,7 +284,6 @@ function Sidebar() {
           }}
         >
           <img src={Exploreicon} alt="" className="logos" />
-          {ShowSearch && (
             <ul style={{ marginLeft: "20px" }}>
               <li className="listtext">
                 <Link
@@ -296,8 +293,7 @@ function Sidebar() {
                   Explore
                 </Link>
               </li>
-            </ul>
-          )}
+            </ul> 
         </div>
 
 
@@ -314,11 +310,9 @@ function Sidebar() {
           }}
         >
           <img src={Reels} alt="" className="logos" />
-          {ShowSearch && (
             <ul style={{ marginLeft: "20px" }}>
               <li className="listtext"> Saved</li>
             </ul>
-          )}
         </div>
         </Link>
 
@@ -334,7 +328,6 @@ function Sidebar() {
           }}
         >
           <img src={Messages} alt="" className="logos" />
-          {ShowSearch && (
             <ul style={{ marginLeft: "20px" }}>
               <li className="listtext">
               <Link
@@ -345,7 +338,6 @@ function Sidebar() {
                 </Link>
               </li>
             </ul>
-          )}
         </div>
 
 
@@ -361,11 +353,9 @@ function Sidebar() {
           onClick={handleShowmodal}
         >
           <img src={createicon} alt="" className="logos" />
-          {ShowSearch && (
             <ul style={{ marginLeft: "20px" }}>
               <li className="listtext">Create</li>
             </ul>
-          )}
         </div>
 
           {/* profile icon */}
@@ -384,11 +374,9 @@ function Sidebar() {
               alt=""
               className="profileicon"
             />
-            {ShowSearch && (
               <ul style={{ marginLeft: "20px" }}>
                 <li className="listtext"> Profile</li>
               </ul>
-            )}
           </div>
         </Link>
 
@@ -404,11 +392,9 @@ function Sidebar() {
           onClick={signOut}
         >
           <img src={More} alt="" className="logos" />
-          {ShowSearch && (
             <ul style={{ marginLeft: "20px" }}>
               <li className="listtext">Logout</li>
             </ul>
-          )}
         </div>
       </div>
 
