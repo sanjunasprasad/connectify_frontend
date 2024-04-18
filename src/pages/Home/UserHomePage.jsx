@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import "./Home.css";
 import  { axiosUserInstance }   from '../../services/axios/axios';
 import { setUser } from "../../services/redux/slices/userSlice";
@@ -9,13 +9,7 @@ import Rightbar from "../../components/User/Rightbar/Rightbar";
 
 function UserHomePage() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const token = useSelector(state => state.user.token);
-
   useEffect(() => {
-    if (!token) {
-      navigate("/");
-    } else {
        axiosUserInstance 
         .get("/userProfile")
         .then((response) => {
@@ -25,8 +19,7 @@ function UserHomePage() {
         .catch((err) => {
           console.log(err.response);
         });
-    }
-  },[navigate]);
+  },[]);
 
   return (
     <div>

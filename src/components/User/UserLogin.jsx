@@ -180,14 +180,7 @@ function UserLogin() {
               <p className="error-message text-center text-red-500">{emailExist}</p>
             )}
 
-            {/* <button className="text-white text-center mt-3">Google Signin?</button> */}
-             {/* <GoogleLogin
-              clientId="YOUR_GOOGLE_CLIENT_ID"
-              buttonText="Sign in with Google"
-              onSuccess={handleGoogleLoginSuccess}
-              onFailure={handleGoogleLoginFailure}
-              cookiePolicy={'single_host_origin'}
-            />  */}
+            
           </form>
         </div>
 
