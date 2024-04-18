@@ -87,6 +87,7 @@ function Sidebar() {
   const handleCreatePost = async () => {
     try {
       console.log("creation iam called")
+      const token = localStorage.getItem("token")
       const formData = new FormData();
       const caption = document.querySelector('textarea[name="caption"]').value;
       formData.append("caption", caption);
