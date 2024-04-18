@@ -16,8 +16,6 @@ function Chat() {
         <div className='chatrightbar'>
           <ChatRightbar />
         </div>
-
-
       </div>
     </div>
 

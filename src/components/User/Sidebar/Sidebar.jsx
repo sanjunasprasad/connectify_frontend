@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch ,useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 // import { axiosUserInstance }  from "../../../services/axios/axios";
-import {axiosFormDataInstance} from "../../../services/axios/axios";
-import {clearUser} from "../../../services/redux/slices/userSlice"
+import { axiosFormDataInstance } from "../../../services/axios/axios";
+import { clearUser } from "../../../services/redux/slices/userSlice"
 import { addPost } from "../../../services/redux/slices/postSlice";
 import Modal from "react-modal";
 import Swal from "sweetalert2";
@@ -17,14 +17,15 @@ import Messages from "../../../Icons/Messenger.png";
 import createicon from "../../../Icons/New post.png";
 import More from "../../../Icons/Settings.png";
 import Iconsfromcreatemodal from "../../../Icons/Icon to represent media such as images or videos.png";
-import InstagramIcon from "../../../Icons/Instagramlogo.png"; //instagram logotext
+import InstagramIcon from "../../../Icons/Instagramlogo.png"; //instagram icon
+import Instagramicon from "../../../Icons/Instagram.png";//instagram 
 
 
 function Sidebar() {
 
-  
+
   const loggedUser = useSelector(state => state.user.user);
- 
+
   //for logout
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -49,7 +50,7 @@ function Sidebar() {
     });
   };
 
- 
+
 
   //modal
   const [modalIsOpen, setmodalIsOpen] = useState(false);
@@ -68,16 +69,16 @@ function Sidebar() {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    if (e.target.files && e.target.files.length > 0) { 
-        const selectedFile = e.target.files[0];
-        setFile(selectedFile);
-        if (selectedFile.type.startsWith('video/')) {
-            setImagePre(URL.createObjectURL(selectedFile));
-        } else {
-            setImagePre(URL.createObjectURL(selectedFile));
-        }
+    if (e.target.files && e.target.files.length > 0) {
+      const selectedFile = e.target.files[0];
+      setFile(selectedFile);
+      if (selectedFile.type.startsWith('video/')) {
+        setImagePre(URL.createObjectURL(selectedFile));
+      } else {
+        setImagePre(URL.createObjectURL(selectedFile));
+      }
     }
-};
+  };
 
 
 
@@ -86,7 +87,6 @@ function Sidebar() {
   const handleCreatePost = async () => {
     try {
       console.log("creation iam called")
-      const token = localStorage.getItem("token");
       const formData = new FormData();
       const caption = document.querySelector('textarea[name="caption"]').value;
       formData.append("caption", caption);
@@ -103,7 +103,7 @@ function Sidebar() {
       axiosFormDataInstance
         .post("/post/createPost", formData)
         .then((response) => {
-          console.log("created succesffully",response.data);
+          console.log("created succesffully", response.data);
           dispatch(addPost(response.data));
           Swal.fire({
             position: "top-end",
@@ -125,13 +125,13 @@ function Sidebar() {
 
   return (
     <div className="mainsidebar">
-     <Modal
+      <Modal
         isOpen={modalIsOpen}
         onRequestClose={() => setmodalIsOpen(false)}
         style={{ overlay: { backgroundColor: "#2e2b2bc7" } }}
         className={"modalclassNameforAPost"}
       >
-        
+
         <div style={{ flex: 1, height: "70vh" }}>
           {imagepre == null ? (
             <div>
@@ -251,7 +251,10 @@ function Sidebar() {
       <div>
         {/* logotext on sidebar */}
         <div style={{ display: "flex", marginTop: "45px", marginLeft: "20px" }}>
-            <img src={InstagramIcon} alt="" className="logos" />
+          <img src={InstagramIcon} alt="" className="logos" />
+          <ul style={{ marginLeft: "20px" }}>
+            <img src={Instagramicon} alt="" className="logos" />
+          </ul>
         </div>
 
         {/* sidebar items */}
@@ -266,10 +269,10 @@ function Sidebar() {
               marginLeft: "20px",
             }}
           >
-            <img src={Homeicon} alt="" className="logos" />       
-              <ul style={{ marginLeft: "20px" }}>
-                <li className="listtext"> Home </li>
-              </ul>
+            <img src={Homeicon} alt="" className="logos" />
+            <ul style={{ marginLeft: "20px" }}>
+              <li className="listtext"> Home </li>
+            </ul>
           </div>
         </Link>
 
@@ -284,36 +287,36 @@ function Sidebar() {
           }}
         >
           <img src={Exploreicon} alt="" className="logos" />
-            <ul style={{ marginLeft: "20px" }}>
-              <li className="listtext">
-                <Link
-                  to={"/Explore"}
-                  style={{ textDecoration: "none", color: "white" }}
-                >
-                  Explore
-                </Link>
-              </li>
-            </ul> 
+          <ul style={{ marginLeft: "20px" }}>
+            <li className="listtext">
+              <Link
+                to={"/Explore"}
+                style={{ textDecoration: "none", color: "white" }}
+              >
+                Explore
+              </Link>
+            </li>
+          </ul>
         </div>
 
 
 
         {/* savedicon */}
-        <Link to={"/savedpost"} style={{ textDecoration: "none", color: "white" }}> 
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            marginTop: "40px",
-            cursor: "pointer",
-            marginLeft: "20px",
-          }}
-        >
-          <img src={Reels} alt="" className="logos" />
+        <Link to={"/savedpost"} style={{ textDecoration: "none", color: "white" }}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              marginTop: "40px",
+              cursor: "pointer",
+              marginLeft: "20px",
+            }}
+          >
+            <img src={Reels} alt="" className="logos" />
             <ul style={{ marginLeft: "20px" }}>
               <li className="listtext"> Saved</li>
             </ul>
-        </div>
+          </div>
         </Link>
 
 
@@ -328,16 +331,16 @@ function Sidebar() {
           }}
         >
           <img src={Messages} alt="" className="logos" />
-            <ul style={{ marginLeft: "20px" }}>
-              <li className="listtext">
+          <ul style={{ marginLeft: "20px" }}>
+            <li className="listtext">
               <Link
-                  to={"/chat"}
-                  style={{ textDecoration: "none", color: "white" }}
-                >
-                  Message
-                </Link>
-              </li>
-            </ul>
+                to={"/chat"}
+                style={{ textDecoration: "none", color: "white" }}
+              >
+                Message
+              </Link>
+            </li>
+          </ul>
         </div>
 
 
@@ -353,12 +356,12 @@ function Sidebar() {
           onClick={handleShowmodal}
         >
           <img src={createicon} alt="" className="logos" />
-            <ul style={{ marginLeft: "20px" }}>
-              <li className="listtext">Create</li>
-            </ul>
+          <ul style={{ marginLeft: "20px" }}>
+            <li className="listtext">Create</li>
+          </ul>
         </div>
 
-          {/* profile icon */}
+        {/* profile icon */}
         <Link to={"/username"}>
           <div
             style={{
@@ -374,13 +377,13 @@ function Sidebar() {
               alt=""
               className="profileicon"
             />
-              <ul style={{ marginLeft: "20px" }}>
-                <li className="listtext"> Profile</li>
-              </ul>
+            <ul style={{ marginLeft: "20px" }}>
+              <li className="listtext"> Profile</li>
+            </ul>
           </div>
         </Link>
 
-          {/* logout icon */}
+        {/* logout icon */}
         <div
           style={{
             display: "flex",
@@ -392,13 +395,13 @@ function Sidebar() {
           onClick={signOut}
         >
           <img src={More} alt="" className="logos" />
-            <ul style={{ marginLeft: "20px" }}>
-              <li className="listtext">Logout</li>
-            </ul>
+          <ul style={{ marginLeft: "20px" }}>
+            <li className="listtext">Logout</li>
+          </ul>
         </div>
       </div>
 
-      
+
     </div>
   );
 }
