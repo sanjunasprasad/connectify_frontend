@@ -51,11 +51,7 @@ function Sidebar() {
     });
   };
 
-  //search
-  const [ShowSearch, setShowSearch] = useState(true);
-  const toggleSeachText = () => {
-    setShowSearch(!ShowSearch);
-  };
+  
 
   //modal
   const [modalIsOpen, setmodalIsOpen] = useState(false);
@@ -286,24 +282,7 @@ function Sidebar() {
         </Link>
 
 
-        {/* searchicon */}
-        {/* <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            marginTop: "40px",
-            cursor: "pointer",
-            marginLeft: "20px",
-          }}
-          onClick={toggleSeachText}
-        >
-          <img src={SearchIcon} alt="" className="logos" />
-          {ShowSearch && (
-            <ul style={{ marginLeft: "20px" }}>
-              <li className="listtext"> </li>    
-            </ul>
-          )}
-        </div> */}
+        
 
 
         {/* exploreicon */}
@@ -381,23 +360,7 @@ function Sidebar() {
 
 
 
-        {/* notification icon */}
-        {/* <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            marginTop: "40px",
-            cursor: "pointer",
-            marginLeft: "20px",
-          }}
-        >
-          <img src={Notifications} alt="" className="logos" />
-          {ShowSearch && (
-            <ul style={{ marginLeft: "20px" }}>
-              <li className="listtext"> Notifications</li>
-            </ul>
-          )}
-        </div> */}
+        
  
 
 
@@ -464,75 +427,7 @@ function Sidebar() {
         </div>
       </div>
 
-        {/* search result */}
-      {!ShowSearch && (
-        <div
-          style={{
-            width: "100%",
-            height: "100vh",
-            backgroundColor: "black",
-            marginLeft: 35,
-          }}
-        >
-          <p
-            style={{
-              color: "white",
-              fontWeight: 600,
-              fontSize: 27,
-              marginLeft: 10,
-              marginTop: 35,
-            }}
-          >
-            Search
-          </p>
-          <div
-            style={{ display: "flex", alignContent: "center", marginLeft: 10 }}
-          >
-            <img
-              src={SearchIcon}
-              style={{ width: 15, height: 15, marginTop: 0 }}
-              alt=""
-            />
-            <input
-              className="showsearchinput"
-              placeholder="Search"
-              name="text"
-            />
-          </div>
-          <p style={{ marginLeft: 10, fontWeight: 600, fontSize: 17 }}>
-            Recent
-          </p>
-          <div style={{ height: "80vh", overflow: "auto" }}>
-            {Profiledata?.map((item) => (
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  marginLeft: 10,
-                  marginTop: -25,
-                }}
-              >
-                <img
-                  src={item.profile}
-                  style={{
-                    width: "40px",
-                    objectFit: "cover",
-                    height: "40px",
-                    borderRadius: "50%",
-                  }}
-                  alt=""
-                />
-                <div style={{ marginLeft: 10 }}>
-                  <p style={{ marginTop: 20, fontSize: 14 }}>{item.name}</p>
-                  <p style={{ marginTop: -12, color: "#A8A8A8" }}>
-                    {item.email}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+        
     </div>
   );
 }
