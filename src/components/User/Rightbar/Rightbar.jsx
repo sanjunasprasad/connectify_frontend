@@ -11,9 +11,9 @@ function Rightbar() {
 
     const dispatch = useDispatch();
     const loggeduser = useSelector(state => state.user.user);
-    // console.log("user data from store in rightbar switch",loggeduser)
+    console.log("user data from store in rightbar switch",loggeduser)
     const {_id,following} = loggeduser || { _id: null, following: [] };
-    // console.log("logged id is",_id)
+    console.log("logged id is",_id)
     // console.log("i am following is:",following)
 
   //restricted post display
