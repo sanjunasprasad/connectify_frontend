@@ -100,12 +100,12 @@ function Sidebar() {
       });
       const token = localStorage.getItem("token")
       const headers = {
-        "Content-Type": "multipart/form-data", 
+        // "Content-Type": "multipart/form-data", 
         "Authorization": `Bearer ${token}`,
         "role": "user",
       };    
-      axiosUserInstance.post("/post/createPost" , formData,{ headers })
-      // axios.post("https://connectifyy.site/post/createPost", formData,{ headers })
+      // axiosUserInstance.post("/post/createPost" ,formData,{ headers })
+      axios.post("https://connectifyy.site/post/createPost", { headers : headers })
       //axiosFormDataInstance.post("/post/createPost" ,formData)
         .then((response) => {
           console.log("created succesffully", response.data);
