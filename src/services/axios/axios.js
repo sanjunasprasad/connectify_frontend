@@ -26,8 +26,6 @@ function createAxiosInstance(token ,role ) { //fn creates & configures Axios ins
 
 function createFormDataAxiosInstance(token, role) {
     try {
-        console.log("token in forminstance",token)
-        console.log("role in forminstance",role)
         const instance = createAxiosInstance(token, role);
         console.log(instance,'>>>>>>>>>')
         if(instance){
