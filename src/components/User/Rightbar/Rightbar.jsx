@@ -41,7 +41,7 @@ function Rightbar() {
       const response = axiosUserInstance.get(`/friend/suggestionlist/${_id}`)
         .then(response => {
           setResponseData(response.data);
-          console.log("POST RESPONSE##### ",responseData) 
+          console.log("POST RESPONSE##### ",response) 
           
           })
           .catch(error => {
