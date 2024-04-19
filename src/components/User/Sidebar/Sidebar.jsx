@@ -104,7 +104,7 @@ function Sidebar() {
         "role": "user",
       };    
       axios
-        .post("/post/createPost", formData,{ headers })
+        .post("https://connectifyy.site/post/createPost", formData,{ headers })
         .then((response) => {
           console.log("created succesffully", response.data);
           dispatch(addPost(response.data));
