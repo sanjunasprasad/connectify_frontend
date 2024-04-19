@@ -38,6 +38,7 @@ export default function Post({ postlist }) {
     const storedLiked = localStorage.getItem(`post_liked_${postlist._id}_${loggeduser._id}`);
     return storedLiked ? JSON.parse(storedLiked) : postlist?.likes.some(like => like.user === loggeduser._id);
   });
+    // const [likes, setLikes] = useState(() => { return postlist?.likes.length || 0});
   const [likes, setLikes] = useState(() => {
     const storedLikes = localStorage.getItem(`post_liked_${postlist._id}_${loggeduser._id}`);
     return storedLikes ? JSON.parse(storedLikes) : postlist?.likes.length || 0;
@@ -281,7 +282,7 @@ export default function Post({ postlist }) {
      
 
        {/* likes count  */}
-        <p style={{ display: "flex", marginTop: "0px" }} onClick={showLikedPeople}>{likes} likes</p> 
+        <p style={{ display: "flex", marginTop: "0px" }} onClick={showLikedPeople}>{postlist.likes} likes</p> 
         <p style={{ textAlign: 'start', }}>{postlist.caption}</p> {/* caption */}
         <div style={{ cursor: "pointer" }} onClick={handleShowmodal}>
           <p style={{ textAlign: "start", color: "#A8A8A8" }}>View all comments</p>
