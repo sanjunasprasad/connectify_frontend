@@ -4,7 +4,7 @@ function createAxiosInstance(token ,role ) { //fn creates & configures Axios ins
     const instance = axios.create({
         baseURL: apiURl,
     });
-    if(token.trim()){
+    if( token && token.trim()){
     instance.interceptors.request.use(
         
         (config) => {
