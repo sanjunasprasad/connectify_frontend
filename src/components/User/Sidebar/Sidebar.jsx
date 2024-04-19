@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 // import { axiosUserInstance }  from "../../../services/axios/axios";
-// import { axiosFormDataInstance } from "../../../services/axios/axios";
+import { axiosFormDataInstance } from "../../../services/axios/axios";
 import { clearUser } from "../../../services/redux/slices/userSlice"
 import { addPost } from "../../../services/redux/slices/postSlice";
 import Modal from "react-modal";
@@ -20,6 +20,7 @@ import Iconsfromcreatemodal from "../../../Icons/Icon to represent media such as
 import InstagramIcon from "../../../Icons/Instagramlogo.png"; //instagram icon
 import Instagramicon from "../../../Icons/Instagram.png";//instagram 
 import axios from "axios";
+
 
 
 function Sidebar() {
@@ -97,14 +98,15 @@ function Sidebar() {
         fileType: file.type,
         userData: loggedUser,
       });
-      const token = localStorage.getItem("token")
-      const headers = {
-        "Content-Type": "multipart/form-data", 
-        "Authorization": `Bearer ${token}`,
-        "role": "user",
-      };    
-      axios
-        .post("https://connectifyy.site/post/createPost", formData,{ headers })
+      // const token = localStorage.getItem("token")
+      // const headers = {
+      //   "Content-Type": "multipart/form-data", 
+      //   "Authorization": `Bearer ${token}`,
+      //   "role": "user",
+      // };    
+      // axios
+      //   .post("https://connectifyy.site/post/createPost", formData,{ headers })
+       axiosFormDataInstance.post("/post/createPost" ,formData)
         .then((response) => {
           console.log("created succesffully", response.data);
           dispatch(addPost(response.data));
@@ -117,7 +119,7 @@ function Sidebar() {
           });
         })
         .catch((error) => {
-          console.error(error);
+          console.error("error posttttt",error);
         });
       setFormData({ caption: "", file: "" });
       setmodalIsOpen(false);

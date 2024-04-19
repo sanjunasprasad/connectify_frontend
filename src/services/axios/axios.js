@@ -26,16 +26,26 @@ function createAxiosInstance(token ,role ) { //fn creates & configures Axios ins
 
 function createFormDataAxiosInstance(token, role) {
     try {
+        console.log("token in forminstance",token)
+        console.log("role in forminstance",role)
         const instance = createAxiosInstance(token, role);
-        instance.interceptors.request.use((config) => {
-            if (config.headers['Content-Type'] === 'multipart/form-data') {
+        console.log(instance,'>>>>>>>>>')
+        if(instance){
+            instance.interceptors.request.use((config) => {
+                if (config.headers['Content-Type'] === 'multipart/form-data') {
+                    // No need to set headers for multipart form data
+                    return config;
+                }
+                config.headers['Content-Type'] = 'multipart/form-data';
+                console.log("config",config)
                 return config;
-            }
-            config.headers['Content-Type'] = 'multipart/form-data';
-            return config;
-        });
-
-        return instance;
+            });
+    
+            return instance;
+        }else {
+            console.log(111111);
+        }
+       
     } catch (error) {
         console.error('Error creating FormData Axios instance:', error);
         return null;
