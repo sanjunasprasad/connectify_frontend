@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 // import { axiosUserInstance }  from "../../../services/axios/axios";
-import { axiosFormDataInstance } from "../../../services/axios/axios";
+// import { axiosFormDataInstance } from "../../../services/axios/axios";
 import { clearUser } from "../../../services/redux/slices/userSlice"
 import { addPost } from "../../../services/redux/slices/postSlice";
 import Modal from "react-modal";
@@ -97,14 +97,14 @@ function Sidebar() {
         fileType: file.type,
         userData: loggedUser,
       });
-      // const token = localStorage.getItem("token")
-      // const headers = {
-      //   "Content-Type": "multipart/form-data", 
-      //   "Authorization": `Bearer ${token}`,
-      //   "role": "user",
-      // };    
-      axiosFormDataInstance
-        .post("/post/createPost", formData)
+      const token = localStorage.getItem("token")
+      const headers = {
+        "Content-Type": "multipart/form-data", 
+        "Authorization": `Bearer ${token}`,
+        "role": "user",
+      };    
+      axios
+        .post("/post/createPost", formData,{ headers })
         .then((response) => {
           console.log("created succesffully", response.data);
           dispatch(addPost(response.data));
