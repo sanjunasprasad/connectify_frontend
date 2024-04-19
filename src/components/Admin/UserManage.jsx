@@ -263,46 +263,7 @@ const deleteUser = async (id) => {
                 </div>
               </div>
             </div>
-          </div>
-          {/* Pagination */}
-          <div className="flex items-center justify-center pt-6">
-            <a
-              href="#"
-              className="mx-1 cursor-not-allowed text-sm font-semibold text-gray-900"
-            >
-              <span className="hidden lg:block">&larr; Previous</span>
-              <span className="block lg:hidden">&larr;</span>
-            </a>
-            <a
-              href="#"
-              className="mx-1 flex items-center rounded-md border border-gray-400 px-3 py-1 text-gray-900 hover:scale-105"
-            >
-              1
-            </a>
-            <a
-              href="#"
-              className="mx-1 flex items-center rounded-md border border-gray-400 px-3 py-1 text-gray-900 hover:scale-105"
-            >
-              2
-            </a>
-            <a
-              href="#"
-              className="mx-1 flex items-center rounded-md border border-gray-400 px-3 py-1 text-gray-900 hover:scale-105"
-            >
-              3
-            </a>
-            <a
-              href="#"
-              className="mx-1 flex items-center rounded-md border border-gray-400 px-3 py-1 text-gray-900 hover:scale-105"
-            >
-              4
-            </a>
-            <a href="#" className="mx-2 text-sm font-semibold text-gray-900">
-              <span className="hidden lg:block">Next &rarr;</span>
-              <span className="block lg:hidden">&rarr;</span>
-            </a>
-          </div>
-          
+          </div>  
         </section>
       </div>
     </div>

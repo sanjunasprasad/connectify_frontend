@@ -24,10 +24,7 @@ export default function Post({ postlist }) {
   // console.log("postlist props contains:", postlist)
   // console.log(postlist.file)
   const dispatch = useDispatch();
-  const loggeduser = useSelector(state => state.user.user);
-  // console.log("logeduser 22222",loggeduser)
-  // const { _id } = loggeduser
-  // console.log("loggeduser id" ,_id)
+  const loggeduser = useSelector(state => state.user.user)
   const isImage = postlist.file.endsWith(".jpg") || postlist.file.endsWith(".jpeg") || postlist.file.endsWith(".png") || postlist.file.endsWith(".gif");
   const isVideo = postlist.file.endsWith(".mp4") || postlist.file.endsWith(".mov") || postlist.file.endsWith(".avi") || postlist.file.endsWith(".mkv");
 
@@ -156,7 +153,7 @@ export default function Post({ postlist }) {
             </p>
           </div>
           <div >
-            <img src={Moreoptions} alt="" />
+            {/* <img src={Moreoptions} alt="" /> */}
           </div>
         </div>
 
