@@ -113,20 +113,23 @@ const handleUnfollow = async (userid) => {
               {/* list */}
               {responseData.map(user => (
               <div key={user._id} style={{display:"flex" , alignItems:"center" , marginLeft:20 , marginTop:10}}>
-                  <img src={user?.image || altusericon}style={{ width: "40px", height: "40px", borderRadius: "50%", objectFit: "cover" }} alt="" />
-                    <div>
-                      <p style={{ marginLeft: 10 , textAlign:"start"  }}>  <Link to={`/username/${user._id}`} >{user?.firstName}</Link> </p>
-                      <p style={{marginTop:-5 , color:"#A8A8A8" , marginLeft:10}}>Sugggested for you</p>
-                    </div>
-
-                    <div style={{marginLeft:"130px" , cursor:"pointer"}}>
-                    {followStatus[user._id] ? (
-                            <p style={{ color: "#0095f6" }} onClick={() => handleUnfollow(user._id)}>Unfollow</p>
-                        ) : (
-                            <p style={{ color: "#0095f6" }} onClick={() => handleFollow(user._id)}>Follow</p>
-                        )}
-                    </div>
+              <img src={user?.image || altusericon} style={{ width: "40px", height: "40px", borderRadius: "50%", objectFit: "cover" }} alt={`${user?.firstName}'s profile`} />
+              <div>
+                 <p style={{ marginLeft: 10 , textAlign:"start" }}>
+                   <Link to={`/username/${user._id}`}>{user?.firstName}</Link>
+                 </p>
+                 <p style={{marginTop:-5 , color:"#A8A8A8" , marginLeft:10}}>Suggested for you</p>
               </div>
+             
+              <div style={{marginLeft:"130px" , cursor:"pointer"}}>
+                 {followStatus[user._id] ? (
+                   <p style={{ color: "#0095f6" }} onClick={() => handleUnfollow(user._id)}>Unfollow</p>
+                 ) : (
+                   <p style={{ color: "#0095f6" }} onClick={() => handleFollow(user._id)}>Follow</p>
+                 )}
+              </div>
+             </div>
+             
                 ))} 
             </div>  
           </div>
