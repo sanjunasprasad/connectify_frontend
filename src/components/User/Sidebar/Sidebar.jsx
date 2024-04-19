@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 // import { axiosUserInstance }  from "../../../services/axios/axios";
-// import { axiosFormDataInstance } from "../../../services/axios/axios";
+import { axiosFormDataInstance } from "../../../services/axios/axios";
 import { clearUser } from "../../../services/redux/slices/userSlice"
 import { addPost } from "../../../services/redux/slices/postSlice";
 import Modal from "react-modal";
@@ -64,10 +64,6 @@ function Sidebar() {
 
   // Form input change
   const [formData, setFormData] = useState({ caption: "", file: "" });
-  // const handleChange = (e) => {
-  //   setFormData({ ...formData, [e.target.name]: e.target.value });
-  // };
-
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     if (e.target.files && e.target.files.length > 0) {
@@ -88,7 +84,7 @@ function Sidebar() {
   const handleCreatePost = async () => {
     try {
       console.log("creation iam called")
-      const token = localStorage.getItem("token")
+      
       const formData = new FormData();
       const caption = document.querySelector('textarea[name="caption"]').value;
       formData.append("caption", caption);
@@ -101,13 +97,14 @@ function Sidebar() {
         fileType: file.type,
         userData: loggedUser,
       });
-      console.log("my type:", typeof formData);      
-      axios
-        .post("/post/createPost", formData,{ headers: {
-          "Content-Type": "multipart/form-data",
-          "Authorization": `Bearer ${token}`,
-          "role" : 'user'
-        },})
+      // const token = localStorage.getItem("token")
+      // const headers = {
+      //   "Content-Type": "multipart/form-data", 
+      //   "Authorization": `Bearer ${token}`,
+      //   "role": "user",
+      // };    
+      axiosFormDataInstance
+        .post("/post/createPost", formData)
         .then((response) => {
           console.log("created succesffully", response.data);
           dispatch(addPost(response.data));
