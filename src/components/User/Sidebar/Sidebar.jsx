@@ -100,7 +100,7 @@ function Sidebar() {
       });
       const token = localStorage.getItem("token")
       const headers = {
-        "Content-Type": "application/json", 
+        "Content-Type": "multipart/form-data", 
         "Authorization": `Bearer ${token}`,
         "role": "user",
       };    
