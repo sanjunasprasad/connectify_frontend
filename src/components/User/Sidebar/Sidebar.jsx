@@ -106,11 +106,15 @@ function Sidebar() {
       // };    
       // axiosUserInstance.post("/post/createPost" ,formData,{ headers })
       // axios.post("https://connectifyy.site/post/createPost", { headers : headers })
-      axiosFormDataInstance.post("/post/createPost" ,formData, {
-        headers: {
-            'Content-Type': 'multipart/form-data'
-        }
-    })
+      axiosFormDataInstance.post("/post/createPost" ,formData)
+    // axiosUserInstance 
+    //     .post("/post/createPost", formData, {
+    //       headers: {
+    //         "Content-Type": "multipart/form-data",
+    //         Authorization: `Bearer ${token}`,
+    //         role : 'user'
+    //       },
+    //     })
         .then((response) => {
           console.log("created succesffully", response.data);
           dispatch(addPost(response.data));
