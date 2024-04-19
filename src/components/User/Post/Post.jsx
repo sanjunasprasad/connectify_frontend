@@ -21,8 +21,8 @@ import Savedicon from "../../../Icons/saved.png"
 export default function Post({ postlist }) {
 
   
-  // console.log("postlist props contains:", postlist)
-  // console.log(postlist.file)
+  console.log("postlist props contains:", postlist)
+  console.log(postlist.file)
   const dispatch = useDispatch();
   const loggeduser = useSelector(state => state.user.user)
   const isImage = postlist.file.endsWith(".jpg") || postlist.file.endsWith(".jpeg") || postlist.file.endsWith(".png") || postlist.file.endsWith(".gif");
