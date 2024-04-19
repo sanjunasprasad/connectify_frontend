@@ -50,6 +50,11 @@ function Rightbar() {
     }
   },[_id])
 
+  useEffect (()=>{
+    console.log("resoponse",responseData)
+  })
+
+
 //follow+unfollow
 const [followStatus, setFollowStatus] = useState({});
 const handleFollow = async (userid) => {
@@ -113,7 +118,7 @@ const handleUnfollow = async (userid) => {
               <p style={{color:"#A8A8A8" , textAlign:'start',marginLeft:30,marginTop:50 }}>People you may know</p>
               {/* list */}
               {responseData.map(user => (
-              <div key={user._id} style={{display:"flex" , alignItems:"center" , marginLeft:20 , marginTop:10}}>
+              <div  style={{display:"flex" , alignItems:"center" , marginLeft:20 , marginTop:10}}>
               <img src={user?.image || altusericon} style={{ width: "40px", height: "40px", borderRadius: "50%", objectFit: "cover" }} alt={`${user?.firstName}'s profile`} />
               <div>
                  <p style={{ marginLeft: 10 , textAlign:"start" }}>
