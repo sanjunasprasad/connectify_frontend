@@ -180,7 +180,6 @@ export default function Post({ postlist }) {
                 <ReactPlayer
                   controls={true}
                   url={`https://connectifyy.site/${postlist?.file}`}
-                  // url={`http://localhost:8000/${postlist?.file}`}
                   height="85vh"
                   width="100%"
                   style={{ objectFit: "cover" }}

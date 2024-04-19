@@ -11,6 +11,7 @@ function Rightbar() {
 
     const dispatch = useDispatch();
     const loggeduser = useSelector(state => state.user.user);
+    const [responseData, setResponseData] = useState([]);
     console.log("user data from store in rightbar switch",loggeduser)
     const {_id,following} = loggeduser || { _id: null, following: [] };
     console.log("logged id is",_id)
@@ -34,13 +35,13 @@ function Rightbar() {
 
 
   //suggestion list
-  const [responseData, setResponseData] = useState([]);
+  
   useEffect (()=>{
     if (_id) {
       const response = axiosUserInstance.get(`/friend/suggestionlist/${_id}`)
         .then(response => {
           setResponseData(response.data);
-          // console.log("POST RESPONSE##### ",response.data) 
+          console.log("POST RESPONSE##### ",responseData) 
           
           })
           .catch(error => {
