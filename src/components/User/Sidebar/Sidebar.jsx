@@ -106,7 +106,7 @@ function Sidebar() {
       // };    
       // axiosUserInstance.post("/post/createPost" ,formData,{ headers })
       // axios.post("https://connectifyy.site/post/createPost", { headers : headers })
-     await axiosFormDataInstance.post("/post/createPost" ,formData)
+      axiosFormDataInstance.post("/post/createPost" ,formData)
         .then((response) => {
           console.log("created succesffully", response.data);
           dispatch(addPost(response.data));
