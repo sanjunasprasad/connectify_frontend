@@ -4,7 +4,7 @@ function createAxiosInstance(token ,role ) { //fn creates & configures Axios ins
     const instance = axios.create({
         baseURL: apiURl,
     });
-    if(token){
+    if(token.trim()){
     instance.interceptors.request.use(
         
         (config) => {
@@ -41,7 +41,7 @@ function createFormDataAxiosInstance(token, role) {
     
             return instance;
         }else {
-            console.log(111111);
+            console.log('form data else errorrrr>>>');
         }
        
     } catch (error) {
@@ -54,7 +54,7 @@ function createFormDataAxiosInstance(token, role) {
 
 const axiosUserInstance = createAxiosInstance("token" , 'user');
 const axiosAdminInstance = createAxiosInstance("adminToken" , 'admin');
-const axiosFormDataInstance = createFormDataAxiosInstance("token" , 'user');
+const axiosFormDataInstance = createFormDataAxiosInstance("token" ,'user');
 const axiosInstance = createAxiosInstance(null , null)
 
 
