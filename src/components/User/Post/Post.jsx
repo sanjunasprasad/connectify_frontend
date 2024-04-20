@@ -21,8 +21,8 @@ import Savedicon from "../../../Icons/saved.png"
 export default function Post({ postlist }) {
 
   
-  console.log("postlist props contains:", postlist)
-  console.log(postlist.file)
+  // console.log("postlist props contains:", postlist)
+  // console.log(postlist.file)
   const dispatch = useDispatch();
   const loggeduser = useSelector(state => state.user.user)
   const isImage = postlist.file.endsWith(".jpg") || postlist.file.endsWith(".jpeg") || postlist.file.endsWith(".png") || postlist.file.endsWith(".gif");
@@ -281,7 +281,7 @@ export default function Post({ postlist }) {
      
 
        {/* likes count  */}
-        <p style={{ display: "flex", marginTop: "0px" }} onClick={showLikedPeople}>{postlist.likes} likes</p> 
+        <p style={{ display: "flex", marginTop: "0px" }} onClick={showLikedPeople}>{postlist.likes.length} likes</p> 
         <p style={{ textAlign: 'start', }}>{postlist.caption}</p> {/* caption */}
         <div style={{ cursor: "pointer" }} onClick={handleShowmodal}>
           <p style={{ textAlign: "start", color: "#A8A8A8" }}>View all comments</p>
