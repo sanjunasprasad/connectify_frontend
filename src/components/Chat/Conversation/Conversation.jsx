@@ -19,7 +19,7 @@ const Conversation = ({ data, currentUserId , online}) => {
         senderId: currentUserId,
         receiverId: receiverId
       });
-      console.log("Chat created withh id:", response.data);
+      // console.log("Chat created withh id:", response.data);
       dispatch(addChat(response.data))
     } catch (error) {
       console.error("Error creating chat:", error);

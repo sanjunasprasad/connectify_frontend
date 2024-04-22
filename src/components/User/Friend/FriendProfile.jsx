@@ -16,9 +16,9 @@ function FriendProfile() {
 
 const loggeduser = useSelector(state => state.user.user);
 const { _id } = loggeduser;
-console.log("Logged user ID:", _id);
+// console.log("Logged user ID:", _id);
 const {userid} = useParams()
-console.log("friend userid",userid)
+// console.log("friend userid",userid)
 const [userName,SetName] = useState("")
 const [userMail,SetMail]=useState("")
 const [userBio,SetBio] =useState("")
@@ -51,23 +51,28 @@ useEffect(() => {
 
   //FOLLOW + UNFOLLOW
   const handleFollow = async () => {
-    try {
-      const response = await axiosUserInstance.post(`/friend/follow/${userid}`,{ loggeduser: _id });
-      // console.log("response for follow:",response)
-      setIsFollowing(true);
-    } catch (error) {
-      console.error('Error following user:', error);
+    if(_id){
+      try {
+        const response = await axiosUserInstance.post(`/friend/follow/${userid}`,{ loggeduser: _id });
+        // console.log("response for follow:",response)
+        setIsFollowing(true);
+      } catch (error) {
+        console.error('Error following user:', error);
+      }
     }
+    
   };
 
   const handleUnfollow = async () => {
-    try {
-      const response = await axiosUserInstance.post(`/friend/unfollow/${userid}`,{loggeduser:_id});
-      // console.log("response for unfollow:",response)
-      setIsFollowing(false);
-    } catch (error) {
-      console.error('Error unfollowing user:', error);
-    }
+    if(_id){
+      try {
+        const response = await axiosUserInstance.post(`/friend/unfollow/${userid}`,{loggeduser:_id});
+        // console.log("response for unfollow:",response)
+        setIsFollowing(false);
+      } catch (error) {
+        console.error('Error unfollowing user:', error);
+      }
+    }  
   };
 
   // useEffect(()=>{

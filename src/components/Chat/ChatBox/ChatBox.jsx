@@ -153,7 +153,7 @@ const ChatBox = ({ currentUser, setSendMessage, receivedMessage }) => {
   const [videoCallLink, setVideoCallLink] = useState(null);
   useEffect(() => {
     const link = localStorage.getItem('videoCallLink');
-    console.log("i got link chatbox from localll:", link)
+    // console.log("i got link chatbox from localll:", link)
     if (link) {
       setVideoCallLink(link);     
     }

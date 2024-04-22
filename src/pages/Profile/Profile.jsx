@@ -102,65 +102,63 @@ export default function Profile() {
 
   //after edit submit post
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const validationErrors = validateForm(formData);
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-      return;
-    }
-
     try {
+      e.preventDefault();
+      const validationErrors = validateForm(formData);
+      if (Object.keys(validationErrors).length > 0) {
+        setErrors(validationErrors);
+        return;
+      }
+  
       const bio = document.querySelector('textarea[name="bio"]').value;
       const firstName = document.querySelector('input[name="firstName"]').value;
       const email = document.querySelector('input[name="email"]').value;
       const location = document.querySelector('input[name="location"]').value;
       const fileInput = document.querySelector('input[name="file"]');
       const file = fileInput.files[0];
-
-
-      const formDataToSend = new FormData();
-      formDataToSend.append('firstName', firstName);
-      formDataToSend.append('email', email);
-      formDataToSend.append('bio', bio);
-      formDataToSend.append('location', location);
-      formDataToSend.append('file', file); // Append the file directly, without changing the field name
-
-      console.log("User ID for test:", loggedUser._id);
-      console.log("Form data details:");
-      console.log("Bio:", bio);
-      console.log("First Name:", firstName);
-      console.log("Email:", email);
-      console.log("Location:", location);
-      console.log("File Name:", file.name);
-      console.log("File Type:", file.type);
-      console.log("File Size:", file.size);
-
-
-      const response = await axiosUserInstance.put(`/updateUser/${loggedUser._id}`, formDataToSend, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer ${token}`,
-          role: 'user'
-        }
+  
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", upload_preset);
+      console.log("Cloudinary data:", {
+        file: file.name,
+        upload_preset: upload_preset,
       });
-
-      if (response.status === 200) {
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "Profile updated successfully",
-          showConfirmButton: false,
-          timer: 1500
-        });
-        console.log("User profile updated successfully:", response.data);
-        dispatch(setUser(response.data));
+  
+      const response = await fetch(`https://api.cloudinary.com/v1_1/dvu3hgufk/image/upload`, {
+        method: 'POST',
+        body: formData,
+      });
+  
+      if (response.ok) {
+        const imageData = await response.json();
+        console.log("Uploaded resource URL:", imageData.secure_url);
+        const profileDataToSend = {
+          firstName: firstName,
+          email: email,
+          bio: bio,
+          location: location,
+          file: imageData.secure_url
+        }
+  
+        const backendResponse = await axiosUserInstance.put(`/updateUser/${loggedUser._id}`, profileDataToSend);
+        if (backendResponse.status === 200) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Profile updated successfully",
+            showConfirmButton: false,
+            timer: 1500
+          });
+          console.log("User profile updated successfully:", response.data);
+          dispatch(setUser(response.data));
+        }
       }
-
     } catch (err) {
       console.log(err);
     }
   }
-
+  
   //to delete user
   const deleteUser = async () => {
     console.log("deleteUser function called");

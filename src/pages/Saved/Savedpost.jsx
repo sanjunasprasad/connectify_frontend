@@ -11,15 +11,9 @@ import Sidebar from '../../components/User/Sidebar/Sidebar'
   console.log("id is", _id)
   const [savedPosts, setSavedPosts] = useState([]);
   useEffect(() => {
-    const token = localStorage.getItem("token");
     const fetchSavedPosts = async () => {
       try {
-        const response = await axiosUserInstance.get(`/post/getSavedpost/${_id}`, {
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'role': 'user'
-          }
-        });
+        const response = await axiosUserInstance.get(`/post/getSavedpost/${_id}`);
         console.log("backend response", response)
         setSavedPosts(response.data);
       } catch (error) {

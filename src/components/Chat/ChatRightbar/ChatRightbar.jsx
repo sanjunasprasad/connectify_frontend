@@ -71,7 +71,7 @@ function ChatRightbar() {
   //recived message from socket server
   useEffect(() => {
     socket.current.on("recieve-message", (data) => {
-      console.log(data)
+      // console.log(data)
       setReceivedMessage(data);
     }
     );

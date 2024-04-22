@@ -109,7 +109,7 @@ const handleCreatePost = async () => {
       };
       console.log("Post Data****:", postData); 
       const backendResponse = await axiosUserInstance.post("/post/createPost", postData);
-      console.log("Created successfully:", backendResponse.data);
+      // console.log("Created successfully:", backendResponse.data);
       dispatch(addPost(backendResponse.data));
       Swal.fire({
         position: "top-end",
