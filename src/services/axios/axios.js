@@ -31,6 +31,5 @@ const axiosInstance = createAxiosInstance(null , null)
 export {
     axiosUserInstance,
     axiosAdminInstance,
-    axiosFormDataInstance,
     axiosInstance
 };
