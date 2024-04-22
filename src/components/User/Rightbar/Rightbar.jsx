@@ -14,7 +14,7 @@ function Rightbar() {
   const [responseData, setResponseData] = useState([]);
   // console.log("user data from store in rightbar switch", loggeduser)
   const { _id, following } = loggeduser || { _id: null, following: [] };
-  console.log("logged id is", _id)
+  // console.log("logged id is", _id)
   // console.log("i am following is:",following)
 
   //restricted post display
@@ -42,7 +42,7 @@ function Rightbar() {
       const response = axiosUserInstance.get(`/friend/suggestionlist/${_id}`)
         .then(response => {
           setResponseData(response.data);
-          console.log("POST RESPONSE##### ", response)
+          // console.log("POST RESPONSE##### ", response)
 
         })
         .catch(error => {
@@ -51,10 +51,7 @@ function Rightbar() {
     }
   }, [_id])
 
-  useEffect(() => {
-    console.log("resoponse", responseData)
-    console.log("Type of responseData:", Array.isArray(responseData));
-  })
+
 
 
   //follow+unfollow
@@ -86,7 +83,7 @@ function Rightbar() {
   };
 
   const posts = useSelector(state => state.post.posts) || []; //mapping for post component,useselector needed
-  console.log("post from rightbar selector through redux",posts)
+  // console.log("post from rightbar selector through redux",posts)
 
   return (
     <div className='MainRigntBar'>
@@ -119,8 +116,8 @@ function Rightbar() {
               <div>
                 <p style={{ color: "#A8A8A8", textAlign: 'start', marginLeft: 30, marginTop: 50 }}>People you may know</p>
                 {/* list */}
-                {responseData.map((user)=> (
-                  <div key ={user?._id}style={{ display: "flex", alignItems: "center", marginLeft: 20, marginTop: 10 }}>
+                {responseData.map((user) => (
+                  <div key={user?._id} style={{ display: "flex", alignItems: "center", marginLeft: 20, marginTop: 10 }}>
                     <img src={user?.image || altusericon} style={{ width: "40px", height: "40px", borderRadius: "50%", objectFit: "cover" }} alt={`${user?.firstName}'s profile`} />
                     <div>
                       <p style={{ marginLeft: 10, textAlign: "start" }}>
@@ -137,11 +134,8 @@ function Rightbar() {
                     </div>
                   </div>
                 ))}
-
               </div>
             </div>
-
-
           </div>
         </div>
       </div>

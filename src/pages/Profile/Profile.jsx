@@ -103,14 +103,13 @@ export default function Profile() {
   //after edit submit post
 const upload_preset = "yuudjikt";
   const handleSubmit = async (e) => {
+    e.preventDefault();
+    const validationErrors = validateForm(formData);
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
     try {
-      e.preventDefault();
-      const validationErrors = validateForm(formData);
-      if (Object.keys(validationErrors).length > 0) {
-        setErrors(validationErrors);
-        return;
-      }
-  
       const bio = document.querySelector('textarea[name="bio"]').value;
       const firstName = document.querySelector('input[name="firstName"]').value;
       const email = document.querySelector('input[name="email"]').value;
@@ -155,7 +154,7 @@ const upload_preset = "yuudjikt";
           dispatch(setUser(response.data));
         }
       }
-    } catch (err) {
+    } catch(err) {
       console.log(err);
     }
   }

@@ -22,7 +22,7 @@ export default function Post({ postlist }) {
 
   
   // console.log("postlist props contains:", postlist)
-  console.log("url of posts",postlist.file)
+  // console.log("url of posts",postlist.file)
   const dispatch = useDispatch();
   const loggeduser = useSelector(state => state.user.user)
   const isImage = postlist.file.endsWith(".jpg") || postlist.file.endsWith(".jpeg") || postlist.file.endsWith(".png") || postlist.file.endsWith(".gif");
