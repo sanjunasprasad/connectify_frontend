@@ -138,7 +138,7 @@ const upload_preset = "yuudjikt";
           email: email,
           bio: bio,
           location: location,
-          file: imageData.secure_url
+          image: imageData.secure_url
         }
   
         const backendResponse = await axiosUserInstance.put(`/updateUser/${loggedUser._id}`, profileDataToSend);
