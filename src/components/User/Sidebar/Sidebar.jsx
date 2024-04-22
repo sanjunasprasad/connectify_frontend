@@ -107,7 +107,7 @@ const handleCreatePost = async () => {
         postUrl: imageData.secure_url,
         userId: loggedUser._id
       };
-      console.log("Post Data:", postData); 
+      console.log("Post Data****:", postData); 
       const backendResponse = await axiosUserInstance.post("/post/createPost", postData);
       console.log("Created successfully:", backendResponse.data);
       dispatch(addPost(backendResponse.data));

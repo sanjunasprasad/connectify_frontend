@@ -106,9 +106,9 @@ const ChatBox = ({ currentUser, setSendMessage, receivedMessage }) => {
     }
 
     const receiverId = chat.members.find((id) => id !== currentUser);
+     // send message to socket server
     setSendMessage({ senderId: currentUser, text: newMessage, image: selectedImage, receiverId });
-      // send message to socket server
-  // setSendMessage({ ...message, receiverId });
+      // setSendMessage({ ...message, receiverId });
     try {
       const {data} = await axiosUserInstance.post("/messages", message, {
         headers: {
