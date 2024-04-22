@@ -108,7 +108,7 @@ const handleCreatePost = async () => {
         userId: loggedUser._id
       };
       console.log("Post Data:", postData); 
-      const backendResponse = await axiosUserInstance.post("http://localhost:8000/post/createPost", postData);
+      const backendResponse = await axiosUserInstance.post("/post/createPost", postData);
       console.log("Created successfully:", backendResponse.data);
       dispatch(addPost(backendResponse.data));
       Swal.fire({
