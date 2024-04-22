@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { clearUser } from "../../../services/redux/slices/userSlice"
 import { addPost } from "../../../services/redux/slices/postSlice";
+import {axiosUserInstance} from "../../../services/axios/axios"
 import Modal from "react-modal";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
