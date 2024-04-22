@@ -17,7 +17,7 @@ import More from "../../../Icons/Settings.png";
 import Iconsfromcreatemodal from "../../../Icons/Icon to represent media such as images or videos.png";
 import InstagramIcon from "../../../Icons/Instagramlogo.png"; //instagram icon
 import Instagramicon from "../../../Icons/Instagram.png";//instagram 
-import axios from "axios";
+
 
 
 
@@ -78,51 +78,54 @@ function Sidebar() {
 
 
 
-  // Create post
-  const handleCreatePost = async () => {
-    try {
-      console.log("creation iam called")
-      
-      const formData = new FormData();
+const upload_preset = "yuudjikt";
+const handleCreatePost = async () => {
+  try {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", upload_preset);
+    console.log("Cloudinary data:", {
+      file: file.name,
+      upload_preset: upload_preset,
+    });
+    // Determine resourceType based on file type
+    const resourceType = file.type.startsWith('image/') ? 'image' : 'video';
+    const response = await fetch(`https://api.cloudinary.com/v1_1/dvu3hgufk/${resourceType}/upload`, {
+      method: 'POST',
+      body: formData,
+    });
+
+    if (response.ok) {
+      const imageData = await response.json();
+      console.log("Uploaded resource URL:", imageData.secure_url);
+
+      // Upload post data to backend
       const caption = document.querySelector('textarea[name="caption"]').value;
-      formData.append("caption", caption);
-      formData.append("file", file);
-      formData.append("user", JSON.stringify(loggedUser));
-      console.log("Post Data:", {
+      const postData = {
         caption: caption,
-        file: file.name,
-        fileSize: file.size,
-        fileType: file.type,
-        userData: loggedUser,
+        postUrl: imageData.secure_url,
+        userId: loggedUser._id
+      };
+      console.log("Post Data:", postData); 
+      const backendResponse = await axiosUserInstance.post("http://localhost:8000/post/createPost", postData);
+      console.log("Created successfully:", backendResponse.data);
+      dispatch(addPost(backendResponse.data));
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Post created successfully",
+        showConfirmButton: false,
+        timer: 1500
       });
-      const token = localStorage.getItem("token")
-      const headers = {
-        "Content-Type": "multipart/form-data", 
-        "Authorization": `Bearer ${token}`,
-        "role": "user",
-      };    
-      axios.post("https://connectifyy.site/post/createPost",formData,
-       { headers : headers })
-        .then((response) => {
-          console.log("created succesffully", response.data);
-          dispatch(addPost(response.data));
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Post created successfully",
-            showConfirmButton: false,
-            timer: 1500
-          });
-        })
-        .catch((error) => {
-          console.error("error posttttt",error);
-        });
       setFormData({ caption: "", file: "" });
       setmodalIsOpen(false);
-    } catch (error) {
-      console.error("Error creating post:", error);
+    } else {
+      console.error("Error uploading resource to Cloudinary");
     }
-  };
+  } catch (error) {
+    console.error("Error creating post:", error);
+  }
+};
 
   return (
     <div className="mainsidebar">

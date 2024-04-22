@@ -23,36 +23,8 @@ function createAxiosInstance(token ,role ) { //fn creates & configures Axios ins
 }
 
 
-
-function createFormDataAxiosInstance(token, role) {
-    try {
-        const instance = createAxiosInstance(token, role);
-        if(instance){
-            instance.interceptors.request.use((config) => {
-                if (config.headers['Content-Type'] === 'multipart/form-data') {
-                    return config;
-                }
-                config.headers['Content-Type'] = 'multipart/form-data';
-                console.log("config",config)
-                return config;
-            });
-    
-            return instance;
-        }else {
-            console.log('form data else errorrrr>>>');
-        }
-       
-    } catch (error) {
-        console.error('Error creating FormData Axios instance:', error);
-        return null;
-    }
-}
-
-
-
 const axiosUserInstance = createAxiosInstance("token" , 'user');
 const axiosAdminInstance = createAxiosInstance("adminToken" , 'admin');
-const axiosFormDataInstance = createFormDataAxiosInstance("token" ,'user');
 const axiosInstance = createAxiosInstance(null , null)
 
 

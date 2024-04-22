@@ -22,7 +22,7 @@ export default function Post({ postlist }) {
 
   
   // console.log("postlist props contains:", postlist)
-  // console.log(postlist.file)
+  console.log("url of posts",postlist.file)
   const dispatch = useDispatch();
   const loggeduser = useSelector(state => state.user.user)
   const isImage = postlist.file.endsWith(".jpg") || postlist.file.endsWith(".jpeg") || postlist.file.endsWith(".png") || postlist.file.endsWith(".gif");
@@ -179,7 +179,7 @@ export default function Post({ postlist }) {
               {isVideo && (
                 <ReactPlayer
                   controls={true}
-                  url={`https://connectifyy.site/${postlist?.file}`}
+                  url={postlist?.file}
                   height="85vh"
                   width="100%"
                   style={{ objectFit: "cover" }}
@@ -250,7 +250,7 @@ export default function Post({ postlist }) {
         {isVideo && (
           <ReactPlayer
             controls={true}
-             url={`https://connectifyy.site/${postlist?.file}`}
+             url={postlist?.file}
             height="auto"
             width="100%"
             style={{ objectFit: "contain" }} />
