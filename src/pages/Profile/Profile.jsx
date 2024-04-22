@@ -101,6 +101,7 @@ export default function Profile() {
 
 
   //after edit submit post
+const upload_preset = "yuudjikt";
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
