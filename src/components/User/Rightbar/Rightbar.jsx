@@ -36,7 +36,6 @@ function Rightbar() {
 
 
   //suggestion list
-
   useEffect(() => {
     if (_id) {
       const response = axiosUserInstance.get(`/friend/suggestionlist/${_id}`)

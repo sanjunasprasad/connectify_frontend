@@ -1,18 +1,18 @@
 import React, { useEffect } from "react";
 import { useDispatch} from "react-redux";
-import "./Home.css";
+import "./FeedHome.css";
 import  { axiosUserInstance }   from '../../services/axios/axios';
 import { setUser } from "../../services/redux/slices/userSlice";
 import Sidebar from "../../components/User/Sidebar/Sidebar";
 import Rightbar from "../../components/User/Rightbar/Rightbar";
 
-function UserHomePage() {
+function FeedHome() {
   const dispatch = useDispatch();
   useEffect(() => {
        axiosUserInstance 
         .get("/userProfile")
         .then((response) => {
-          // console.log("response from fetchprofile in homepage:",response)
+          // console.log("response from fetchprofile in FEEDHOME:",response)
           dispatch(setUser(response.data));
         })
         .catch((err) => {
@@ -34,4 +34,4 @@ function UserHomePage() {
   );
 }
 
-export default UserHomePage;
+export default FeedHome;

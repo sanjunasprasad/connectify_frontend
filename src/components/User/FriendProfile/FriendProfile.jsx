@@ -5,7 +5,7 @@ import "./FriendProfile.css";
 import { axiosUserInstance } from "../../../services/axios/axios";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
-import FriendPost from "..//UserProfile/FriendPost";
+import FriendPost from "../ProfilePosts/FriendPost";
 import Sidebar from "../Sidebar/Sidebar"
 import SettingIcon from "../../../Icons/Settingslogo.png"
 import altusericon from "../../../Icons/user.png"
@@ -75,9 +75,7 @@ useEffect(() => {
     }  
   };
 
-  // useEffect(()=>{
-  //   console.log("current status for relationship:",isFollowing)
-  // },[isFollowing])
+ 
 
 
   const handleReportProfile = async () => {

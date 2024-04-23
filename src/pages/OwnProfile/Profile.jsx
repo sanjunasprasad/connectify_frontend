@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { setUser, clearUser } from "../../services/redux/slices/userSlice";
 import { axiosUserInstance } from "../../services/axios/axios";
 import "./Profilee.css";
-import OwnPost from "../../components/User/UserProfile/OwnPost"
+import OwnPost from "../../components/User/ProfilePosts/OwnPost"
 import Sidebar from "../../components/User/Sidebar/Sidebar";
 import SettingIcon from "../../Icons/Settingslogo.png";
 import altusericon from "../../Icons/user.png"

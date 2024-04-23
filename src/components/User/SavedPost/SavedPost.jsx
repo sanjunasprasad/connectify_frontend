@@ -1,7 +1,8 @@
-import React, { useState} from 'react'
+import React, { useState,useEffect} from 'react'
 import moment from 'moment';
 import Modal from 'react-modal';
 import "./SavedPost.css"
+import { axiosUserInstance } from "../../../services/axios/axios";
 import love from "../../../Icons/Notifications2.png"
 import comment from "../../../Icons/Comment.png"
 import Likeicon from "../../../Icons/Notifications.png"
@@ -16,7 +17,7 @@ import 'sweetalert2/dist/sweetalert2.min.css'
 
 function SavedPost({item}) {
 
-
+  const loggedUser = useSelector(state => state.user.user);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     if (item) {
@@ -50,6 +51,9 @@ function SavedPost({item}) {
   }
 
 
+
+  //
+  const [postId, setPostId] = useState(null);
   const handleUnSave = async () => {
     try {
       const confirmationResult = await Swal.fire({

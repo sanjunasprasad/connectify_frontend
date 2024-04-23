@@ -153,9 +153,6 @@ export default function Post({ postlist }) {
               {postlist && postlist.user && postlist.user._id && loggeduser && loggeduser._id === postlist.user._id ? (<Link to={`/username`} >{postlist?.user?.firstName}</Link>) : (<Link to={`/username/${postlist.user._id}`} >{postlist?.user?.firstName}</Link>)}
             </p>
           </div>
-          <div >
-            {/* <img src={Moreoptions} alt="" /> */}
-          </div>
         </div>
 
 
