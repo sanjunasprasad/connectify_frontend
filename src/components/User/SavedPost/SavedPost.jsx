@@ -1,4 +1,5 @@
 import React, { useState,useEffect} from 'react'
+import { useSelector } from 'react-redux';
 import moment from 'moment';
 import Modal from 'react-modal';
 import "./SavedPost.css"

@@ -19,8 +19,9 @@ export default function Profile() {
   const navigate = useNavigate();
   const token = useSelector(state => state.user.token);
   const loggedUser = useSelector(state => state.user.user);
+  const { _id } = loggedUser
   // console.log("userdata from Redux store profile:", loggedUser);
-  // const { _id } = loggedUser
+  
   // console.log("id is", _id)
 
 
