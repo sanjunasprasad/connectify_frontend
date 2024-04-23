@@ -20,7 +20,7 @@ export default function Profile() {
   const token = useSelector(state => state.user.token);
   const loggedUser = useSelector(state => state.user.user);
   // console.log("userdata from Redux store profile:", loggedUser);
-  const { _id } = loggedUser
+  // const { _id } = loggedUser
   // console.log("id is", _id)
 
 
@@ -70,7 +70,7 @@ export default function Profile() {
   const handleImageChange = (e) => {
     const image = e.target.files[0];
     setImage(image);
-    setFormData({ ...formData, image: image });
+    setFormData({ ...formData, image: URL.createObjectURL(image) });
   }
 
   //form validate function
@@ -100,64 +100,66 @@ export default function Profile() {
 
 
 
-  //after edit submit post
-const upload_preset = "yuudjikt";
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const validationErrors = validateForm(formData);
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-      return;
-    }
-    try {
-      const bio = document.querySelector('textarea[name="bio"]').value;
-      const firstName = document.querySelector('input[name="firstName"]').value;
-      const email = document.querySelector('input[name="email"]').value;
-      const location = document.querySelector('input[name="location"]').value;
-      const fileInput = document.querySelector('input[name="file"]');
-      const file = fileInput.files[0];
-  
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("upload_preset", upload_preset);
-      console.log("Cloudinary data:", {
-        file: file.name,
-        upload_preset: upload_preset,
-      });
-  
-      const response = await fetch(`https://api.cloudinary.com/v1_1/dvu3hgufk/image/upload`, {
-        method: 'POST',
-        body: formData,
-      });
-  
-      if (response.ok) {
-        const imageData = await response.json();
-        console.log("Uploaded resource URL:", imageData.secure_url);
-        const profileDataToSend = {
-          firstName: firstName,
-          email: email,
-          bio: bio,
-          location: location,
-          image: imageData.secure_url
-        }
-  
-        const backendResponse = await axiosUserInstance.put(`/updateUser/${loggedUser._id}`, profileDataToSend);
-        if (backendResponse.status === 200) {
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Profile updated successfully",
-            showConfirmButton: false,
-            timer: 1500
-          });
-          console.log("User profile updated successfully:", response.data);
-          dispatch(setUser(response.data));
-        }
-      }
-    } catch(err) {
-      console.log(err);
-    }
-  }
+
+ //after edit submit post
+ const upload_preset = "yuudjikt";
+ const handleSubmit = async (e) => {
+   e.preventDefault();
+   const validationErrors = validateForm(formData);
+   if (Object.keys(validationErrors).length > 0) {
+     setErrors(validationErrors);
+     return;
+   }
+   try {
+     const bio = document.querySelector('textarea[name="bio"]').value;
+     const firstName = document.querySelector('input[name="firstName"]').value;
+     const email = document.querySelector('input[name="email"]').value;
+     const location = document.querySelector('input[name="location"]').value;
+     const fileInput = document.querySelector('input[name="file"]');
+     const file = fileInput.files[0];
+
+     const formData = new FormData();
+     formData.append("file", file);
+     formData.append("upload_preset", upload_preset);
+     console.log("Cloudinary data:", {
+       file: file.name,
+       upload_preset: upload_preset,
+     });
+
+     const response = await fetch(`https://api.cloudinary.com/v1_1/dvu3hgufk/image/upload`, {
+       method: 'POST',
+       body: formData,
+     });
+
+     if (response.ok) {
+       const imageData = await response.json();
+       console.log("Uploaded resource URL:", imageData.secure_url);
+       const profileDataToSend = {
+         firstName: firstName,
+         email: email,
+         bio: bio,
+         location: location,
+         image: imageData.secure_url
+       }
+
+       const backendResponse = await axiosUserInstance.put(`/updateUser/${loggedUser._id}`, profileDataToSend);
+       if (backendResponse.status === 200) {
+         Swal.fire({
+           position: "top-end",
+           icon: "success",
+           title: "Profile updated successfully",
+           showConfirmButton: false,
+           timer: 1500
+         });
+         console.log("User profile updated successfully:", backendResponse.data);
+         dispatch(setUser(profileDataToSend));
+        
+       }
+     }
+   } catch (err) {
+     console.log(err);
+   }
+ }
   
   //to delete user
   const deleteUser = async () => {
@@ -326,7 +328,7 @@ const upload_preset = "yuudjikt";
                               htmlFor="fileInput"
                               style={{ color: "white" }}
                             >
-                              {image ? "Choose another pic" : "Select a profile Photo:"}
+                              {image ? "Choose another pic" : "Select a new profile Photo:"}
                             </label>
                             <input
                               type="file"
@@ -339,10 +341,15 @@ const upload_preset = "yuudjikt";
                           </div>
 
                           <div  >
-                            Selected File: {formData?.image ? <img src={`http://localhost:5000/${formData?.image}`} alt={formData?.image} style={{ color: "white" }} /> : 'No file selected'}
-                            {/* {errors.file && (
-                              <p className="error-message text-red-500">{errors.file}</p>
-                            )} */}
+                            Selected File: {formData?.image ? <img src={formData?.image} alt={formData?.image}
+                              style={{
+                                width: "100px",
+                                height: "100px",
+                                objectFit: "cover",
+                                borderRadius: "50%",
+                                cursor: "pointer",
+                              }} /> : 'No file selected'}
+                           
                           </div>
                           <button type="submit">Update</button>
                         </form>

@@ -9,10 +9,24 @@ import unlike from "../../../Icons/Unlike.png"
 import Moreoptions from '../../../Icons/Moreoptions.png'
 import Saveicon from "../../../Icons/Save.png"
 import altusericon from "../../../Icons/user.png"
+import Swal from "sweetalert2"
+import 'sweetalert2/dist/sweetalert2.min.css'
 
 
 
 function SavedPost({item}) {
+
+
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    if (item) {
+      // Simulating asynchronous operation to get _id from item props
+      setTimeout(() => {
+        setPostId(item._id);
+        setLoading(false);
+      }, 1000); // Adjust timeout as needed
+    }
+  }, [item]);
 
   const getRelativeTime = (createdAt) => {
     return moment(createdAt).fromNow();
@@ -34,8 +48,47 @@ function SavedPost({item}) {
       SetLike(Likeicon);
     }
   }
+
+
+  const handleUnSave = async () => {
+    try {
+      const confirmationResult = await Swal.fire({
+        text: 'Do you want to unsave?',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes'
+      });
+      if (confirmationResult.isConfirmed && item) {
+        const response = await axiosUserInstance.post('/post/unsavePost', {
+          userId: loggedUser._id,
+          postId: item._id
+        });
+        if (response.status === 200) {
+          Swal.fire({
+            text: 'Post unsaved.',
+            icon: 'success',
+          });
+        } else {
+          Swal.fire({
+            text: 'Failed to unsave post. Please try again later.',
+            icon: 'error',
+          });
+        }
+      }
+    } catch (error) {
+      console.error('Error unsaving post:', error);
+      Swal.fire({
+        text: 'An unexpected error occurred. Please try again later.',
+        icon: 'error',
+      });
+    }
+  };
   return (
     <>
+    {loading ? (
+        <p>Loading...</p>
+      ) : (
       <div className="containerclass" onClick={handleShowmodal}>
           <div  className="imagefor">
             <img src={item?.file}className='imageforimage' alt="" />
@@ -51,6 +104,8 @@ function SavedPost({item}) {
             </div>
           </div>
       </div>
+        )}
+
       <Modal style={{ overlay: { backgroundColor: "#2e2b2bc7" } }} isOpen={modalIsOpen} onRequestClose={handleCloseModal} className={"modalclassNameforASavedPost"}>
         <div style={{ display: "flex" }}>
           <div style={{ flex: 1.3 }} >
@@ -104,7 +159,7 @@ function SavedPost({item}) {
                   <img src={comment} style={{ marginLeft: 45, marginTop: -25, cursor: "pointer" }} alt="" />
 
                 </div>
-                <div style={{ marginTop: 10 }}>
+                <div onClick={handleUnSave} style={{ marginTop: 10 }}>
                   <img src={Saveicon} style={{ cursor: "pointer" }} alt="" />
                 </div>
               </div>
