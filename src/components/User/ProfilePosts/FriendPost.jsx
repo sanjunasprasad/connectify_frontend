@@ -5,18 +5,17 @@ import ReactPlayer from 'react-player'
 import altusericon from "../../../Icons/user.png"
 import Likeicon from "../../../Icons/Notifications.png"
 import commentIcon from '../../../Icons/Comment.png';
-import comment from '../../../Icons/Comment.png';
-import Moreoptions from "../../../Icons/Moreoptions.png"
-import Saveicon from "../../../Icons/Save.png"
+
 
 
 function FriendPost({ post }) {
 
+    // console.log("porps post 111111",post)
   const isImage = post.file.endsWith(".jpg") || post.file.endsWith(".jpeg") || post.file.endsWith(".png") || post.file.endsWith(".gif");
   const isVideo = post.file.endsWith(".mp4") || post.file.endsWith(".mov") || post.file.endsWith(".avi") || post.file.endsWith(".mkv");
 
 
-  // console.log("porps post 111111",post)
+ //TIME
   const getRelativeTime = (createdAt) => {
     return moment(createdAt).fromNow();
   };
@@ -108,9 +107,9 @@ function FriendPost({ post }) {
                     <p style={{ marginBottom: 16 }}>{post?.user?.firstName}</p>
                   </div>
                 </div>
-                <div >
+                {/* <div >
                   <img src={Moreoptions} alt="" />
-                </div>
+                </div> */}
               </div>
 
               <div className='scrollable-div'>
@@ -135,28 +134,6 @@ function FriendPost({ post }) {
                   </div>
                 ))}
 
-              </div>
-            </div>
-
-            <div style={{ marginLeft: 30, marginTop: -9 }}>
-              <div style={{ display: 'flex', justifyContent: "space-between", alignContent: 'center' }}>
-                <div style={{ marginTop: 10, marginLeft: -15 }}>
-                  <img src={Likeicon} style={{ marginLeft: 13, cursor: "pointer" }} alt="" />
-                  <img src={comment} style={{ marginLeft: 45, marginTop: -25, cursor: "pointer" }} alt="" />
-
-                </div>
-                <div style={{ marginTop: 10 }}>
-                  <img src={Saveicon} style={{ cursor: "pointer" }} alt="" />
-                </div>
-              </div>
-              <p style={{ marginTop: 0 }}>{post?.likes.length} likes</p>
-            </div>
-            <div style={{ display: 'flex', justifyContent: "space-between", marginLeft: 30, alignContent: 'center' }}>
-              <div style={{ flex: 4, marginLeft: 0 }}>
-                <textarea type="text" style={{ width: "100%", backgroundColor: "black", border: "none", color: "white" }} placeholder='Add a comment' />
-              </div>
-              <div style={{ flex: 0.3, marginTop: 10, marginLeft: 35 }} >
-                <p style={{ cursor: 'pointer', color: "#0095F6", fontWeight: 600 }}>Post</p>
               </div>
             </div>
           </div>

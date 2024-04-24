@@ -21,7 +21,6 @@ export default function Profile() {
   const loggedUser = useSelector(state => state.user.user);
   const { _id } = loggedUser
   // console.log("userdata from Redux store profile:", loggedUser);
-  
   // console.log("id is", _id)
 
 

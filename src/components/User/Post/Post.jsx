@@ -278,7 +278,7 @@ export default function Post({ postlist }) {
      
 
        {/* likes count  */}
-        <p style={{ display: "flex", marginTop: "0px" }} onClick={showLikedPeople}>{postlist.likes.length} likes</p> 
+        <p style={{ display: "flex", marginTop: "0px" }} onClick={showLikedPeople}>{likes} likes</p> 
         <p style={{ textAlign: 'start', }}>{postlist.caption}</p> {/* caption */}
         <div style={{ cursor: "pointer" }} onClick={handleShowmodal}>
           <p style={{ textAlign: "start", color: "#A8A8A8" }}>View all comments</p>

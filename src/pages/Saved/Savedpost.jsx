@@ -7,21 +7,21 @@ import Sidebar from '../../components/User/Sidebar/Sidebar'
 
  function Savedpost() {
   const loggedUser = useSelector(state => state.user.user);
-  const { _id } = loggedUser
-  console.log("id is", _id)
+  // console.log("user redux data in savedpost",loggedUser)
+ 
   const [savedPosts, setSavedPosts] = useState([]);
   useEffect(() => {
     const fetchSavedPosts = async () => {
       try {
-        const response = await axiosUserInstance.get(`/post/getSavedpost/${_id}`);
-        console.log("backend response", response)
+        const response = await axiosUserInstance.get(`/post/getSavedpost/${loggedUser._id}`);
+        // console.log("backend response of getsavedpost", response)
         setSavedPosts(response.data);
       } catch (error) {
         console.error('Error fetching saved posts:', error);
       }
     };
     fetchSavedPosts();
-  }, [_id]);
+  }, [loggedUser._id]);
   return (
     <div>
       <div>

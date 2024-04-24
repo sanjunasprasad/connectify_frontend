@@ -7,6 +7,8 @@ import Sidebar from "../../components/User/Sidebar/Sidebar";
 import Rightbar from "../../components/User/Rightbar/Rightbar";
 
 function FeedHome() {
+  // const loggedUser = useSelector(state => state.user);
+  // console.log("user redux data in feedhome",loggedUser)
   const dispatch = useDispatch();
   useEffect(() => {
        axiosUserInstance 
