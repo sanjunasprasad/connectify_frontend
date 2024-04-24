@@ -25,6 +25,7 @@ export default function Post({ postlist }) {
   // console.log("url of posts",postlist.file)
   const dispatch = useDispatch();
   const loggeduser = useSelector(state => state.user.user)
+  // console.log("from post ",loggeduser)
   const isImage = postlist.file.endsWith(".jpg") || postlist.file.endsWith(".jpeg") || postlist.file.endsWith(".png") || postlist.file.endsWith(".gif");
   const isVideo = postlist.file.endsWith(".mp4") || postlist.file.endsWith(".mov") || postlist.file.endsWith(".avi") || postlist.file.endsWith(".mkv");
 

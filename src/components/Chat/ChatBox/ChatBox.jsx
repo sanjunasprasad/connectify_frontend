@@ -90,7 +90,7 @@ const ChatBox = ({ currentUser, setSendMessage, receivedMessage }) => {
       }
     };
     if (chat !== null) fetchMessages();
-  },); //removed dependency chat, it cause infinite rerender
+  },[chat]); //removed dependency [chat], it cause infinite rerender
 
 
 
@@ -124,6 +124,10 @@ const ChatBox = ({ currentUser, setSendMessage, receivedMessage }) => {
       console.log("Error sending message:", error);
     }
   };
+
+
+
+  
 
 
   
@@ -203,7 +207,7 @@ const ChatBox = ({ currentUser, setSendMessage, receivedMessage }) => {
           {/* chat messages */}
           <div className="chat-body" >
             {messages.map((message, index) => (
-              <>
+            
                 <div key={index} ref={scroll}
                   className={
                     message.senderId === currentUser
@@ -220,7 +224,7 @@ const ChatBox = ({ currentUser, setSendMessage, receivedMessage }) => {
                   )}
                   <span>{getRelativeTime(message.createdAt)}</span>
                 </div>
-              </>
+             
             ))}
             {videoCallLink && (
               <div className="px-4 py-3 leading-normal text-red-700 bg-orange-100 rounded-lg" role="alert">
