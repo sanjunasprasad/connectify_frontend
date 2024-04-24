@@ -11,7 +11,7 @@ const ZegoVcall = () => {
     console.log("user id",userId)
     console.log("friend id",id)
     const navigate = useNavigate();
-    const VURL = 'https://connectify-cyan.vercel.app'
+    const VURL = 'https://connectify-omega-mauve.vercel.app'
     const videoCallLink = `${VURL}/meeting/${userId}/${id}`;
 
     useEffect(() => {
@@ -33,12 +33,6 @@ const ZegoVcall = () => {
     const zc = ZegoUIKitPrebuilt.create(kitToken);
     zc.joinRoom({
       container: element,
-      // sharedLinks: [
-      //   {
-      //   name: 'copy link',
-      //   url: `http://localhost:3000/meeting/${userId}/${id}`,
-      //  }
-      //  ],
       scenario: {
         mode: ZegoUIKitPrebuilt.OneONoneCall,
       },
