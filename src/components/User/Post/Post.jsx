@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { axiosUserInstance } from "../../../services/axios/axios";
@@ -20,12 +20,11 @@ import Savedicon from "../../../Icons/saved.png"
 
 export default function Post({ postlist }) {
 
-  
+
   // console.log("postlist props contains:", postlist)
   // console.log("url of posts",postlist.file)
   const dispatch = useDispatch();
   const loggeduser = useSelector(state => state.user.user)
-  // console.log("from post ",loggeduser)
   const isImage = postlist.file.endsWith(".jpg") || postlist.file.endsWith(".jpeg") || postlist.file.endsWith(".png") || postlist.file.endsWith(".gif");
   const isVideo = postlist.file.endsWith(".mp4") || postlist.file.endsWith(".mov") || postlist.file.endsWith(".avi") || postlist.file.endsWith(".mkv");
 
@@ -37,30 +36,37 @@ export default function Post({ postlist }) {
   //LIKE DISLIKE
   const [liked, setLiked] = useState(() => {
     const storedLiked = localStorage.getItem(`post_liked_${postlist._id}_${loggeduser._id}`);
-    return storedLiked ? JSON.parse(storedLiked) : postlist?.likes.some(like => like.user === loggeduser._id);
+    // console.log("from local stored like",storedLiked)
+    const initialState = storedLiked ? JSON.parse(storedLiked) : postlist?.likes.some(like => like.user === loggeduser._id);
+    // console.log(`Initial like state for post ${postlist._id}:`, initialState);
+    return initialState
   });
-    // const [likes, setLikes] = useState(() => { return postlist?.likes.length || 0});
+
   const [likes, setLikes] = useState(() => {
-    const storedLikes = localStorage.getItem(`post_liked_${postlist._id}_${loggeduser._id}`);
-    return storedLikes ? JSON.parse(storedLikes) : postlist?.likes.length || 0;
+    const storedLikes = localStorage.getItem(`post_likes_${postlist._id}_${loggeduser._id}`);
+    // console.log("from local stored TOTAL like",storedLikes)
+    const initialtotal_likes = storedLikes ? JSON.parse(storedLikes) : postlist?.likes.length || 0;
+    // console.log(`Initial like state for post ${postlist._id}:`,initialtotal_likes );
+    return initialtotal_likes
   });
 
   const handleLike = async () => {
     try {
       const newLiked = !liked;
+      console.log("New liked state:", newLiked); 
       setLiked(newLiked);
-      const response = await axiosUserInstance.put(`/post/likepost/${postlist._id}`, {userId: loggeduser._id});
+      const response = await axiosUserInstance.put(`/post/likepost/${postlist._id}`, { userId: loggeduser._id });
       console.log("like response is", response);
       if (response.status === 200) {
         setLikes(prevLikes => (newLiked ? prevLikes + 1 : prevLikes - 1));
         localStorage.setItem(`post_liked_${postlist._id}_${loggeduser._id}`, JSON.stringify(newLiked));
-        localStorage.setItem(`post_liked_${postlist._id}_${loggeduser._id}`, JSON.stringify(newLiked ? likes + 1 : likes - 1));
+        localStorage.setItem(`post_likes_${postlist._id}_${loggeduser._id}`, JSON.stringify(newLiked ? likes + 1 : likes - 1));
       }
     } catch (error) {
       console.error('Error occurred while liking the post:', error);
     }
   };
-  
+
 
 
 
@@ -96,6 +102,19 @@ export default function Post({ postlist }) {
   };
 
 
+//DELETE COMMENT
+// const handleDeleteComment = async(commentId,postId)=>{
+//   console.log("from child")
+//   try {
+  
+//     onDeleteComment(postId, commentId);
+//   } catch (error) {
+//     console.error('Error deleting comment:', error);
+//   }
+// }
+
+
+
   //savepost 
   const [isSaved, setIsSaved] = useState(false);
   // useEffect(() => {
@@ -114,7 +133,7 @@ export default function Post({ postlist }) {
   }
 
 
-//fetch post liked users only
+  //fetch list of post liked users only
   const [modalOpen, setModalOpen] = useState(false);
   const [likedUsers, setLikedUsers] = useState([]);
   const showLikedPeople = () => {
@@ -147,7 +166,7 @@ export default function Post({ postlist }) {
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: "space-between", marginBottom: 10 }}>
           <div style={{ display: 'flex', alignItems: 'center' }}>
             {/* profilepic on post top*/}
-            {postlist &&  (
+            {postlist && (
               <img src={postlist?.user?.image || altusericon} style={{ width: "30px", height: "30px", borderRadius: "50%", objectFit: "cover", }} alt="" />)}
             {/* username  on post top*/}
             <p style={{ marginLeft: 10 }}>
@@ -190,14 +209,11 @@ export default function Post({ postlist }) {
               <div >
                 <div style={{ display: "flex", alignItems: "center", paddingLeft: 10, justifyContent: "space-between" }}>
                   <div style={{ display: "flex", alignItems: "center", paddingLeft: 10 }}>
-                    <img src={postlist?.user?.image ||altusericon} style={{ width: "30px", height: "30px", borderRadius: "50%", objectFit: "cover" }} alt="" />
+                    <img src={postlist?.user?.image || altusericon} style={{ width: "30px", height: "30px", borderRadius: "50%", objectFit: "cover" }} alt="" />
                     <div style={{ paddingLeft: 10 }}>
                       {/* post owner name on top comment section */}
                       <p style={{ marginBottom: 0 }}>{postlist?.user?.firstName}</p>
                     </div>
-                  </div>
-                  <div>
-                    <img src={Moreoptions} alt="" />
                   </div>
                 </div>
                 {/* dynamic comment display section */}
@@ -210,6 +226,7 @@ export default function Post({ postlist }) {
                       <p style={{ marginTop: -3 }}>{postlist?.caption}</p>
                       <p style={{ color: "#A8A8A8", marginTop: -10 }}>{getRelativeTime(postlist?.createdAt)}</p>
                     </div>
+
                   </div>
 
                   {postlist.comments.map((comment, index) => (
@@ -218,6 +235,9 @@ export default function Post({ postlist }) {
                       <div style={{ marginLeft: 20 }}>
                         <p style={{ marginTop: 30 }}>{comment?.user?.firstName}</p>
                         <p style={{ marginTop: 0 }}>{comment?.text}</p>
+                        {/* {(comment.user._id === loggeduser._id || postlist.user._id === loggeduser._id) && (
+                          <img src={Moreoptions} alt="More options" onClick={() => handleDeleteComment(comment._id,postlist._id)} style={{ cursor: 'pointer' }} />
+                        )} */}
                         <p style={{ color: '#A8A8A8', marginTop: -4 }}>{getRelativeTime(comment?.createdAt)}</p>
                       </div>
                     </div>
@@ -248,7 +268,7 @@ export default function Post({ postlist }) {
         {isVideo && (
           <ReactPlayer
             controls={true}
-             url={postlist?.file}
+            url={postlist?.file}
             height="auto"
             width="100%"
             style={{ objectFit: "contain" }} />
@@ -258,7 +278,7 @@ export default function Post({ postlist }) {
           <div style={{ display: 'flex', alignItems: "center", justifyContent: "space-between" }}>
             {/* Likes  */}
             <div >
-              <img src={liked ? redicon : greyicon} className='logoforpost' alt=""   onClick={handleLike}/> 
+              <img src={liked ? redicon : greyicon} className='logoforpost' alt="" onClick={handleLike} />
             </div>
 
 
@@ -276,10 +296,10 @@ export default function Post({ postlist }) {
             )}
           </div>
         </div>
-     
 
-       {/* likes count  */}
-        <p style={{ display: "flex", marginTop: "0px" }} onClick={showLikedPeople}>{likes} likes</p> 
+
+        {/* likes count  */}
+        <p style={{ display: "flex", marginTop: "0px" }} onClick={showLikedPeople}>{likes} likes</p>
         <p style={{ textAlign: 'start', }}>{postlist.caption}</p> {/* caption */}
         <div style={{ cursor: "pointer" }} onClick={handleShowmodal}>
           <p style={{ textAlign: "start", color: "#A8A8A8" }}>View all comments</p>

@@ -1,18 +1,20 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate ,useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { clearUserState } from "../../../services/redux/slices/userSlice"
 import { clearPostState } from "../../../services/redux/slices/postSlice";
 import { clearChatState } from "../../../services/redux/slices/chatSlice";
 import { persistor } from "../../../services/redux/store/store";
 import { addPost } from "../../../services/redux/slices/postSlice";
-import {axiosUserInstance} from "../../../services/axios/axios"
+import { axiosUserInstance } from "../../../services/axios/axios"
 import Modal from "react-modal";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import "./Sidebarr.css";
 import altusericon from "../../../Icons/user.png"
 import Homeicon from "../../../Icons/home.png";
+import CloseIcon from "../../../Icons/closebutton.png";
+import SearchIcon from "../../../Icons/Search.png";
 import Exploreicon from "../../../Icons/Explore.png";
 import Reels from "../../../Icons/Reels.png";
 import Messages from "../../../Icons/Messenger.png";
@@ -25,7 +27,60 @@ import Instagramicon from "../../../Icons/Instagram.png";//instagram
 
 
 
+
 function Sidebar() {
+
+
+
+  //search area display
+  const location = useLocation(); 
+  // console.log("location",location)
+  const [ShowSearch, setShowSearch] = useState(true);
+  const toggleSeachText = () => {
+    setShowSearch(!ShowSearch);
+  };
+
+  //search functionality
+  const [searchUsers, setsearchUsers] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [timeoutId, setTimeoutId] = useState(null);
+  const handleClearButtonClick = () => {
+    setSearchTerm('');
+  };
+  const debounce = (func, delay) => {
+    let timer;
+    return function () {
+      const context = this;
+      const args = arguments;
+      clearTimeout(timer);
+      timer = setTimeout(() => func.apply(context, args), delay);
+    };
+  };
+
+  const searchUser = debounce(async (term) => {
+    try {
+      const response = await axiosUserInstance.get(`/search?term=${term}`);
+      console.log("search result", response.data);
+      setsearchUsers(response.data)
+
+      // Clear search results after 5 seconds
+      const id = setTimeout(() => {
+        setsearchUsers([]);
+        setSearchTerm('');
+      }, 10000);
+      setTimeoutId(id);
+    } catch (error) {
+      console.error('Error searching user:', error);
+    }
+  }, 300);
+
+  const handleInputChange = (e) => {
+    const { value } = e.target;
+    setSearchTerm(value);
+    searchUser(value);
+  };
+
+
 
 
   const loggedUser = useSelector(state => state.user.user);
@@ -37,7 +92,7 @@ function Sidebar() {
     dispatch(clearPostState());
     dispatch(clearChatState());
     localStorage.removeItem("token");
-    persistor.purge(['user', 'post' , 'chat']);
+    persistor.purge(['user', 'post', 'chat']);
     navigate("/");
     const Toast = Swal.mixin({
       toast: true,
@@ -85,54 +140,54 @@ function Sidebar() {
 
 
 
-const upload_preset = "yuudjikt";
-const handleCreatePost = async () => {
-  try {
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("upload_preset", upload_preset);
-    console.log("Cloudinary data:", {
-      file: file.name,
-      upload_preset: upload_preset,
-    });
-    // Determine resourceType based on file type
-    const resourceType = file.type.startsWith('image/') ? 'image' : 'video';
-    const response = await fetch(`https://api.cloudinary.com/v1_1/dvu3hgufk/${resourceType}/upload`, {
-      method: 'POST',
-      body: formData,
-    });
-
-    if (response.ok) {
-      const imageData = await response.json();
-      console.log("Uploaded resource URL:", imageData.secure_url);
-
-      // Upload post data to backend
-      const caption = document.querySelector('textarea[name="caption"]').value;
-      const postData = {
-        caption: caption,
-        postUrl: imageData.secure_url,
-        userId: loggedUser._id
-      };
-      console.log("Post Data****:", postData); 
-      const backendResponse = await axiosUserInstance.post("/post/createPost", postData);
-      // console.log("Created successfully:", backendResponse.data);
-      dispatch(addPost(backendResponse.data));
-      Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: "Post created successfully",
-        showConfirmButton: false,
-        timer: 1500
+  const upload_preset = "yuudjikt";
+  const handleCreatePost = async () => {
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", upload_preset);
+      console.log("Cloudinary data:", {
+        file: file.name,
+        upload_preset: upload_preset,
       });
-      setFormData({ caption: "", file: "" });
-      setmodalIsOpen(false);
-    } else {
-      console.error("Error uploading resource to Cloudinary");
+      // Determine resourceType based on file type
+      const resourceType = file.type.startsWith('image/') ? 'image' : 'video';
+      const response = await fetch(`https://api.cloudinary.com/v1_1/dvu3hgufk/${resourceType}/upload`, {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (response.ok) {
+        const imageData = await response.json();
+        console.log("Uploaded resource URL:", imageData.secure_url);
+
+        // Upload post data to backend
+        const caption = document.querySelector('textarea[name="caption"]').value;
+        const postData = {
+          caption: caption,
+          postUrl: imageData.secure_url,
+          userId: loggedUser._id
+        };
+        console.log("Post Data****:", postData);
+        const backendResponse = await axiosUserInstance.post("/post/createPost", postData);
+        // console.log("Created successfully:", backendResponse.data);
+        dispatch(addPost(backendResponse.data));
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Post created successfully",
+          showConfirmButton: false,
+          timer: 1500
+        });
+        setFormData({ caption: "", file: "" });
+        setmodalIsOpen(false);
+      } else {
+        console.error("Error uploading resource to Cloudinary");
+      }
+    } catch (error) {
+      console.error("Error creating post:", error);
     }
-  } catch (error) {
-    console.error("Error creating post:", error);
-  }
-};
+  };
 
   return (
     <div className="mainsidebar">
@@ -262,11 +317,14 @@ const handleCreatePost = async () => {
       <div>
         {/* logotext on sidebar */}
         <div style={{ display: "flex", marginTop: "45px", marginLeft: "20px" }}>
-          <img src={InstagramIcon} alt="" className="logos" />
-          <ul style={{ marginLeft: "20px" }}>
+          {ShowSearch === false ? (
+            <img src={InstagramIcon} alt="" className="logos" />
+          ) : (
             <img src={Instagramicon} alt="" className="logos" />
-          </ul>
+          )}
         </div>
+
+
 
         {/* sidebar items */}
         {/* homeicon */}
@@ -281,13 +339,17 @@ const handleCreatePost = async () => {
             }}
           >
             <img src={Homeicon} alt="" className="logos" />
-            <ul style={{ marginLeft: "20px" }}>
-              <li className="listtext"> Home </li>
-            </ul>
+            {ShowSearch && (
+              <ul style={{ marginLeft: "20px" }}>
+                <li className="listtext"> Home </li>
+              </ul>
+            )}
           </div>
         </Link>
 
-        {/* exploreicon */}
+
+
+        {/* searchicon */}
         <div
           style={{
             display: "flex",
@@ -296,19 +358,42 @@ const handleCreatePost = async () => {
             cursor: "pointer",
             marginLeft: "20px",
           }}
+          onClick={toggleSeachText}
         >
-          <img src={Exploreicon} alt="" className="logos" />
-          <ul style={{ marginLeft: "20px" }}>
-            <li className="listtext">
-              <Link
-                to={"/Explore"}
-                style={{ textDecoration: "none", color: "white" }}
-              >
-                Explore
-              </Link>
-            </li>
-          </ul>
+          <img src={SearchIcon} alt="" className="logos" />
+          {ShowSearch && (
+            <ul style={{ marginLeft: "20px" }}>
+              <li className="listtext">Search </li>
+            </ul>
+          )}
         </div>
+
+
+        {/* exploreicon */}
+        <Link
+          to={"/Explore"}
+          style={{ textDecoration: "none", color: "white" }}
+        >
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              marginTop: "40px",
+              cursor: "pointer",
+              marginLeft: "20px",
+            }}
+          >
+            <img src={Exploreicon} alt="" className="logos" />
+            {ShowSearch && (
+              <ul style={{ marginLeft: "20px" }}>
+                <li className="listtext">
+                  Explore
+                </li>
+              </ul>
+            )}
+          </div>
+        </Link>
+
 
 
 
@@ -324,35 +409,40 @@ const handleCreatePost = async () => {
             }}
           >
             <img src={Reels} alt="" className="logos" />
-            <ul style={{ marginLeft: "20px" }}>
-              <li className="listtext"> Saved</li>
-            </ul>
+            {ShowSearch && (
+              <ul style={{ marginLeft: "20px" }}>
+                <li className="listtext"> Saved</li>
+              </ul>
+            )}
           </div>
         </Link>
 
 
+
         {/* messageicon */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            marginTop: "40px",
-            cursor: "pointer",
-            marginLeft: "20px",
-          }}
+        <Link
+          to={"/chat"}
+          style={{ textDecoration: "none", color: "white" }}
         >
-          <img src={Messages} alt="" className="logos" />
-          <ul style={{ marginLeft: "20px" }}>
-            <li className="listtext">
-              <Link
-                to={"/chat"}
-                style={{ textDecoration: "none", color: "white" }}
-              >
-                Message
-              </Link>
-            </li>
-          </ul>
-        </div>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              marginTop: "40px",
+              cursor: "pointer",
+              marginLeft: "20px",
+            }}
+          >
+            <img src={Messages} alt="" className="logos" />
+            {ShowSearch && (
+              <ul style={{ marginLeft: "20px" }}>
+                <li className="listtext">
+                  Message
+                </li>
+              </ul>
+            )}
+          </div>
+        </Link>
 
 
         {/* create post icon */}
@@ -367,10 +457,15 @@ const handleCreatePost = async () => {
           onClick={handleShowmodal}
         >
           <img src={createicon} alt="" className="logos" />
-          <ul style={{ marginLeft: "20px" }}>
-            <li className="listtext">Create</li>
-          </ul>
+          {ShowSearch && (
+            <ul style={{ marginLeft: "20px" }}>
+              <li className="listtext">Create</li>
+            </ul>
+          )}
         </div>
+
+
+
 
         {/* profile icon */}
         <Link to={"/username"}>
@@ -388,9 +483,11 @@ const handleCreatePost = async () => {
               alt=""
               className="profileicon"
             />
-            <ul style={{ marginLeft: "20px" }}>
-              <li className="listtext"> Profile</li>
-            </ul>
+            {ShowSearch && (
+              <ul style={{ marginLeft: "20px" }}>
+                <li className="listtext"> Profile</li>
+              </ul>
+            )}
           </div>
         </Link>
 
@@ -406,15 +503,113 @@ const handleCreatePost = async () => {
           onClick={signOut}
         >
           <img src={More} alt="" className="logos" />
-          <ul style={{ marginLeft: "20px" }}>
-            <li className="listtext">Logout</li>
-          </ul>
+          {ShowSearch && (
+            <ul style={{ marginLeft: "20px" }}>
+              <li className="listtext">Logout</li>
+            </ul>
+          )}
         </div>
       </div>
 
+ 
 
-    </div>
-  );
+
+
+      {/* search field and results*/}
+      {!ShowSearch &&  location.pathname === '/feedhome' &&   (
+        <div
+          style={{
+            width: "100%",
+            height: "100vh",
+            backgroundColor: "black",
+            marginLeft: 35,
+          }}
+        >
+          <p
+            style={{
+              color: "white",
+              fontWeight: 600,
+              fontSize: 27,
+              marginLeft: 13,
+              marginTop: 35,
+            }}
+          >
+            Search
+          </p>
+
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              marginLeft: 0,
+              marginTop: 30,
+              position: "relative"
+            }}
+          >
+            <input
+              className="showsearchinput"
+              placeholder="Search"
+              name="text"
+              style={{ paddingLeft: "26px" }}
+              value={searchTerm}
+              onChange={handleInputChange}
+            />
+            <img
+              src={SearchIcon}
+              alt=""
+              style={{
+                position: "absolute",
+                left: 15,
+                top: "50%",
+                transform: "translateY(-50%)",
+                width: 15,
+                height: 15,
+                cursor: "pointer"
+              }}
+            />
+            {searchTerm && (
+              <img
+                src={CloseIcon}
+                alt=""
+                style={{
+                  position: "absolute",
+                  right: 47,
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  cursor: "pointer"
+                }}
+                onClick={handleClearButtonClick}
+              />
+            )}
+          </div>
+
+           {/* serach results display */}
+          {(searchTerm && searchUsers.length === 0) 
+          ? (
+            <p style={{color: "white", marginLeft: 13, marginTop: 35,}}>No results found. </p>
+            )  : (
+            searchUsers.map(user => (
+              <div key={user.userId} style={{ height: "80vh", overflow: "auto", marginTop: 15 }}>
+             
+                <div style={{display: "flex",alignItems: "center",marginLeft: 10,marginTop: 0,}}>
+                <Link to={`/username/${user.userId}`} style={{ textDecoration: 'none', color: 'inherit' }}> 
+                  <img src={user.image} style={{width: "40px",objectFit: "cover",height: "40px",borderRadius: "50%",}}alt=""/>
+                  </Link>
+                  <Link to={`/username/${user.userId}`} style={{ textDecoration: 'none', color: 'inherit' }}> 
+                  <div style={{ marginLeft: 10 }}>
+                    <p style={{ marginTop: 20, fontSize: 14 }}>{`${user.firstName} ${user.lastName}`}</p>
+                    <p style={{ marginTop: -6, color: "#A8A8A8" }}>{user.email}</p>
+                  </div>
+                  </Link>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+      )}
+      
+    </div >
+  )
 }
 
 export default Sidebar;

@@ -63,13 +63,14 @@ ul{
 }
 
 .showsearchinput{
-    background-color:black; 
+    background-color:rgb(38, 38, 41); 
     border:none; 
     width:80%; 
-    height:15px;
+    height:35px;
     margin-left:10px;
     outline: none;
     color:white;
+    border-radius: 6px;
 }
 
 .showsearchinput::placeholder{
