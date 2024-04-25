@@ -23,12 +23,13 @@ const postSlice = createSlice({
         post.comments.push({ userId, comment });
       }
     },
-    
-   
+    clearPostState: state => {
+      state.posts = [];
+    },
     
   },
 });
 
-export const { setPosts , addPost ,addComment } = postSlice.actions; // action created and reducer fn
+export const { setPosts , addPost ,addComment ,clearPostState} = postSlice.actions; // action created and reducer fn
 export default postSlice.reducer;   //reducer fn generated used to update the state of the posts slice in the Redux store.
 

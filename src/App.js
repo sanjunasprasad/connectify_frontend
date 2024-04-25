@@ -16,6 +16,7 @@ import ForgotPwOtp from './components/User/ForgotPwOtp';
 import FriendProfile from './components/User/FriendProfile/FriendProfile';
 import AdminLogin from './components/Admin/AdminLogin'
 import UserManage from './components/Admin/UserManage'
+import UserPosts from './components/Admin/UserPosts';
 import Notifications from './components/Admin/Notifications';
 import ResetPassword from './components/User/ResetPassword';
 
@@ -43,6 +44,7 @@ function App() {
             <Route element={<AdminPage />} path="/dashboard" /> 
             <Route element={<UserManage />} path="/users" /> 
             <Route element={<Notifications/>} path="/notifications" />
+            <Route element={<UserPosts/>} path="/posts" />
 
               
             <Route element={<Chat />} path="/chat" /> 

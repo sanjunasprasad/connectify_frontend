@@ -42,7 +42,7 @@ function UserManage() {
     // const token = localStorage.getItem("adminToken");
     // console.log("admin token",token)
     const userToUpdate = users.find((user) => user._id === id);
-    console.log("usertoupdate:", userToUpdate);
+    // console.log("usertoupdate:", userToUpdate);
     const newStatus = !userToUpdate.is_blocked;
     console.log("newstatus", newStatus);
     try {
@@ -56,7 +56,7 @@ function UserManage() {
 
         if (result.isConfirmed) {
             const response = await  axiosAdminInstance.patch(`/admin/blockuser/${id}`,{is_blocked: newStatus,});
-            console.log("response of blocked user:",response)
+            // console.log("response of blocked user:",response)
 
             // Update the local state to reflect the change
             setUsers(

@@ -1,11 +1,12 @@
 import React from 'react'
 import {  useDispatch,useSelector } from 'react-redux';
 import { Link,useNavigate } from "react-router-dom";
-import {clearUser} from "../../../services/redux/slices/userSlice"
+import { clearUserState } from "../../../services/redux/slices/userSlice"
+import { clearPostState } from "../../../services/redux/slices/postSlice";
+import { clearChatState } from "../../../services/redux/slices/chatSlice";
+import { persistor } from "../../../services/redux/store/store";
 import "./Chatsidebar.css"
 import Homeicon from "../../../Icons/home.png";
-// import SearchIcon from "../../../Icons/Search.png";
-// import Notifications from "../../../Icons/Notifications.png";
 import Exploreicon from "../../../Icons/Explore.png";
 import Messages from "../../../Icons/Messenger.png";
 import createicon from "../../../Icons/New post.png";
@@ -18,8 +19,11 @@ function Chatsidebar() {
   const navigate = useNavigate();
   const dispatch =useDispatch()
   const signOut = () => {
-    dispatch(clearUser());
+    dispatch(clearUserState());
+    dispatch(clearPostState());
+    dispatch(clearChatState());
     localStorage.removeItem("token");
+    persistor.purge(['user', 'post' , 'chat']);
     navigate("/");
   };
 
@@ -46,9 +50,6 @@ function Chatsidebar() {
       </div>
       </Link>
 
-      {/* <div style={{ display: "flex", alignItems: "center", marginTop: "40px" , cursor:'pointer', marginLeft: "20px" }}>
-      <img src={SearchIcon} className="logos" alt=""/>
-      </div> */}
 
 
       <Link to={"/Explore"} style={{ textDecoration: "none", color: "white" }}>  
@@ -64,9 +65,7 @@ function Chatsidebar() {
       </div>
       </Link>
 
-      {/* <div style={{ display: "flex", alignItems: "center", marginTop: "40px" , cursor:'pointer', marginLeft: "20px" }}>
-      <img src={Notifications}className="logos" alt="" />
-      </div> */}
+     
 
       <div style={{ display: "flex", alignItems: "center", marginTop: "40px" , cursor:'pointer', marginLeft: "20px" }}>
       <img src={createicon}  className="logos"alt=""/>

@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { clearUser } from "../../../services/redux/slices/userSlice"
+import { clearUserState } from "../../../services/redux/slices/userSlice"
+import { clearPostState } from "../../../services/redux/slices/postSlice";
+import { clearChatState } from "../../../services/redux/slices/chatSlice";
+import { persistor } from "../../../services/redux/store/store";
 import { addPost } from "../../../services/redux/slices/postSlice";
 import {axiosUserInstance} from "../../../services/axios/axios"
 import Modal from "react-modal";
@@ -30,8 +33,11 @@ function Sidebar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const signOut = () => {
-    dispatch(clearUser());
+    dispatch(clearUserState());
+    dispatch(clearPostState());
+    dispatch(clearChatState());
     localStorage.removeItem("token");
+    persistor.purge(['user', 'post' , 'chat']);
     navigate("/");
     const Toast = Swal.mixin({
       toast: true,

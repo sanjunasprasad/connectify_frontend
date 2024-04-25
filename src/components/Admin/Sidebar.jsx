@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import { BarChart,  User, BellRing} from 'lucide-react'
+import { BarChart,  User, BellRing ,Newspaper} from 'lucide-react'
 
  function Sidebar() {
   return (
@@ -22,6 +22,10 @@ import { BarChart,  User, BellRing} from 'lucide-react'
 
              <Link to="/notifications" className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700">
               <BellRing className="h-5 w-5" aria-hidden="true" /><span className="mx-2 text-sm font-medium">Notifications</span>
+            </Link>
+
+            <Link to="/posts" className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700">
+              <Newspaper className="h-5 w-5" aria-hidden="true" /><span className="mx-2 text-sm font-medium">Posts</span>
             </Link>
 
             

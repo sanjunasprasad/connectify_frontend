@@ -16,14 +16,13 @@ const userSlice = createSlice({
     setToken(state, action) {
       state.token = action.payload;
     },
-    clearUser(state) {
-      state.user = null;
-      state.token = null;
+    clearUserState(state) {
+      Object.assign(state, initialState);
     },
     
   },
 });
 
-export const { setUser, setToken, clearUser } = userSlice.actions;
+export const { setUser, setToken, clearUserState } = userSlice.actions;
 
 export default userSlice.reducer;

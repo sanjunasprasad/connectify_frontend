@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
-import { setUser, clearUser } from "../../services/redux/slices/userSlice";
+import { clearUserState } from "../../services/redux/slices/userSlice"
+import { clearPostState } from "../../services/redux/slices/postSlice";
+import { clearChatState } from "../../services/redux/slices/chatSlice";
+import { persistor } from "../../services/redux/store/store";
+import { setUser} from "../../services/redux/slices/userSlice";
 import { axiosUserInstance } from "../../services/axios/axios";
 import "./Profilee.css";
 import OwnPost from "../../components/User/ProfilePosts/OwnPost"
@@ -192,8 +196,11 @@ export default function Profile() {
             text: "User has been deleted.",
             icon: "success"
           }).then(() => {
-            dispatch(clearUser());
+            dispatch(clearUserState());
+            dispatch(clearPostState());
+            dispatch(clearChatState());
             localStorage.removeItem("token");
+            persistor.purge(['user', 'post' , 'chat']);
             navigate("/");
           })
         }

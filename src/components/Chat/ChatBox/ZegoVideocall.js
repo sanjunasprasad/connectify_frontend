@@ -8,15 +8,15 @@ import { v4 } from 'uuid'
 
 const ZegoVcall = () => {
     const { userId, id } = useParams();
-    console.log("user id",userId)
-    console.log("friend id",id)
+    // console.log("user id",userId)
+    // console.log("friend id",id)
     const navigate = useNavigate();
     const VURL = 'https://connectify-omega-mauve.vercel.app'
     const videoCallLink = `${VURL}/meeting/${userId}/${id}`;
 
     useEffect(() => {
       localStorage.setItem('videoCallLink', videoCallLink);
-      console.log("LINK saved in localstorage == directed link ",videoCallLink);
+      // console.log("LINK saved in localstorage == directed link ",videoCallLink);
   }, []); 
 
 
