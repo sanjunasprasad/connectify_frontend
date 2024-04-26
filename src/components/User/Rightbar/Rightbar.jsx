@@ -22,7 +22,7 @@ function Rightbar() {
         params: { following: JSON.stringify(following) }
       })
         .then(response => {
-          console.log("POST RESPONSE POSTTTTT##### ",response.data) //full populated data
+          // console.log("POST RESPONSE POSTTTTT##### ",response.data) //full populated data
           dispatch(setPosts(response.data));
         })
         .catch(error => {
@@ -33,24 +33,6 @@ function Rightbar() {
 
 
 
-//delete comment from child
-// const [post, setPosts] = useState([]);
-//   const onDeleteComment = async(postId, commentId) => {
-//     console.log("form parent")
-//     console.log('Deleting comment:', postId, commentId);
-//     const response = await axiosUserInstance.delete(`/post/deleteComment/${postId}/${commentId}`,  { data: { userId: _id } });
-//     console.log("response",response)
-//     setPosts(prevPosts =>
-//       prevPosts.map(post => {
-//         if (post._id === postId) {
-//           // Filter out the deleted comment
-//           const updatedComments = post.comments.filter(comment => comment._id !== commentId);
-//           return { ...post, comments: updatedComments };
-//         }
-//         return post;
-//       })
-//     );
-//   };
 
 
 

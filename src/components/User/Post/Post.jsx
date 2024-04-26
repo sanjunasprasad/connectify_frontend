@@ -42,25 +42,27 @@ export default function Post({ postlist }) {
     return initialState
   });
 
-  const [likes, setLikes] = useState(() => {
-    const storedLikes = localStorage.getItem(`post_likes_${postlist._id}_${loggeduser._id}`);
-    // console.log("from local stored TOTAL like",storedLikes)
-    const initialtotal_likes = storedLikes ? JSON.parse(storedLikes) : postlist?.likes.length || 0;
-    // console.log(`Initial like state for post ${postlist._id}:`,initialtotal_likes );
+
+  
+  const [Likes, setLikes] = useState(() => {
+    const storedLikes = localStorage.getItem(`post_likes_${postlist._id}`);
+    // console.log("from local stored TOTAL like", storedLikes)
+    const initialtotal_likes = storedLikes ? JSON.parse(storedLikes) : (postlist?.likes.length || 0)
+    // console.log(`Initial like state for post ${postlist._id}:`, initialtotal_likes);
     return initialtotal_likes
   });
 
   const handleLike = async () => {
     try {
       const newLiked = !liked;
-      console.log("New liked state:", newLiked); 
+      console.log("New liked state:", newLiked);
       setLiked(newLiked);
       const response = await axiosUserInstance.put(`/post/likepost/${postlist._id}`, { userId: loggeduser._id });
       console.log("like response is", response);
       if (response.status === 200) {
         setLikes(prevLikes => (newLiked ? prevLikes + 1 : prevLikes - 1));
         localStorage.setItem(`post_liked_${postlist._id}_${loggeduser._id}`, JSON.stringify(newLiked));
-        localStorage.setItem(`post_likes_${postlist._id}_${loggeduser._id}`, JSON.stringify(newLiked ? likes + 1 : likes - 1));
+        localStorage.setItem(`post_likes_${postlist._id}`, JSON.stringify(newLiked ? Likes + 1 : Likes - 1));    
       }
     } catch (error) {
       console.error('Error occurred while liking the post:', error);
@@ -101,26 +103,8 @@ export default function Post({ postlist }) {
     }
   };
 
-
-//DELETE COMMENT
-// const handleDeleteComment = async(commentId,postId)=>{
-//   console.log("from child")
-//   try {
-  
-//     onDeleteComment(postId, commentId);
-//   } catch (error) {
-//     console.error('Error deleting comment:', error);
-//   }
-// }
-
-
-
   //savepost 
   const [isSaved, setIsSaved] = useState(false);
-  // useEffect(() => {
-  //   const isPostSaved = savedPosts.some(savedPostId => savedPostId === _id);
-  //   setIsSaved(isPostSaved);
-  // }, [_id, savedPosts]);
   const savePost = async () => {
     try {
       await axiosUserInstance.post(`/post/savePost/${postlist._id}`, { userId: loggeduser._id });
@@ -235,9 +219,6 @@ export default function Post({ postlist }) {
                       <div style={{ marginLeft: 20 }}>
                         <p style={{ marginTop: 30 }}>{comment?.user?.firstName}</p>
                         <p style={{ marginTop: 0 }}>{comment?.text}</p>
-                        {/* {(comment.user._id === loggeduser._id || postlist.user._id === loggeduser._id) && (
-                          <img src={Moreoptions} alt="More options" onClick={() => handleDeleteComment(comment._id,postlist._id)} style={{ cursor: 'pointer' }} />
-                        )} */}
                         <p style={{ color: '#A8A8A8', marginTop: -4 }}>{getRelativeTime(comment?.createdAt)}</p>
                       </div>
                     </div>
@@ -290,16 +271,16 @@ export default function Post({ postlist }) {
           {/* Save */}
           <div style={{ display: 'flex', alignItems: 'center' }} onClick={savePost}>
             {isSaved ? (
-              <img src={Savedicon} alt="Saved" /> // Render saved icon if post is saved
+              <img src={Saveicon} alt="Saved" /> 
             ) : (
-              <img src={Saveicon} alt="Save" /> // Render save icon if post is not saved
+              <img src={Saveicon} alt="Save" /> 
             )}
           </div>
         </div>
 
 
         {/* likes count  */}
-        <p style={{ display: "flex", marginTop: "0px" }} onClick={showLikedPeople}>{likes} likes</p>
+        <p style={{ display: "flex", marginTop: "0px" }} onClick={showLikedPeople}>{Likes} likes</p>
         <p style={{ textAlign: 'start', }}>{postlist.caption}</p> {/* caption */}
         <div style={{ cursor: "pointer" }} onClick={handleShowmodal}>
           <p style={{ textAlign: "start", color: "#A8A8A8" }}>View all comments</p>
