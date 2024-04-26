@@ -90,7 +90,7 @@ const ChatBox = ({ currentUser, setSendMessage, receivedMessage }) => {
       }
     };
     if (chat !== null) fetchMessages();
-  },[chat]); //removed dependency [chat], it cause infinite rerender
+  }); //removed dependency [chat], it cause infinite rerender
 
 
 
