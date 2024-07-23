@@ -55,8 +55,8 @@ function UserManage() {
         });
 
         if (result.isConfirmed) {
-            const response = await  axiosAdminInstance.patch(`/admin/blockuser/${id}`,{is_blocked: newStatus,});
-            // console.log("response of blocked user:",response)
+            const response = await  axiosAdminInstance.post(`/admin/blockuser/${id}`,{is_blocked: newStatus,});
+            console.log("response of blocked user:",response)
 
             // Update the local state to reflect the change
             setUsers(

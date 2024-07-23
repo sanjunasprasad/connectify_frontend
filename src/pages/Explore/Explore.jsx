@@ -4,6 +4,7 @@ import Explorepost from '../../components/User/ExplorePost/Explorepost'
 import Sidebar from '../../components/User/Sidebar/Sidebar'
 import { PostExplore } from '../../components/User/data'
 export default function Explore() {
+  
   return (
     <div>
       <div>

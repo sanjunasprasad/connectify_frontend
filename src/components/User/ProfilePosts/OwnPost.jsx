@@ -1,4 +1,4 @@
-import React, {  useState } from 'react';
+import React, { useState } from 'react';
 import Modal from "react-modal";
 import moment from 'moment';
 import Swal from "sweetalert2"
@@ -15,7 +15,9 @@ import altusericon from "../../../Icons/user.png"
 
 function OwnPost({ post }) {
 
- 
+
+
+
   const isImage = post.file.endsWith(".jpg") || post.file.endsWith(".jpeg") || post.file.endsWith(".png") || post.file.endsWith(".gif");
   const isVideo = post.file.endsWith(".mp4") || post.file.endsWith(".mov") || post.file.endsWith(".avi") || post.file.endsWith(".mkv");
   // show icon love,comment on post top
@@ -127,10 +129,10 @@ function OwnPost({ post }) {
       cancelButtonText: "Cancel"
     });
 
-    if (updatedCaption ) {
+    if (updatedCaption) {
       try {
         const response = await axiosUserInstance.put(`/post/editPost/${postId}`, { caption: updatedCaption });
-        console.log("editedddddd response",response.data);
+        console.log("editedddddd response", response.data);
         // setPosts({ ...post, caption: updatedCaption });
         Swal.fire("Post  updated successfully!");
         handleCloseModal();
@@ -140,51 +142,55 @@ function OwnPost({ post }) {
     }
   };
 
-  
 
-  
 
-  
+
+
+
 
   return (
     <>
-      <div
-        className="relative aspect-[16/9] w-auto rounded-md md:aspect-auto md:h-400"
-        style={{ position: 'relative', overflow: 'hidden' }}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        onClick={handleShowmodal}
-      >
-        {isImage && (
-          <img
-            src={post?.file}
-            className="z-0 h-full w-full rounded-md object-cover"
-            style={{ maxHeight: '250px' }}
-            alt=""
-          />
-        )}
+    
+        <div
+          className="relative aspect-[16/9] w-auto rounded-md md:aspect-auto md:h-400"
+          style={{ position: 'relative', overflow: 'hidden' }}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          onClick={handleShowmodal}
+        >
+          {isImage && (
+            <img
+              src={post?.file}
+              className="z-0 h-full w-full rounded-md object-cover"
+              style={{ maxHeight: '250px' }}
+              alt=""
+            />
+          )}
 
-        {isVideo && (
-          <ReactPlayer
-          controls={true}
-            url={post?.file}
-            className="z-0 h-full w-full rounded-md object-cover"
-            style={{ maxHeight: '250px', width: '333px' }}
-            alt=""
+          {isVideo && (
+            <ReactPlayer
+              controls={true}
+              url={post?.file}
+              className="z-0 h-full w-full rounded-md object-cover"
+              style={{ maxHeight: '250px', width: '333px' }}
+              alt=""
 
-          />
-        )}
-        {isHovered && (
-          <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center">
-            <div className="flex items-center space-x-4">
-              <img src={Likeicon} alt="Love Icon" className="w-6 h-6 cursor-pointer" />
-              <p style={{ marginLeft: 5 }}>{post?.likes.length}</p>
-              <img src={commentIcon} alt="Comment Icon" className="w-6 h-6 cursor-pointer" />
-              <p style={{ marginLeft: 5 }}>{post?.comments.length}</p>
+            />
+          )}
+          {isHovered && (
+            <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center">
+              <div className="flex items-center space-x-4">
+                <img src={Likeicon} alt="Love Icon" className="w-6 h-6 cursor-pointer" />
+                <p style={{ marginLeft: 5 }}>{post?.likes.length}</p>
+                <img src={commentIcon} alt="Comment Icon" className="w-6 h-6 cursor-pointer" />
+                <p style={{ marginLeft: 5 }}>{post?.comments.length}</p>
+              </div>
             </div>
-          </div>
-        )}
-      </div>
+          )}
+        </div>
+
+
+      
       <Modal style={{ overlay: { backgroundColor: "#2e2b2bc7" } }} isOpen={modalIsOpen} onRequestClose={handleCloseModal} className={"modalclassNameforASavedPost"}>
         <div style={{ display: "flex" }}>
           <div style={{ flex: 1.3 }} >

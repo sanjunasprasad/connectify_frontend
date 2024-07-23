@@ -6,7 +6,7 @@ import { setToken } from "../../services/redux/slices/userSlice";
 import { axiosInstance } from "../../services/axios/axios";
 import Swal from "sweetalert2"
 import 'sweetalert2/dist/sweetalert2.min.css'
-// import { GoogleLogin } from 'react-google-login';
+
 
 
 function UserLogin() {
@@ -39,7 +39,7 @@ function UserLogin() {
     if (Object.keys(validationErrors).length === 0) {
       try {
         const response = await axiosInstance.post("/userLogin", formdata);
-        // console.log("Responseeee after login:", response);
+        console.log("Responseeee after login:", response);
         if (response.status === 200) {
           localStorage.setItem("token", response.data);
           // console.log("token  setted to localstorage  after login via loginpage:",response.data)
@@ -96,26 +96,7 @@ function UserLogin() {
   };
 
 
-  //  //Handle successful Google Sign-In
-  // const handleGoogleLoginSuccess = async (response) => {
-  //   try {
-  //     const { tokenId } = response;
-  //     const googleResponse = await axiosInstance.post("/googleLogin", { tokenId });
-  //     if (googleResponse.status === 200) {
-  //       localStorage.setItem("token", googleResponse.data);
-  //       dispatch(setToken(googleResponse.data));
-  //       navigate("/feedhome");
-  //     }
-  //   } catch (error) {
-  //     // Handle error
-  //     console.error("Error:", error);
-  //   }
-  // };
-
-  // // Handle failed Google Sign-In
-  // const handleGoogleLoginFailure = (error) => {
-  //   console.error("Google Sign-In failed:", error);
-  // };
+  
 
 
 

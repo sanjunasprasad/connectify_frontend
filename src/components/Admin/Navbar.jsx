@@ -17,17 +17,11 @@ const Navbar = () => {
       <div className="flex justify-between items-center">
         {/* Logo or Brand */}
         <div className="flex-shrink-0">
-          {/* <a href="#" className="text-white font-semibold">Your Logo</a> */}
         </div>
 
         {/* search Icon */}
         <div className="flex items-center">
-          {/* <input
-            type="search"
-            placeholder="Search"
           
-            className="border border-gray-700 px-3 py-1 mr-2 rounded-lg bg-gray-700 text-white"
-          /> */}
           <div className="relative">
             <button
               onClick={toggleDropdown}

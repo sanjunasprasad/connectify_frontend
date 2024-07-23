@@ -23,7 +23,7 @@ function Notifications() {
       axiosAdminInstance
         .get("/admin/listReportuser")
         .then((response) => {
-          console.log("response all reported user", response.data)
+          // console.log("response all reported user", response.data)
           setUsers(response.data);
           const allUsers = response.data;
           const filtereduser = allUsers.filter(user =>
@@ -59,7 +59,7 @@ function Notifications() {
       });
       
       if (confirmed.isConfirmed) {
-        const response = await axiosAdminInstance.patch(`/admin/deactivateUser/${id}`, { status: false });
+        const response = await axiosAdminInstance.post(`/admin/deactivateUser/${id}`, { status: false });
         
         if (response.status === 200) {
           // Update usersForRemoval state after deactivating the user

@@ -23,8 +23,9 @@ function createAxiosInstance(token ,role ) { //fn creates & configures Axios ins
 }
 
 
-const axiosUserInstance = createAxiosInstance("token" , 'user');
-const axiosAdminInstance = createAxiosInstance("adminToken" , 'admin');
+
+const axiosUserInstance = createAxiosInstance("token" );
+const axiosAdminInstance = createAxiosInstance("adminToken");
 const axiosInstance = createAxiosInstance(null , null)
 
 

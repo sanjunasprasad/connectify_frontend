@@ -23,6 +23,7 @@ import More from "../../../Icons/Settings.png";
 import Iconsfromcreatemodal from "../../../Icons/Icon to represent media such as images or videos.png";
 import InstagramIcon from "../../../Icons/Instagramlogo.png"; //instagram icon
 import Instagramicon from "../../../Icons/Instagram.png";//instagram 
+import Connectify from "../../../Icons/log.png"//connectify textlogo
 
 
 
@@ -60,7 +61,7 @@ function Sidebar() {
   const searchUser = debounce(async (term) => {
     try {
       const response = await axiosUserInstance.get(`/search?term=${term}`);
-      console.log("search result", response.data);
+      // console.log("search result", response.data);
       setsearchUsers(response.data)
 
       // Clear search results after 5 seconds
@@ -159,7 +160,7 @@ function Sidebar() {
 
       if (response.ok) {
         const imageData = await response.json();
-        console.log("Uploaded resource URL:", imageData.secure_url);
+        // console.log("Uploaded resource URL:", imageData.secure_url);
 
         // Upload post data to backend
         const caption = document.querySelector('textarea[name="caption"]').value;
@@ -168,9 +169,14 @@ function Sidebar() {
           postUrl: imageData.secure_url,
           userId: loggedUser._id
         };
-        console.log("Post Data****:", postData);
+        // console.log("Post Data****:", postData);
         const backendResponse = await axiosUserInstance.post("/post/createPost", postData);
         // console.log("Created successfully:", backendResponse.data);
+
+        setFormData({ caption: "", file: "" });
+        setFile(null); // Reset file state
+        setImagePre(null); // Reset image preview state
+
         dispatch(addPost(backendResponse.data));
         Swal.fire({
           position: "top-end",
@@ -179,7 +185,7 @@ function Sidebar() {
           showConfirmButton: false,
           timer: 1500
         });
-        setFormData({ caption: "", file: "" });
+     
         setmodalIsOpen(false);
       } else {
         console.error("Error uploading resource to Cloudinary");
@@ -320,7 +326,10 @@ function Sidebar() {
           {ShowSearch === false ? (
             <img src={InstagramIcon} alt="" className="logos" />
           ) : (
-            <img src={Instagramicon} alt="" className="logos" />
+            <img 
+            // src={Instagramicon} 
+            src = {Connectify}
+            alt="" className="logos" />
           )}
         </div>
 

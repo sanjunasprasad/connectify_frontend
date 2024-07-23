@@ -10,7 +10,6 @@ import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import "./Postt.css"
 import altusericon from "../../../Icons/user.png"
-import Moreoptions from "../../../Icons/Moreoptions.png"
 import greyicon from "../../../Icons/Notifications.png" //hollowwhite
 import redicon from "../../../Icons/Unlike.png" //redicon
 import commneticon from "../../../Icons/Comment.png"
@@ -55,10 +54,10 @@ export default function Post({ postlist }) {
   const handleLike = async () => {
     try {
       const newLiked = !liked;
-      console.log("New liked state:", newLiked);
+      // console.log("New liked state:", newLiked);
       setLiked(newLiked);
       const response = await axiosUserInstance.put(`/post/likepost/${postlist._id}`, { userId: loggeduser._id });
-      console.log("like response is", response);
+      // console.log("like response is", response);
       if (response.status === 200) {
         setLikes(prevLikes => (newLiked ? prevLikes + 1 : prevLikes - 1));
         localStorage.setItem(`post_liked_${postlist._id}_${loggeduser._id}`, JSON.stringify(newLiked));
@@ -280,7 +279,7 @@ export default function Post({ postlist }) {
 
 
         {/* likes count  */}
-        <p style={{ display: "flex", marginTop: "0px" }} onClick={showLikedPeople}>{Likes} likes</p>
+        <p style={{ display: "flex", marginTop: "0px" ,cursor: "pointer",}} onClick={showLikedPeople}>{Likes} likes</p>
         <p style={{ textAlign: 'start', }}>{postlist.caption}</p> {/* caption */}
         <div style={{ cursor: "pointer" }} onClick={handleShowmodal}>
           <p style={{ textAlign: "start", color: "#A8A8A8" }}>View all comments</p>

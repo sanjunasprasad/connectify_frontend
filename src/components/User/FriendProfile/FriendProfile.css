@@ -71,3 +71,20 @@
 .inputfields label {
     color: white;
 }
+
+
+.modalforListpeople{
+  width: 22%;
+  height: 50vh;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  padding: 20px;
+  border: none;
+  background-color: #1f1e1e;
+  margin-top: 165px;
+  border: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+}

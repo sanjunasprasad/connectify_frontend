@@ -89,11 +89,19 @@ function Rightbar() {
     <div className='MainRigntBar'>
       <div className='submainrightbar'>
         {/* post area */}
-        <div style={{ flex: 1.7, padding: 20 }}>
-          {posts.map((postlist) => (
-            <Post postlist={postlist} key={postlist._id}  />
-          ))}
-        </div>
+         <div style={{ flex: 1.7, padding: 20 }}>
+        {posts.length === 0 ? (
+          <div style={{ textAlign: 'center', fontWeight: 'bold' , marginTop: '235px' , marginLeft:'-170px' ,fontSize: "1.5em" }}>
+            <p>Follow users to see their posts </p>
+            <p>or</p>
+            <p>Create your own post</p>
+          </div>
+        ): (
+          posts.map((postlist) => (
+            <Post postlist={postlist} key={postlist._id} />
+          ))
+        )}
+      </div>
 
 
         {/* suggestion list area */}
