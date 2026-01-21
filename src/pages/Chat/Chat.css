@@ -1,0 +1,12 @@
+.chatsubcontainer{
+    display: flex;
+}
+
+.chatsidebar{
+    flex: 0.05;  /* original 0.3 */
+    background-color: black;
+}
+.chatrightbar{
+    flex: 0.95; 
+    /* original 1 */
+}

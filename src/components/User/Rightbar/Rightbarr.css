@@ -1,0 +1,13 @@
+.MainRigntBar{
+    background-color: black; /*bg color for entire rightside*/
+    height: 100vh;
+    overflow: auto; 
+}
+p{
+    color:white  /*color for text*/
+}
+
+.submainrightbar{  /* divide post and suggestionlist*/
+    display: flex;
+}
+
