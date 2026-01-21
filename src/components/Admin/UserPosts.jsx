@@ -38,7 +38,7 @@ function UserPosts() {
     }
   };
   function isImageUrl(url) {
-    return /\.(gif|jpg|jpeg|tiff|png)$/i.test(url);
+    return /\.(gif|jpg|jpeg|tiff|png|avif)$/i.test(url);
   }
   
 

@@ -17,7 +17,7 @@ import altusericon from "../../../Icons/user.png"
 function SavedPost({ item }) {
 
 
-  const isImage = item.file.endsWith(".jpg") || item.file.endsWith(".jpeg") || item.file.endsWith(".png") || item.file.endsWith(".gif");
+  const isImage = item.file.endsWith(".jpg") || item.file.endsWith(".jpeg") || item.file.endsWith(".png") || item.file.endsWith(".gif") || item.file.endsWith(".avif");
   const isVideo = item.file.endsWith(".mp4") || item.file.endsWith(".mov") || item.file.endsWith(".avi") || item.file.endsWith(".mkv");
 
   const loggedUser = useSelector(state => state.user.user);

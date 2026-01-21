@@ -153,7 +153,7 @@ export default function Profile() {
 
       if (response.ok) {
         const imageData = await response.json();
-        // console.log("Uploaded resource URL:", imageData.secure_url);
+        console.log("Uploaded resource URL:", imageData.secure_url);
         const profileDataToSend = {
           ...loggedUser,
           firstName: firstName,
@@ -175,7 +175,7 @@ export default function Profile() {
             showConfirmButton: false,
             timer: 1500
           });
-          // console.log("User profile updated successfully:", backendResponse.data);
+          console.log("User profile updated successfully:", backendResponse.data);
           dispatch(setUser(backendResponse.data.user));
 
         }

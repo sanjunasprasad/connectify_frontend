@@ -11,7 +11,7 @@ import commentIcon from '../../../Icons/Comment.png';
 function FriendPost({ post }) {
 
     // console.log("porps post 111111",post)
-  const isImage = post.file.endsWith(".jpg") || post.file.endsWith(".jpeg") || post.file.endsWith(".png") || post.file.endsWith(".gif");
+  const isImage = post.file.endsWith(".jpg") || post.file.endsWith(".jpeg") || post.file.endsWith(".png") || post.file.endsWith(".gif") || post.file.endsWith(".avif");
   const isVideo = post.file.endsWith(".mp4") || post.file.endsWith(".mov") || post.file.endsWith(".avi") || post.file.endsWith(".mkv");
 
 
