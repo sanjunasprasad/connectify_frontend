@@ -24,6 +24,8 @@ export default function Post({ postlist }) {
   // console.log("url of posts",postlist.file)
   const dispatch = useDispatch();
   const loggeduser = useSelector(state => state.user.user)
+
+  
   const isImage = postlist.file.endsWith(".jpg") || postlist.file.endsWith(".jpeg") || postlist.file.endsWith(".png") || postlist.file.endsWith(".gif") || postlist.file.endsWith(".avif");
   const isVideo = postlist.file.endsWith(".mp4") || postlist.file.endsWith(".mov") || postlist.file.endsWith(".avi") || postlist.file.endsWith(".mkv");
 
@@ -34,6 +36,7 @@ export default function Post({ postlist }) {
 
   //LIKE DISLIKE
   const [liked, setLiked] = useState(() => {
+     if (!loggeduser || !loggeduser._id) return false; 
     const storedLiked = localStorage.getItem(`post_liked_${postlist._id}_${loggeduser._id}`);
     // console.log("from local stored like",storedLiked)
     const initialState = storedLiked ? JSON.parse(storedLiked) : postlist?.likes.some(like => like.user === loggeduser._id);
@@ -44,6 +47,7 @@ export default function Post({ postlist }) {
 
   
   const [Likes, setLikes] = useState(() => {
+     if (!postlist || !postlist._id) return 0; 
     const storedLikes = localStorage.getItem(`post_likes_${postlist._id}`);
     // console.log("from local stored TOTAL like", storedLikes)
     const initialtotal_likes = storedLikes ? JSON.parse(storedLikes) : (postlist?.likes.length || 0)
