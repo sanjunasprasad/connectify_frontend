@@ -11,8 +11,7 @@ const ZegoVcall = () => {
     // console.log("user id",userId)
     // console.log("friend id",id)
     const navigate = useNavigate();
-    const VURL = 'http://localhost:8000'
-    // const VURL = 'https://connectify-omega-mauve.vercel.app'
+        const VURL = "http://localhost:8000" || 'https://connectify-backend-oiw1.onrender.com';
     const videoCallLink = `${VURL}/meeting/${userId}/${id}`;
 
     useEffect(() => {
